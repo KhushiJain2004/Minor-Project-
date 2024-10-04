@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface EventsRepository extends MongoRepository<Events, String> {
-    
+    List<Events> findByStartTimeBeforeAndEndTimeAfter(LocalDateTime currentTime);
     /*
       
      Fetch on the basis of Tag : Ongoing, Featured, Upcoming
