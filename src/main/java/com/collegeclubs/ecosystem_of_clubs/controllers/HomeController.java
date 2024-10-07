@@ -9,5 +9,8 @@ public class HomeController {
     public String displayhome() {
         return "home"; // This should return your home.jsp page
     }
-
+    @GetMapping("/auth") // Handle the root URL
+    public String displayAuth() {
+        return "auth"; // This should return your home.jsp page
+    }
 }
