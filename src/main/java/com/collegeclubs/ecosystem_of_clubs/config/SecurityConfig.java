@@ -18,60 +18,65 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.collegeclubs.ecosystem_of_clubs.filters.JwtFilter;
 import com.collegeclubs.ecosystem_of_clubs.service.MyUserDetailsService;
 
-@Configuration
-@EnableWebSecurity
-public class SecurityConfig {       
+    @Configuration
+    @EnableWebSecurity
+    public class SecurityConfig {       
 
-    private final MyUserDetailsService userDetailsService;
+        private final MyUserDetailsService userDetailsService;
 
-    @Autowired
-    private JwtFilter jwtFilter;
+        @Autowired
+        private JwtFilter jwtFilter;
 
-    public SecurityConfig(MyUserDetailsService userDetailsService) {
-        this.userDetailsService = userDetailsService;
-    }
+        public SecurityConfig(MyUserDetailsService userDetailsService) {
+            this.userDetailsService = userDetailsService;
+        }
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
-        return http
-            .csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(request -> request
-                .requestMatchers("/api/user/list","api/clubs/list").hasAuthority("WEB_ADMIN")
-                .requestMatchers("/**","/home").permitAll()
-                .anyRequest().authenticated()
+        @Bean
+        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+            return http
+                .csrf(csrf -> csrf.disable())
+                // .cors(cors->cors.disable())
+                .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(request -> request
+                    .requestMatchers("/clubAdmin/").hasAuthority("CLUB_ADMIN")
+                    .requestMatchers("/webAdmin/","/api/user/list","api/clubs/list").hasAuthority("WEB_ADMIN")
+                    .requestMatchers("/**","/home").permitAll() 
+                    .anyRequest().authenticated()
+                    )
+                .httpBasic(basic->{})
+                .formLogin(login -> login
+                    .loginPage("/login") // Custom login page
+                    .permitAll()
                 )
-            .httpBasic(basic->{})
-            .formLogin(login -> login
-                .loginPage("/auth") // Custom login page
-                .permitAll()
-            )
-            .logout(logout -> logout
-                .permitAll())
-            .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .addFilterBefore(jwtFilter,UsernamePasswordAuthenticationFilter.class)
-            .build();
-            
-    }
+                // .logout(logout -> logout
+                //     .permitAll())
+                
+                .addFilterBefore(jwtFilter,UsernamePasswordAuthenticationFilter.class)
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+                .build();
 
-    @Bean 
-    public AuthenticationProvider authenticationProvider()
-    {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setPasswordEncoder(passwordEncoder());
-        provider.setUserDetailsService(userDetailsService);
+                
+        }
 
-        return provider;
-    }
 
-    @Bean 
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception
-    {
-        return config.getAuthenticationManager();
+        @Bean
+        public PasswordEncoder passwordEncoder() {
+            return new BCryptPasswordEncoder();
+        }
+
+        @Bean 
+        public AuthenticationProvider authenticationProvider()
+        {
+            DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+            provider.setPasswordEncoder(passwordEncoder());
+            provider.setUserDetailsService(userDetailsService);
+
+            return provider;        
+        }
+
+        @Bean 
+        public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception
+        {
+            return config.getAuthenticationManager();
+        }
     }
-}

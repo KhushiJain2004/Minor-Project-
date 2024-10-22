@@ -7,6 +7,7 @@ pageEncoding="UTF-8"%>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Landing Page</title>
     <link rel="stylesheet" href="style.css" />
+    <script src="${pageContext.request.contextPath}/js/common.js"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -26,7 +27,22 @@ pageEncoding="UTF-8"%>
         background: #E2F3FB;
         overflow: hidden;
       }
+      .profile-icon {
+        width: 40px; /* Adjust the size as needed */
+        height: 40px; /* Adjust the size as needed */
+        border-radius: 50%;
+        margin:auto; /* Spacing between the name and icon */
+        margin-right:10px;
 
+      }
+      #profile-item
+      {
+        cursor:pointer;
+      }
+      #username
+      {
+        font-weight: bold;
+      }
       .container {
         position: absolute;
         top: 50%;
@@ -399,6 +415,10 @@ nav input {
         font-size: 45px;
         font-weight: 600;
       }
+      .profile-item{
+        display: flex;
+        gap:10px;
+      }
       
     </style>
   </head>
@@ -417,19 +437,24 @@ nav input {
         <input type="radio" name="slider" id="menu-btn" />
         <input type="radio" name="slider" id="close-btn" />
         <ul class="nav-links">
-          <label for="close-btn" class="btn close-btn"
-            ><i class="fas fa-times"></i
-          ></label>
+          <label for="close-btn" class="btn close-btn">
+            <i class="fas fa-times"></i>
+          </label>
           <li><a href="#">Home</a></li>
           <li><a href="slider.jsp">Clubs</a></li>
           <li><a href="clubAdminDash.jsp">Feedback</a></li>
-          <li><a href="#">Login</a></li>
+          <li id="login-link"><a href="/login">Login</a></li>
+          <li id="profile-item" style="display: none;">
+            <img src="images/profile.png" alt="Profile" class="profile-icon" />
+            <span id="username"></span> <!-- Placeholder for user's name -->
+          </li>
         </ul>
-        <label for="menu-btn" class="btn menu-btn"
-          ><i class="fas fa-bars"></i
-        ></label>
+        <label for="menu-btn" class="btn menu-btn">
+          <i class="fas fa-bars"></i>
+        </label>
       </div>
     </nav>
+    
 
     <div class="container">
       <div class="slide">

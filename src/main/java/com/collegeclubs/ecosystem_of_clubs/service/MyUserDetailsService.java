@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.collegeclubs.ecosystem_of_clubs.model.User;
 import com.collegeclubs.ecosystem_of_clubs.repositories.UserRepository;
 
 @Service
@@ -15,8 +16,11 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return userRepository.findByEmail(email)
+        User user=userRepository.findByEmail(email)
             .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
+            System.out.println("Loaded user: " + user.getEmail() + ", Role: " + user.getRole());
+        return user;
+    
     }
 
     public UserDetails loadUserById(String userId) {
