@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.collegeclubs.ecosystem_of_clubs.model.Club;
 import com.collegeclubs.ecosystem_of_clubs.repositories.ClubRepository;
 import com.collegeclubs.ecosystem_of_clubs.service.ClubService;
+
+import jakarta.servlet.http.HttpSession;
 // import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -45,11 +47,14 @@ public class ClubController {
     // }
 
     @GetMapping("/list")
-    public ResponseEntity<Object> getAllClubs() {
+    public ResponseEntity<Object> getAllClubs(HttpSession session) {
+
         List<Club> clubList=clubService.getAllClubs();
         if(clubList.isEmpty()) return new ResponseEntity<>("No Clubs Found",HttpStatus.NO_CONTENT);
         else return new ResponseEntity<>(clubList,HttpStatus.OK);
     }
+
+    
 
     // @PostMapping("/login")
     // public ResponseEntity<?> login(@RequestBody ClubAdmin request)
@@ -67,6 +72,7 @@ public class ClubController {
 
     @PostMapping("")
     public ResponseEntity<?> getClub(@RequestParam String id) {
+        
         Club club=clubRepository.findByClubId(id);
         if(club==null) return new ResponseEntity<>("Club not found",HttpStatus.NO_CONTENT);
         return new ResponseEntity<>(club,HttpStatus.OK);
