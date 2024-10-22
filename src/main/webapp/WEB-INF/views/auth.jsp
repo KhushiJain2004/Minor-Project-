@@ -1,3 +1,6 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,97 +9,25 @@
     <title>Register / Login</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/auth.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    
 </head>
 <body>
 
     <div class="container">
         <h1>Welcome to the Clubs Ecosystem</h1>
+        <c:if test="${not empty status}">
+                toastr.info('${status}');
+            </c:if>
 
         <!-- Toggle between Registration and Login -->
         <div id="auth-section">
-            <!-- Registration Form -->
-            <div id="register-section">
-                <h2>Register</h2>
-                <ul>
-                    <li><a href="#" id="user-tab">End User</a></li>
-                    <li><a href="#" id="club-tab">Club Admin</a></li>
-                </ul>
-
-                <!-- End User Registration Form -->
-                <div id="endUserRegistration" style="display: block;">
-                    <form id="endUserForm" action="${pageContext.request.contextPath}/register/enduser" method="post">
-                        <div>
-                            <label for="endUserUsername">Username:</label>
-                            <input type="text" id="endUserUsername" name="username" required>
-                        </div>
-                        <div>
-                            <label for="endUserEmail">Email:</label>
-                            <input type="email" id="endUserEmail" name="email" required>
-                        </div>
-
-                        <div>
-                            <label for="endUserPassword">Password:</label>
-                            <input type="password" id="endUserPassword" name="password" required>
-                        </div>
-
-                        <button type="submit">Register as End User</button>
-                    </form>
-                </div>
-
-                <!-- Club Admin Registration Form -->
-                <div id="clubAdminRegistration" style="display: none;">
-                    <form id="clubAdminForm" action="${pageContext.request.contextPath}/register/clubadmin" method="post" enctype="multipart/form-data">
-                        <!-- Club Admin User Info -->
-                        <div>
-                            <label for="clubAdminEmail">Email:</label>
-                            <input type="email" id="clubAdminEmail" name="email" required>
-                        </div>
-
-                        <div>
-                            <label for="clubAdminUsername">Username:</label>
-                            <input type="text" id="clubAdminUsername" name="username" required>
-                        </div>
-
-                        <div>
-                            <label for="clubAdminPassword">Password:</label>
-                            <input type="password" id="clubAdminPassword" name="password" required>
-                        </div>
-
-                        <!-- Club Details -->
-                        <div>
-                            <label for="clubName">Club Name:</label>
-                            <input type="text" id="clubName" name="clubName" required>
-                        </div>
-
-                        <div>
-                            <label for="slogan">Slogan:</label>
-                            <input type="text" id="slogan" name="slogan">
-                        </div>
-
-                        <div>
-                            <label for="description">Description:</label>
-                            <textarea id="description" name="description"></textarea>
-                        </div>
-
-                        <div>
-                            <label for="logo">Logo:</label>
-                            <input type="file" id="logo" name="logo">
-                        </div>
-
-                        <button type="submit">Register as Club Admin</button>
-                    </form>
-                </div>
-
-                <!-- Link to Login -->
-                <p>Already have an account? <a href="#" id="showLogin">Login here</a></p>
-            </div>
-
             <!-- Login Form -->
-            <div id="login-section" style="display: none;">
-                <h2>Already have an account? Login</h2>
-                <form id="loginForm" method="post"> <!-- Removed action attribute -->
+            <div id="login-section" style="display: block;">  <!-- Make the login section visible by default -->
+                <form id="loginForm" action="#" method="post"> <!-- Removed action attribute -->
                     <label for="loginRole">Login as:</label>
-                    <select id="loginRole" name="loginRole">
+                    <select id="loginRole" name="role">
                         <option value="END_USER">End User</option>
                         <option value="CLUB_ADMIN">Club Admin</option>
                         <option value="WEB_ADMIN">Web Admin</option>
@@ -108,25 +39,97 @@
                     </div>
 
                     <div>
-                        <label for="loginUsername">Username:</label>
-                        <input type="text" id="loginUsername" name="username" required>
-                    </div>
-
-                    <div>
                         <label for="loginPassword">Password:</label>
                         <input type="password" id="loginPassword" name="password" required>
                     </div>
 
                     <button type="submit">Login</button>
                 </form>
-
-                <!-- Link to Register -->
                 <p>Don't have an account? <a href="#" id="showRegister">Register here</a></p>
+            </div>
+
+            <!-- Registration Form -->
+            <div id="register-section" style="display: none;">
+                <h2>Register</h2>
+                <ul>
+                    <li><a href="#" id="user-tab">End User</a></li>
+                    <li><a href="#" id="club-tab">Club Admin</a></li>
+                </ul>
+
+                <!-- End User Registration Form -->
+                <div id="endUserRegistration" style="display: block;">
+                    <form id="endUserForm" action="${pageContext.request.contextPath}/api/auth/register" method="post">
+                        <div>
+                            <label for="endUserUsername">Username:</label>
+                            <input type="text" id="endUserUsername" name="username" required>
+                        </div>
+                        <div>
+                            <label for="endUserEmail">Email:</label>
+                            <input type="email" id="endUserEmail" name="email" required>
+                        </div>
+                        <div>
+                            <label for="endUserPassword">Password:</label>
+                            <input type="password" id="endUserPassword" name="password" required>
+                        </div>
+                        <button type="submit">Register as End User</button>
+                    </form>
+                </div>
+
+                <!-- Club Admin Registration Form -->
+                <div id="clubAdminRegistration" style="display: none;">
+                    <form id="clubAdminForm" action="${pageContext.request.contextPath}/api/auth/register" method="post" enctype="multipart/form-data">
+                        <div>
+                            <label for="clubAdminEmail">Email:</label>
+                            <input type="email" id="clubAdminEmail" name="email" required>
+                        </div>
+                        <div>
+                            <label for="clubAdminUsername">Username:</label>
+                            <input type="text" id="clubAdminUsername" name="username" required>
+                        </div>
+                        <div>
+                            <label for="clubAdminPassword">Password:</label>
+                            <input type="password" id="clubAdminPassword" name="password" required>
+                        </div>
+                        <div>
+                            <label for="clubName">Club Name:</label>
+                            <input type="text" id="clubName" name="clubName" required>
+                        </div>
+                        <div>
+                            <label for="slogan">Slogan:</label>
+                            <input type="text" id="slogan" name="slogan">
+                        </div>
+                        <div>
+                            <label for="description">Description:</label>
+                            <textarea id="description" name="description"></textarea>
+                        </div>
+                        <div>
+                            <label for="logo">Logo:</label>
+                            <input type="file" id="logo" name="logo">
+                        </div>
+                        <button type="submit">Register as Club Admin</button>
+                    </form>
+                </div>
+
+                <p>Already have an account? <a href="#" id="showLogin">Login here</a></p>
             </div>
         </div>
     </div>
 
     <script>
+        // Show register form
+        $('#showRegister').on('click', function (e) {
+            e.preventDefault();
+            $('#register-section').show();
+            $('#login-section').hide();
+        });
+
+        // Show login form
+        $('#showLogin').on('click', function (e) {
+            e.preventDefault();
+            $('#login-section').show();
+            $('#register-section').hide();
+        });
+
         // Switch between End User and Club Admin tabs for registration
         $('#user-tab').on('click', function () {
             $('#endUserRegistration').show();
@@ -138,47 +141,82 @@
             $('#endUserRegistration').hide();
         });
 
-        // Show login form
-        $('#showLogin').on('click', function (e) {
-            e.preventDefault();
-            $('#login-section').show();
-            $('#register-section').hide();
+        $(document).ready(function () {
+    $("#loginForm").submit(function (e) {
+        e.preventDefault(); // Prevent the default form submission behavior
+
+        console.log("Form submission prevented");
+
+        // Collect form data
+        var loginData = {
+            email: $("#loginEmail").val(),
+            password: $("#loginPassword").val(),
+            role: $("#loginRole").val()
+        };
+        console.log(loginData);
+
+        // Make the AJAX request
+        $.ajax({
+            url: "${pageContext.request.contextPath}/api/auth/login", // Your API endpoint
+            type: "POST",
+            contentType: "application/json", // Send as JSON
+            data: JSON.stringify(loginData), // Convert the data to JSON
+            success: function (response) {
+                // Store token and handle success
+                console.log(response)
+                localStorage.setItem("token", response.token);
+                localStorage.setItem("user",JSON.stringify(response.user));
+                
+                
+            // Redirect based on user role
+            switch (response.role) {
+                case 'WEB_ADMIN':
+                    // window.location.replace("/webAdmin/dashboard");
+                    fetchDashboard("${pageContext.request.contextPath}/webAdmin/dashboard")
+                    break;
+                case 'CLUB_ADMIN':
+                    // window.location.replace("/dashboard");
+                    fetchDashboard("${pageContext.request.contextPath}/clubAdmin/dashboard")
+                    break;
+                default:
+                    fetchDashboard("${pageContext.request.contextPath}/home")
+                    break;
+            }
+            },
+            error: function (xhr, status, error) {
+                console.error("Login failed:", error);
+                const errorMessage = xhr.responseJSON ? xhr.responseJSON.message : "Bad credentials";
+                toastr.error(errorMessage ||"Login failed"); // Error handling
+            }
         });
+    });
 
-        // Show register form
-        $('#showRegister').on('click', function (e) {
-            e.preventDefault();
-            $('#login-section').hide();
-            $('#register-section').show();
+    function fetchDashboard(url) {
+        const token = localStorage.getItem("token");
+        console.log(token);
+        $.ajax({
+            url: url, 
+            type: "GET",
+            headers: {
+                "Authorization": "Bearer " + token
+            },
+            success: function (response) {
+                // console.log("Dashboard data:", response);
+            
+                console.log("success logging in ")
+                window.location.replace(url);
+            },
+            error: function (xhr, status, error) {
+                console.error("Access denied:", error);
+            console.error("XHR response:", xhr);
+                // Redirect to login if access denied
+                window.location.replace("/login");
+            }
         });
+    }
+});
 
-        $("#loginForm").submit(function(e) {
-            e.preventDefault(); // Prevent the form from submitting the traditional way
-
-            // Get the form data
-            var loginData = {
-                email: $("#loginEmail").val(),
-                password: $("#loginPassword").val(),
-                role: $("#loginRole").val()
-            };
-            console.log(loginData);
-
-            // Make the AJAX request
-            $.ajax({
-                url: "http://localhost:8080/api/auth/login",  // Your API endpoint
-                type: "POST",
-                contentType: "application/json",  // Set content type as JSON
-                data: JSON.stringify(loginData),  // Convert the data to JSON string
-                success: function(response) {
-                    console.log(response);  // Handle success, response should contain the token and user details
-                    localStorage.setItem("token", response.token);  // Store the token in localStorage
-                    window.location.href = "/";  // Redirect to the homepage or dashboard
-                },
-                error: function(xhr, status, error) {
-                    console.error("Login failed:", error);  // Handle error
-                }
-            });
-        });
+    
     </script>
 
 </body>

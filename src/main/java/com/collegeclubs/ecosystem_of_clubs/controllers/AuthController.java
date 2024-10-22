@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,18 +58,60 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+    // @CrossOrigin(origins = "http://localhost:8080")
+    public ResponseEntity<?> login(@RequestBody LoginRequest request, Model model) {
         try {
+            System.out.println("Received login request for email: " + request.getEmail());
             HashMap<String,Object> response= userService.verifyUserAndGenerateToken(request.getEmail(),request.getPassword(),request.getRole());
+            model.addAttribute("status", "Login successful!"); 
     
             return new ResponseEntity<>(response,HttpStatus.OK);
             
           } catch (Exception e) {
+            model.addAttribute("status", e.getMessage()); 
     
             return new ResponseEntity<>(e.getMessage(),HttpStatus.FORBIDDEN);
           }
        
     }
-    
-    
+        // @PostMapping("/login")
+        // public RedirectView login(@RequestParam String email,
+        //                     @RequestParam String password,
+        //                     @RequestParam Role role,
+        //                     HttpSession session, // Use HttpSession to manage session
+        //                     @ModelAttribute("user") User user, RedirectAttributes redirectAttributes) {
+        //     try {
+        //         HashMap<String, Object> response = userService.verifyUserAndGenerateToken(email, password, role);
+                
+        //         // Store the user details or token in the session
+        //         session.setAttribute("token", response.get("token"));
+        //         session.setAttribute("user", response.get("user")); // Store user details
+        //         // model.addAttribute("user",response.get("user"));
+
+        //         redirectAttributes.addFlashAttribute("user", response.get("user"));
+        //         redirectAttributes.addFlashAttribute("token", response.get("token"));
+                
+        //         // Redirect to dashboard
+        //         return new RedirectView("/dashboard", true); // Make sure you have a controller mapping for /dashboard
+        //     } catch (Exception e) {
+        //         // model.addAttribute("error", e.getMessage());
+        //         redirectAttributes.addFlashAttribute("error", e.getMessage());
+        //         return new RedirectView("/login", true);
+        //     }
+        // }
+        // @PostMapping("/login")
+        // public ResponseEntity<?> login(
+        //         @RequestParam String email,
+        //         @RequestParam String password,
+        //         @RequestParam Role role) {
+        //     try {
+        //         HashMap<String, Object> response = userService.verifyUserAndGenerateToken(email, password, role);
+
+        //         return ResponseEntity.ok(response);
+        //     } catch (Exception e) {
+        //         return new ResponseEntity<>(e.getMessage(),HttpStatus.FORBIDDEN);
+        //     }
+        // }
+        
+
 }

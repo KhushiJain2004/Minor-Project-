@@ -31,10 +31,23 @@ public class User implements UserDetails {
     @NotNull(message="role cannot be null")
     private Role role;
 
+    public User() {
+    }
+
+
     public User(String email, String password, String username) {
         this.email = email;
         this.password = password;
         this.username = username;
+    }
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", role=" + role +
+                '}';
     }
 
     @Override

@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Task Manager & Important Events</title>
+    <script src="${pageContext.request.contextPath}/js/common.js"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -346,6 +346,23 @@ pageEncoding="UTF-8"%>
         resize: vertical;
         height: 100px;
       }
+
+      .profile-icon {
+        width: 40px; /* Adjust the size as needed */
+        height: 40px; /* Adjust the size as needed */
+        border-radius: 50%;
+        margin:auto; /* Spacing between the name and icon */
+        margin-right:10px;
+
+      }
+      #profile-item
+      {
+        cursor:pointer;
+      }
+      #username
+      {
+        font-weight: bold;
+      }
     </style>
   </head>
   <body>
@@ -354,7 +371,7 @@ pageEncoding="UTF-8"%>
         <div class="logo">
           <a href="#">
             <img
-              src="images/UPES University of Petroleum and Energy Studies.png"
+              src="${pageContext.request.contextPath}/images/UPES University of Petroleum and Energy Studies.png"
               alt="Logo"
             />
           </a>
@@ -365,10 +382,14 @@ pageEncoding="UTF-8"%>
           <label for="close-btn" class="btn close-btn">
             <i class="fas fa-times"></i>
           </label>
-          <li><a href="index.jsp">Home</a></li>
-          <li><a href="#">Clubs</a></li>
+          <li><a href="${pageContext.request.contextPath}/home">Home</a></li>
+          <li><a href="slider.jsp">Clubs</a></li>
           <li><a href="clubAdminDash.jsp">Feedback</a></li>
-          <li><a href="#">Login</a></li>
+          <li id="login-link"><a href="/login">Login</a></li>
+          <li id="profile-item" style="display: none;">
+            <img src="${pageContext.request.contextPath}/images/profile.png" alt="Profile" class="profile-icon" />
+            <span id="username"></span> <!-- Placeholder for user's name -->
+          </li>
         </ul>
         <label for="menu-btn" class="btn menu-btn">
           <i class="fas fa-bars"></i>
