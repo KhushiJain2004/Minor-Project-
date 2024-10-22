@@ -19,7 +19,7 @@ import com.collegeclubs.ecosystem_of_clubs.service.ClubService;
 
 @RestController
 @RequestMapping("api/clubs")
-public class ClubController {
+public class clubController {
     
     @Autowired
     private ClubService clubService;
