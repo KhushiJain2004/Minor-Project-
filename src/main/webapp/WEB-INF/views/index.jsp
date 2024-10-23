@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<d%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,6 +7,7 @@ pageEncoding="UTF-8"%>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Landing Page</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/nav.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/common.js"></script>
     <link
@@ -29,10 +30,10 @@ pageEncoding="UTF-8"%>
         overflow: hidden;
       }
       .profile-icon {
-        width: 40px; 
-        height: 40px; 
+        width: 40px; /* Adjust the size as needed */
+        height: 40px; /* Adjust the size as needed */
         border-radius: 50%;
-        margin:auto; 
+        margin:auto; /* Spacing between the name and icon */
         margin-right:10px;
 
       }
@@ -379,10 +380,8 @@ nav input {
           </label>
           <li><a href="#">Home</a></li>
           <li><a href="/clubs">Clubs</a></li>
-          <!-- <li><a href="clubAdminDash.jsp">Feedback</a></li> -->
           <li id="login-link"><a href="/login">Login</a></li>
           <li id="profile-item" style="display: none;">
-            <a href="#" id="logoutLink">Logout</a>
             <img src="images/profile.png" alt="Profile" class="profile-icon" />
             <span id="username"></span> <!-- Placeholder for user's name -->
           </li>
