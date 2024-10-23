@@ -9,7 +9,6 @@ import java.util.List;
 
 public interface EventsRepository extends MongoRepository<Events, String> {
 
-    // Query to get ongoing events based on current time
-    @Query("{ 'startTime': { '$lte': ?0 }, 'endTime': { '$gte': ?0 } }")
+    @Query("{'startTime': {'$lte': ?0}, 'endTime': {'$gte': ?0}}")
     List<Events> findOngoingEvents(LocalDateTime currentTime);
 }
