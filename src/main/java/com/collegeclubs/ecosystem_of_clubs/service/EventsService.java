@@ -2,6 +2,8 @@ package com.collegeclubs.ecosystem_of_clubs.service;
 
 import com.collegeclubs.ecosystem_of_clubs.model.Events;
 import com.collegeclubs.ecosystem_of_clubs.repositories.EventsRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,8 @@ import java.util.List;
 @Service
 public class EventsService {
 
+    private static final Logger logger = LoggerFactory.getLogger(EventsService.class);
+
     @Autowired
     private EventsRepository eventsRepository;
 
@@ -19,7 +23,7 @@ public class EventsService {
         return eventsRepository.findAll();
     }
 
-    // Get ongoing events (pass current time to repository query)
+    // Get ongoing events
     public List<Events> getOngoingEvents(LocalDateTime currentTime) {
         return eventsRepository.findOngoingEvents(currentTime);
     }
@@ -31,6 +35,7 @@ public class EventsService {
 
     // Create or update event
     public Events saveEvent(Events event) {
+        logger.debug("Saving event: {}", event);
         return eventsRepository.save(event);
     }
 
