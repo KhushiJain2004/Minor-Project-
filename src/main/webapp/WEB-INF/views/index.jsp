@@ -398,7 +398,7 @@ nav input {
       <div class="slide">
         <div
           class="item"
-          style="background-image: url(https://i.ibb.co/qCkd9jS/img1.jpg)"
+          style="background-image: url('images/group.jpg')"
         >
           <div class="content">
             <div class="name">UPES ACM</div>
@@ -410,7 +410,7 @@ nav input {
         </div>
         <div
           class="item"
-          style="background-image: url(https://i.ibb.co/jrRb11q/img2.jpg)"
+          style="background-image: url('/images/mtc.jpeg')"
         >
           <div class="content">
             <div class="name">Microsoft Technical Community - UPES</div>
@@ -422,7 +422,7 @@ nav input {
         </div>
         <div
           class="item"
-          style="background-image: url(https://i.ibb.co/NSwVv8D/img3.jpg)"
+          style="background-image:url('/images/csi.jpeg')"
         >
           <div class="content">
             <div class="name">Computer Society of India</div>
@@ -434,7 +434,7 @@ nav input {
         </div>
         <div
           class="item"
-          style="background-image: url(https://i.ibb.co/Bq4Q0M8/img4.jpg)"
+          style="background-image: url('/images/inf.jpeg')"
         >
           <div class="content">
             <div class="name">Infinity Club – Aerospace</div>
@@ -446,7 +446,7 @@ nav input {
         </div>
         <div
           class="item"
-          style="background-image: url(https://i.ibb.co/jTQfmTq/img5.jpg)"
+          style="background-image: url('/images/fipi.jpg')"
         >
           <div class="content">
             <div class="name">UPES FIPI Student Chapter</div>
@@ -458,7 +458,7 @@ nav input {
         </div>
         <div
           class="item"
-          style="background-image: url(https://i.ibb.co/RNkk6L0/img6.jpg)"
+          style="background-image: url('/images/spe.png')"
         >
           <div class="content">
             <div class="name">SPE - Society of Petroleum Engineers</div>
