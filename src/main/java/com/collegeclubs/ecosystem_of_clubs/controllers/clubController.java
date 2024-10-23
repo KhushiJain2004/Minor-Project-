@@ -21,7 +21,7 @@ import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("api/clubs")
-public class ClubController {
+public class clubController {
     
     @Autowired
     private ClubService clubService;
