@@ -43,6 +43,7 @@ pageEncoding="UTF-8"%>
       {
         font-weight: bold;
       }
+      
       .container {
         position: absolute;
         top: 50%;
@@ -355,71 +356,6 @@ nav input {
     display: none;
 }
 
-.carousel {
-  width: 60%;
-  overflow: hidden;
-  position: relative;
-}
-
-.slide {
-  display: flex;
-  transition: transform 0.5s ease-in-out;
-}
-
-.item {
-  display: flex;
-  justify-content: space-between;
-  min-width: 100%;
-}
-
-.card-group {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.card {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  flex: 1;
-  margin: 0 10px;
-  width: 90px;
-}
-
-.card-img {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  margin-right: 20px;
-}
-
-.card-desc {
-  flex: 1;
-}
-
-
-      .body-text {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 100%;
-        text-align: center;
-        padding: 0 30px;
-      }
-      .body-text div {
-        font-size: 45px;
-        font-weight: 600;
-      }
-      .profile-item{
-        display: flex;
-        gap:10px;
-      }
-      
     </style>
   </head>
 
@@ -535,49 +471,8 @@ nav input {
         <button class="next"><i class="fa-solid fa-arrow-left"></i></button>
         <button class="prev"><i class="fa-solid fa-arrow-right"></i></button>
       </div>
-
-
     </div>
-    <div class="carousel">
-      <div class="slide">
-          <!-- Each group will have a class of 'item' -->
-          <div class="item">
-              <!-- Card Group 1 -->
-              <div class="card-group">
-                  <div class="card">
-                      <img src="image1.jpg" alt="Image 1" class="card-img">
-                      <div class="card-desc">Description 1</div>
-                  </div>
-                  <div class="card">
-                      <img src="image2.jpg" alt="Image 2" class="card-img">
-                      <div class="card-desc">Description 2</div>
-                  </div>
-                  <div class="card">
-                      <img src="image3.jpg" alt="Image 3" class="card-img">
-                      <div class="card-desc">Description 3</div>
-                  </div>
-              </div>
-          </div>
-          <div class="item">
-              <!-- Card Group 2 -->
-              <div class="card-group">
-                  <div class="card">
-                      <img src="image4.jpg" alt="Image 4" class="card-img">
-                      <div class="card-desc">Description 4</div>
-                  </div>
-                  <div class="card">
-                      <img src="image5.jpg" alt="Image 5" class="card-img">
-                      <div class="card-desc">Description 5</div>
-                  </div>
-                  <div class="card">
-                      <img src="image6.jpg" alt="Image 6" class="card-img">
-                      <div class="card-desc">Description 6</div>
-                  </div>
-              </div>
-          </div>
-          <!-- Add more card groups as needed up to 6 groups -->
-      </div>
-  </div>
+
 
   </div>
 
