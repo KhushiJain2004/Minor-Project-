@@ -6,11 +6,16 @@ pageEncoding="UTF-8"%>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Task Manager & Important Events</title>
-<<<<<<< Updated upstream
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/common.js"></script>
-=======
->>>>>>> Stashed changes
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/nav.css">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -445,16 +450,12 @@ pageEncoding="UTF-8"%>
           <li><a href="index.jsp">Home</a></li>
           <li><a href="#">Clubs</a></li>
           <li><a href="clubAdminDash.jsp">Feedback</a></li>
-<<<<<<< Updated upstream
           <li id="login-link"><a href="/login">Login</a></li>
           <li id="profile-item" style="display: none;">
             <a href="#" id="logoutLink">Logout</a>
             <img src="${pageContext.request.contextPath}/images/profile.png" alt="Profile" class="profile-icon" />
             <span id="username"></span> <!-- Placeholder for user's name -->
           </li>
-=======
-          <li><a href="#">Login</a></li>
->>>>>>> Stashed changes
         </ul>
         <label for="menu-btn" class="btn menu-btn">
           <i class="fas fa-bars"></i>
