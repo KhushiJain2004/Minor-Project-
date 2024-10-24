@@ -19,6 +19,9 @@ body {
   }
   #profile-item
   {
+    justify-content: center;
+    align-items: center;
+    display:flex;
     cursor:pointer;
   }
   #username
@@ -92,7 +95,8 @@ body {
 
   /* Nav links styling */
   .wrapper .nav-links {
-    display: inline-flex;
+    display: flex;
+    align-items: center;
   }
 
   .nav-links li {
