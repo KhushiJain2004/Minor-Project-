@@ -8,6 +8,7 @@ pageEncoding="UTF-8"%>
     <title>Landing Page</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/nav.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/nav.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/common.js"></script>
     <link
@@ -176,14 +177,14 @@ pageEncoding="UTF-8"%>
         color:#015f85 ;
       }
       /* Navbar styling */
-nav {
+/* nav {
     position: absolute;
     z-index: 99;
     width: 100%;
     background: #FFF;
-}
+} */
 
-nav .wrapper {
+/* nav .wrapper {
     position: relative;
     max-width: 1300px;
     padding: 0px 30px;
@@ -193,25 +194,25 @@ nav .wrapper {
     display: flex;
     align-items: center;
     justify-content: space-between;
-}
+} */
 
 /* Logo styling */
-.wrapper .logo {
-    display: flex; /* Flexbox for alignment */
-    align-items: center; /* Center vertically */
-    justify-content: center; /* Center horizontally */
-    padding: 10px; /* Optional: Add some padding around the logo */
-}
+/* .wrapper .logo {
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    padding: 10px;
+} */
 
-.logo {
+/* .logo {
     align-items: bottom;
-}
+} */
 
 /* Styling the logo image */
 .logo img {
   padding-top: 30px;
-    height: 200px; /* Initial height for the logo */
-    width: 300px; /* Maintain aspect ratio */
+    /* height: 200px; /* Initial height for the logo */
+    /* width: 300px; Maintain aspect ratio  */
     max-width: 100%; /* Ensure the logo fits within the container */
     transition: transform 0.3s ease; /* Smooth transition effect */
 }
@@ -382,6 +383,7 @@ nav input {
           <li><a href="/clubs">Clubs</a></li>
           <li id="login-link"><a href="/login">Login</a></li>
           <li id="profile-item" style="display: none;">
+            <a href="#" id="logoutLink">Logout</a>
             <img src="images/profile.png" alt="Profile" class="profile-icon" />
             <span id="username"></span> <!-- Placeholder for user's name -->
           </li>

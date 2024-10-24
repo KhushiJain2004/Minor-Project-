@@ -31,7 +31,7 @@
         .mainContainer
         {
             position:absolute;
-            margin-top:80%;   
+            margin-top:70%;   
             width:80%;
         }
 

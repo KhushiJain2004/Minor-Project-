@@ -5,12 +5,17 @@ pageEncoding="UTF-8"%>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Task Manager & Important Events</title>
-<<<<<<< Updated upstream
+    <title>Club admin Dash</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/common.js"></script>
-=======
->>>>>>> Stashed changes
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/nav.css">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -58,18 +63,18 @@ pageEncoding="UTF-8"%>
         padding: 50px; /* Optional: Add some padding around the logo */
       }
 
-      .logo {
+      /* .logo {
         align-items: bottom;
       }
 
       /* Styling the logo image */
-      .logo img {
+      /* .logo img {
         padding-top: 30px;
-        height: 250px; /* Initial height for the logo */
-        width: 300px; /* Maintain aspect ratio */
-        max-width: 100%; /* Ensure the logo fits within the container */
-        transition: transform 0.3s ease; /* Smooth transition effect */
-      }
+        height: 250px; 
+        width: 300px; 
+        max-width: 100%; 
+        transition: transform 0.3s ease; 
+      } */ 
 
       /* Adding a hover effect for the logo */
       .logo a:hover img {
@@ -133,7 +138,7 @@ pageEncoding="UTF-8"%>
         .wrapper .btn {
           display: block;
         }
-        .wrapper .nav-links {
+        /* .wrapper .nav-links {
           position: fixed;
           height: 100vh;
           width: 100%;
@@ -145,8 +150,8 @@ pageEncoding="UTF-8"%>
           padding: 50px 10px;
           line-height: 50px;
           overflow-y: auto;
-          transition: all 0.3s ease;
-        }
+          transition: all 0.3s ease; */
+        /* } */
         /* Custom scrollbar */
         ::-webkit-scrollbar {
           width: 10px;
@@ -186,7 +191,7 @@ pageEncoding="UTF-8"%>
           box-shadow: none;
           transition: all 0.3s ease;
         }
-        .nav-links .mobile-item {
+        /* .nav-links .mobile-item {
           display: block;
           color: #f2f2f2;
           font-size: 20px;
@@ -198,7 +203,7 @@ pageEncoding="UTF-8"%>
         }
         .nav-links .mobile-item:hover {
           background: #027aa8;
-        }
+        } */
         .drop-menu li {
           margin: 0;
         }
@@ -431,7 +436,7 @@ pageEncoding="UTF-8"%>
         <div class="logo">
           <a href="#">
             <img
-              src="images/UPES University of Petroleum and Energy Studies.png"
+              src="${pageContext.request.contextPath}/images/UPES University of Petroleum and Energy Studies.png"
               alt="Logo"
             />
           </a>
@@ -442,19 +447,15 @@ pageEncoding="UTF-8"%>
           <label for="close-btn" class="btn close-btn">
             <i class="fas fa-times"></i>
           </label>
-          <li><a href="index.jsp">Home</a></li>
-          <li><a href="#">Clubs</a></li>
-          <li><a href="clubAdminDash.jsp">Feedback</a></li>
-<<<<<<< Updated upstream
+          <li><a href="/home">Home</a></li>
+          <li><a href="/clubs">Clubs</a></li>
+          <!-- <li><a href="clubAdminDash.jsp">Feedback</a></li> -->
           <li id="login-link"><a href="/login">Login</a></li>
           <li id="profile-item" style="display: none;">
             <a href="#" id="logoutLink">Logout</a>
             <img src="${pageContext.request.contextPath}/images/profile.png" alt="Profile" class="profile-icon" />
             <span id="username"></span> <!-- Placeholder for user's name -->
           </li>
-=======
-          <li><a href="#">Login</a></li>
->>>>>>> Stashed changes
         </ul>
         <label for="menu-btn" class="btn menu-btn">
           <i class="fas fa-bars"></i>

@@ -33,7 +33,7 @@
                 <form id="loginForm" action="#" method="post"> <!-- Removed action attribute -->
                     <label for="loginRole">Login as:</label>
                     <div id="loginRoleTabs" class="role-tabs">
-                        <button type="button" data-role="END_USER" class="role-tab active">End User</button>
+                        <button type="button" data-role="END_USER" class="role-tab active">User</button>
                         <button type="button" data-role="CLUB_ADMIN" class="role-tab">Club Admin</button>
                         <button type="button" data-role="WEB_ADMIN" class="role-tab">Web Admin</button>
                     </div>
@@ -59,7 +59,7 @@
             <!-- Registration Form -->
             <div id="register-section" style="display: none;">
                 <ul id="registerRoleTabs" class="role-tabs">
-                    <li><a href="#" id="user-tab" class="role-tab active">End User</a></li>
+                    <li><a href="#" id="user-tab" class="role-tab active">User</a></li>
                     <li><a href="#" id="club-tab" class="role-tab">Club Admin</a></li>
                 </ul>
 
