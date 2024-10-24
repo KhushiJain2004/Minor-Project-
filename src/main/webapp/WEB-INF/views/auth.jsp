@@ -32,11 +32,14 @@
             <div id="login-section" style="display: block;">  <!-- Make the login section visible by default -->
                 <form id="loginForm" action="#" method="post"> <!-- Removed action attribute -->
                     <label for="loginRole">Login as:</label>
-                    <select id="loginRole" name="role">
-                        <option value="END_USER">End User</option>
-                        <option value="CLUB_ADMIN">Club Admin</option>
-                        <option value="WEB_ADMIN">Web Admin</option>
-                    </select>
+                    <div id="loginRoleTabs" class="role-tabs">
+                        <button type="button" data-role="END_USER" class="role-tab active">End User</button>
+                        <button type="button" data-role="CLUB_ADMIN" class="role-tab">Club Admin</button>
+                        <button type="button" data-role="WEB_ADMIN" class="role-tab">Web Admin</button>
+                    </div>
+                    
+                    <!-- Hidden input to store the selected role value -->
+                    <input type="hidden" id="loginRole" name="role" value="END_USER">
 
                     <div>
                         <label for="loginEmail">Email:</label>
@@ -55,10 +58,9 @@
 
             <!-- Registration Form -->
             <div id="register-section" style="display: none;">
-                <h2>Register</h2>
-                <ul>
-                    <li><a href="#" id="user-tab">End User</a></li>
-                    <li><a href="#" id="club-tab">Club Admin</a></li>
+                <ul id="registerRoleTabs" class="role-tabs">
+                    <li><a href="#" id="user-tab" class="role-tab active">End User</a></li>
+                    <li><a href="#" id="club-tab" class="role-tab">Club Admin</a></li>
                 </ul>
 
                 <!-- End User Registration Form -->

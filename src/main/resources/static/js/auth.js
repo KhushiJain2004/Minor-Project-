@@ -21,7 +21,17 @@ $(document).ready(function () {
         $('#clubAdminRegistration').show();
         $('#endUserRegistration').hide();
     });
+    $('.role-tab').on('click', function () {
+        // Remove 'active' class from all tabs
+        $('.role-tab').removeClass('active');
 
+        // Add 'active' class to the clicked tab
+        $(this).addClass('active');
+
+        // Set the selected role into the hidden input
+        var selectedRole = $(this).data('role');
+        $('#loginRole').val(selectedRole);
+    });
    
     $("#loginForm").submit(function (e) {
         e.preventDefault(); 
