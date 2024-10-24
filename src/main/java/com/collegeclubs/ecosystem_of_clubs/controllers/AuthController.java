@@ -1,6 +1,7 @@
 package com.collegeclubs.ecosystem_of_clubs.controllers;
 
 import java.util.HashMap;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,7 +38,8 @@ public class AuthController {
         try {
             User user =request.getUser();
 
-        // if(user==null) throw new NullPointerException();
+        Optional<User> checkUser=userService.findUser(user.getEmail());
+        if(checkUser.isPresent())  return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User already exists");
 
         if(user.getRole()==Role.CLUB_ADMIN)  
         {
@@ -53,6 +55,7 @@ public class AuthController {
             return new ResponseEntity<>(newUser, HttpStatus.OK);
         }
         } catch (Exception e) {
+            // e.printStackTrace();
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }

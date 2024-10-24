@@ -1,114 +1,146 @@
 /* General Styles */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
+    font-family: 'Poppins', sans-serif;
+    background-color: #E2F3FB;
     margin: 0;
     padding: 0;
+    background: url('/images/bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 .container {
-    width: 80%;
-    max-width: 800px;
-    margin: 50px auto;
+    background: rgba(255, 255, 255, 0.8); /* Blur effect */
     padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Heading Styles */
-h1 {
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: auto;
     text-align: center;
-    color: #0056b3;
-}
-
-h2 {
-    color: #0056b3;
-}
-
-/* Form Styles */
-form {
-    margin-top: 20px;
-}
-
-label {
-    display: block;
-    margin: 10px 0 5px;
-    font-weight: bold;
-}
-
-input[type="text"],
-input[type="password"],
-input[type="file"],
-input[type="email"],
-textarea {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+}
+
+/* Headings */
+h1, h2 {
+    color: #027AA8;
     margin-bottom: 20px;
 }
 
-input[type="file"] {
-    padding: 3px; /* Adjust padding for file inputs */
+/* Form Elements */
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
 }
 
-/* Button Styles */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea,
+select {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
 button {
-    background-color: #0056b3;
+    background-color: #027AA8;
     color: #fff;
     border: none;
-    padding: 10px 15px;
-    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    width: 100%;
 }
 
 button:hover {
-    background-color: #004494;
+    background-color: #015f85;
+}
+/* #loginForm
+{
+    width:120%;
+} */
+/* Role Tabs */
+.role-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
 }
 
-/* Tab Styles */
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-ul li {
-    display: inline;
-    margin-right: 15px;
-}
-
-ul li a {
-    text-decoration: none;
-    color: #0056b3;
+.role-tab {
+    background-color: #a9a7a7;
+    border: none;
+    color: #000000;
+    padding: 10px 20px;
+    font-size: 16px;
     font-weight: bold;
+    cursor: pointer;
+    margin: 0 5px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
-ul li a:hover {
-    text-decoration: underline;
+.role-tab.active {
+    background-color: #027AA8;
+    color: #fff;
 }
 
-/* Login and Registration Sections */
-#login-section, #register-section {
-    margin-top: 30px;
+.role-tab:hover {
+    background-color: #015f85;
+    color: white;
 }
 
-#register-section {
-    border-top: 1px solid #ccc;
-    padding-top: 20px;
+/* Authentication Section */
+#auth-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-#login-section h2, #register-section h2 {
-    margin-bottom: 15px;
+#auth-section ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
 }
 
-#loginRole, #registrationType {
-    width: auto; /* Change width for dropdowns */
-    display: inline-block;
+#auth-section ul li {
+    margin: 0 10px;
 }
 
-#clubDetails {
-    display: none; /* Initially hidden for club registration */
+#auth-section ul li a {
+    text-decoration: none;
+    color: #027AA8;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#auth-section ul li a.active,
+#auth-section ul li a:hover {
+    background-color: #027AA8;
+    color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+        margin: 30px auto;
+    }
+
+    #auth-section ul li {
+        margin: 0 5px;
+    }
 }
