@@ -1,12 +1,16 @@
-
 function logout() {
-    console.log("hello from logout");
-    // Clear local storage
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    
-    // Redirect to the logout endpoint
-    window.location.href = "http://localhost:8080/logout"; // Adjust the URL as needed
+  $.ajax({
+      url: '/logout', // URL for your logout endpoint
+      type: 'POST', // or 'GET'
+      success: function(response) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+          window.location.href = '/login'; // Redirect after logout
+      },
+      error: function(xhr, status, error) {
+          console.error('Logout failed: ', error);
+      }
+  });
 }
 // navbar.js
 document.addEventListener("DOMContentLoaded", function () {
@@ -40,4 +44,19 @@ const usernameSpan = document.getElementById('username');
   })
 });
 
+// $.ajaxSetup({
+//   beforeSend: function(xhr) {
+//       console.log("BeforeSend called"); // Add this for debugging
+      
+//       const token = localStorage.getItem("token");
+      
+//       if (token) {
+//           console.log("Token found: ", token); // Check if token is found
+//           xhr.setRequestHeader("Authorization", "Bearer " + token);
+//       } else {
+//           console.log("No token found in localStorage");
+//       }
+//   }
+// });
+//       ;
 

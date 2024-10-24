@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Task Manager & Important Events</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/common.js"></script>
     <link
       rel="stylesheet"
@@ -387,6 +388,7 @@
           <li><a href="clubAdminDash.jsp">Feedback</a></li>
           <li id="login-link"><a href="/login">Login</a></li>
           <li id="profile-item" style="display: none;">
+            <a href="#" id="logoutLink">Logout</a>
             <img src="${pageContext.request.contextPath}/images/profile.png" alt="Profile" class="profile-icon" />
             <span id="username"></span> <!-- Placeholder for user's name -->
           </li>
@@ -678,6 +680,10 @@
           hideEventModal();
         }
       };
+      $("#logoutLink").on("click", function(e) {
+            e.preventDefault(); // Prevent the default link behavior
+            logout();
+      });
     </script>
   </body>
 </html>

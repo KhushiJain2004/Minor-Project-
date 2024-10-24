@@ -8,7 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register / Login</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/auth.css">
+    <script>
+        var contextPath = '${pageContext.request.contextPath}';
+    </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/common.js"></script>
+    <script src="${pageContext.request.contextPath}/js/auth.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     
@@ -102,10 +107,10 @@
                             <label for="description">Description:</label>
                             <textarea id="description" name="description"></textarea>
                         </div>
-                        <div>
+                        <!-- <div>
                             <label for="logo">Logo:</label>
                             <input type="file" id="logo" name="logo">
-                        </div>
+                        </div> -->
                         <button type="submit">Register as Club Admin</button>
                     </form>
                 </div>
@@ -115,7 +120,7 @@
         </div>
     </div>
 
-    <script>
+    <!-- <script>
         // Show register form
         $('#showRegister').on('click', function (e) {
             e.preventDefault();
@@ -201,7 +206,7 @@
                 "Authorization": "Bearer " + token
             },
             success: function (response) {
-                // console.log("Dashboard data:", response);
+                console.log("Dashboard data:", response);
             
                 console.log("success logging in ")
                 window.location.replace(url);
@@ -217,7 +222,7 @@
 });
 
     
-    </script>
+    </script> -->
 
 </body>
 </html>

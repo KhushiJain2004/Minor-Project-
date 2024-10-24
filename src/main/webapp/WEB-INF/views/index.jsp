@@ -7,6 +7,7 @@ pageEncoding="UTF-8"%>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Landing Page</title>
     <link rel="stylesheet" href="style.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/common.js"></script>
     <link
       rel="stylesheet"
@@ -28,10 +29,10 @@ pageEncoding="UTF-8"%>
         overflow: hidden;
       }
       .profile-icon {
-        width: 40px; /* Adjust the size as needed */
-        height: 40px; /* Adjust the size as needed */
+        width: 40px; 
+        height: 40px; 
         border-radius: 50%;
-        margin:auto; /* Spacing between the name and icon */
+        margin:auto; 
         margin-right:10px;
 
       }
@@ -377,10 +378,11 @@ nav input {
             <i class="fas fa-times"></i>
           </label>
           <li><a href="#">Home</a></li>
-          <li><a href="slider.jsp">Clubs</a></li>
-          <li><a href="clubAdminDash.jsp">Feedback</a></li>
+          <li><a href="/clubs">Clubs</a></li>
+          <!-- <li><a href="clubAdminDash.jsp">Feedback</a></li> -->
           <li id="login-link"><a href="/login">Login</a></li>
           <li id="profile-item" style="display: none;">
+            <a href="#" id="logoutLink">Logout</a>
             <img src="images/profile.png" alt="Profile" class="profile-icon" />
             <span id="username"></span> <!-- Placeholder for user's name -->
           </li>
@@ -488,6 +490,10 @@ nav input {
       prev.addEventListener("click", function () {
         let items = document.querySelectorAll(".item");
         document.querySelector(".slide").prepend(items[items.length - 1]);
+      });
+      $("#logoutLink").on("click", function(e) {
+            e.preventDefault(); // Prevent the default link behavior
+            logout();
       });
     </script>
   </body>

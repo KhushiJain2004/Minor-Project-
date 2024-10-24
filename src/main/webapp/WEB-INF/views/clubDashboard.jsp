@@ -5,6 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Club Dashboard</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/nav.css">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
     <style>
         body {
             background-color: #E2F3FB;
@@ -258,7 +266,40 @@
     </style>
 </head>
 <body>
-    <header></header>
+    <header>
+        <nav>
+      <div class="wrapper">
+        <div class="logo">
+          <a href="#">
+            <img
+              src="images/UPES University of Petroleum and Energy Studies.png"
+              alt="Logo"
+            />
+          </a>
+        </div>
+        <input type="radio" name="slider" id="menu-btn" />
+        <input type="radio" name="slider" id="close-btn" />
+        <ul class="nav-links">
+          <label for="close-btn" class="btn close-btn">
+            <i class="fas fa-times"></i>
+          </label>
+          <li><a href="#">Home</a></li>
+          <li><a href="/clubs">Clubs</a></li>
+          <!-- <li><a href="clubAdminDash.jsp">Feedback</a></li> -->
+          <li id="login-link"><a href="/login">Login</a></li>
+          <li id="profile-item" style="display: none;">
+            <a href="#" id="logoutLink">Logout</a>
+            <img src="images/profile.png" alt="Profile" class="profile-icon" />
+            <span id="username"></span> <!-- Placeholder for user's name -->
+          </li>
+        </ul>
+        <label for="menu-btn" class="btn menu-btn">
+          <i class="fas fa-bars"></i>
+        </label>
+      </div>
+    </nav>
+    
+    </header>
     <div class="container">
         <div class="bg-image"></div>
         <img src="logo.jpeg" alt="Club Logo" class="logo">
