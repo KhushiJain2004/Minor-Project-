@@ -2,6 +2,7 @@ package com.collegeclubs.ecosystem_of_clubs.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -36,6 +37,10 @@ public class UserService{
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+    public Optional<User> findUser(String email)
+    {
+        return userRepository.findByEmail(email);
     }
 
     public HashMap<String, Object> verifyUserAndGenerateToken(String email, String password, Role role) throws Exception{

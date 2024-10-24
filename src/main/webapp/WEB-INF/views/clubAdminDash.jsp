@@ -1,11 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Task Manager & Important Events</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/common.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/nav.css">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -210,7 +220,8 @@
 
       .section {
         margin: 30px 0;
-        max-width: 300px;
+        width: 300px;
+        max-width: 1000px;
         width: 100%;
         padding: 20px;
         background: #fff;
@@ -223,9 +234,10 @@
         margin-bottom: 20px;
       }
       .task-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 20px;
+        display: flex; 
+        align-items: flex-start; 
+        gap: 20px; 
+        flex-wrap: wrap; 
       }
       .task-card {
         background-color: #fff;
@@ -257,6 +269,7 @@
       }
       .task-actions {
         display: flex;
+        gap: 10px;
         justify-content: space-between;
         font-size: 14px;
       }
@@ -347,21 +360,73 @@
         height: 100px;
       }
 
-      .profile-icon {
-        width: 40px; /* Adjust the size as needed */
-        height: 40px; /* Adjust the size as needed */
-        border-radius: 50%;
-        margin:auto; /* Spacing between the name and icon */
-        margin-right:10px;
+      .sidebar {
+        width: 250px;
+        height: 150vh;
+        background-color: #2c3e50;
+        color: #ecf0f1;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        position: fixed; /* Fix the sidebar's position */
+        left: 0; /* Align it to the left */
+        top: 73px; /* Align it to the top */
+      }
 
+      .admin-photo img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: 2px solid #ecf0f1;
+        margin-bottom: 15px;
       }
-      #profile-item
-      {
-        cursor:pointer;
+
+      .admin-details {
+        text-align: center;
+        margin-bottom: auto;
       }
-      #username
-      {
+
+      .admin-name {
+        font-size: 22px;
         font-weight: bold;
+        margin-bottom: 8px;
+      }
+
+      .club-name {
+        font-size: 18px;
+        margin-bottom: 4px;
+      }
+
+      .position {
+        font-size: 16px;
+        font-style: italic;
+        margin-bottom: 12px;
+      }
+
+      .email,
+      .contact {
+        font-size: 14px;
+        margin-bottom: 6px;
+      }
+
+      /* Logout Button Styles */
+      .logout-button {
+        margin-top: auto;
+        width: 100%;
+        padding: 10px;
+        background-color: #e74c3c;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+      }
+
+      .logout-button:hover {
+        background-color: #c0392b;
       }
     </style>
   </head>
@@ -371,7 +436,7 @@
         <div class="logo">
           <a href="#">
             <img
-              src="${pageContext.request.contextPath}/images/UPES University of Petroleum and Energy Studies.png"
+              src="images/UPES University of Petroleum and Energy Studies.png"
               alt="Logo"
             />
           </a>
@@ -382,11 +447,12 @@
           <label for="close-btn" class="btn close-btn">
             <i class="fas fa-times"></i>
           </label>
-          <li><a href="${pageContext.request.contextPath}/home">Home</a></li>
-          <li><a href="slider.jsp">Clubs</a></li>
+          <li><a href="index.jsp">Home</a></li>
+          <li><a href="#">Clubs</a></li>
           <li><a href="clubAdminDash.jsp">Feedback</a></li>
           <li id="login-link"><a href="/login">Login</a></li>
           <li id="profile-item" style="display: none;">
+            <a href="#" id="logoutLink">Logout</a>
             <img src="${pageContext.request.contextPath}/images/profile.png" alt="Profile" class="profile-icon" />
             <span id="username"></span> <!-- Placeholder for user's name -->
           </li>
@@ -397,11 +463,25 @@
       </div>
     </nav>
 
+    <div class="sidebar">
+      <div class="admin-photo">
+        <img src="https://via.placeholder.com/100" alt="Admin Photo" />
+      </div>
+      <div class="admin-details">
+        <h2 class="admin-name">John Doe</h2>
+        <p class="club-name">Tech Club</p>
+        <p class="position">Club President</p>
+        <p class="email">john.doe@example.com</p>
+        <p class="contact">+123456789</p>
+      </div>
+
+      <button class="logout-button">Logout</button>
+    </div>
+
     <!-- Regular Task Manager Section -->
     <div class="section">
       <h2>Upcomming events</h2>
       <div class="task-container" id="taskContainer">
-        <!-- Add Task Card -->
         <div class="add-card" onclick="showModal()">
           <i class="fa fa-plus"></i>
         </div>
@@ -412,7 +492,6 @@
     <div class="section">
       <h2>Important Events</h2>
       <div class="task-container" id="importantEventContainer">
-        <!-- Add Event Card -->
         <div class="add-card" onclick="showEventModal()">
           <i class="fa fa-plus"></i>
         </div>
@@ -678,6 +757,10 @@
           hideEventModal();
         }
       };
+      $("#logoutLink").on("click", function(e) {
+            e.preventDefault(); // Prevent the default link behavior
+            logout();
+      });
     </script>
   </body>
 </html>

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<d%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,6 +7,9 @@ pageEncoding="UTF-8"%>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Landing Page</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/nav.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/nav.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/common.js"></script>
     <link
       rel="stylesheet"
@@ -174,14 +177,14 @@ pageEncoding="UTF-8"%>
         color:#015f85 ;
       }
       /* Navbar styling */
-nav {
+/* nav {
     position: absolute;
     z-index: 99;
     width: 100%;
     background: #FFF;
-}
+} */
 
-nav .wrapper {
+/* nav .wrapper {
     position: relative;
     max-width: 1300px;
     padding: 0px 30px;
@@ -191,25 +194,25 @@ nav .wrapper {
     display: flex;
     align-items: center;
     justify-content: space-between;
-}
+} */
 
 /* Logo styling */
-.wrapper .logo {
-    display: flex; /* Flexbox for alignment */
-    align-items: center; /* Center vertically */
-    justify-content: center; /* Center horizontally */
-    padding: 10px; /* Optional: Add some padding around the logo */
-}
+/* .wrapper .logo {
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    padding: 10px;
+} */
 
-.logo {
+/* .logo {
     align-items: bottom;
-}
+} */
 
 /* Styling the logo image */
 .logo img {
   padding-top: 30px;
-    height: 200px; /* Initial height for the logo */
-    width: 300px; /* Maintain aspect ratio */
+    /* height: 200px; /* Initial height for the logo */
+    /* width: 300px; Maintain aspect ratio  */
     max-width: 100%; /* Ensure the logo fits within the container */
     transition: transform 0.3s ease; /* Smooth transition effect */
 }
@@ -377,10 +380,10 @@ nav input {
             <i class="fas fa-times"></i>
           </label>
           <li><a href="#">Home</a></li>
-          <li><a href="slider.jsp">Clubs</a></li>
-          <li><a href="clubAdminDash.jsp">Feedback</a></li>
+          <li><a href="/clubs">Clubs</a></li>
           <li id="login-link"><a href="/login">Login</a></li>
           <li id="profile-item" style="display: none;">
+            <a href="#" id="logoutLink">Logout</a>
             <img src="images/profile.png" alt="Profile" class="profile-icon" />
             <span id="username"></span> <!-- Placeholder for user's name -->
           </li>
@@ -396,7 +399,7 @@ nav input {
       <div class="slide">
         <div
           class="item"
-          style="background-image: url(https://i.ibb.co/qCkd9jS/img1.jpg)"
+          style="background-image: url('images/group.jpg')"
         >
           <div class="content">
             <div class="name">UPES ACM</div>
@@ -408,7 +411,7 @@ nav input {
         </div>
         <div
           class="item"
-          style="background-image: url(https://i.ibb.co/jrRb11q/img2.jpg)"
+          style="background-image: url('/images/mtc.jpeg')"
         >
           <div class="content">
             <div class="name">Microsoft Technical Community - UPES</div>
@@ -420,7 +423,7 @@ nav input {
         </div>
         <div
           class="item"
-          style="background-image: url(https://i.ibb.co/NSwVv8D/img3.jpg)"
+          style="background-image:url('/images/csi.jpeg')"
         >
           <div class="content">
             <div class="name">Computer Society of India</div>
@@ -432,7 +435,7 @@ nav input {
         </div>
         <div
           class="item"
-          style="background-image: url(https://i.ibb.co/Bq4Q0M8/img4.jpg)"
+          style="background-image: url('/images/inf.jpeg')"
         >
           <div class="content">
             <div class="name">Infinity Club – Aerospace</div>
@@ -444,7 +447,7 @@ nav input {
         </div>
         <div
           class="item"
-          style="background-image: url(https://i.ibb.co/jTQfmTq/img5.jpg)"
+          style="background-image: url('/images/fipi.jpg')"
         >
           <div class="content">
             <div class="name">UPES FIPI Student Chapter</div>
@@ -456,7 +459,7 @@ nav input {
         </div>
         <div
           class="item"
-          style="background-image: url(https://i.ibb.co/RNkk6L0/img6.jpg)"
+          style="background-image: url('/images/spe.png')"
         >
           <div class="content">
             <div class="name">SPE - Society of Petroleum Engineers</div>
@@ -488,6 +491,10 @@ nav input {
       prev.addEventListener("click", function () {
         let items = document.querySelectorAll(".item");
         document.querySelector(".slide").prepend(items[items.length - 1]);
+      });
+      $("#logoutLink").on("click", function(e) {
+            e.preventDefault(); // Prevent the default link behavior
+            logout();
       });
     </script>
   </body>
