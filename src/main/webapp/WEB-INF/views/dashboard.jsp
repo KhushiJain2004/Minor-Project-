@@ -7,17 +7,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/nav.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/adminDash.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/common.js"></script>
 </head>
 <body>
+
+    <nav>
+        <div class="wrapper">
+          <div class="logo">
+            <a href="#">
+              <img
+                src="${pageContext.request.contextPath}/images/UPES University of Petroleum and Energy Studies.png"
+                alt="Logo"
+              />
+            </a>
+          </div>
+          <input type="radio" name="slider" id="menu-btn" />
+          <input type="radio" name="slider" id="close-btn" />
+          <ul class="nav-links">
+            <label for="close-btn" class="btn close-btn">
+              <i class="fas fa-times"></i>
+            </label>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/clubs">Clubs</a></li>
+            <!-- <li><a href="clubAdminDash.jsp">Feedback</a></li> -->
+            <li id="login-link"><a href="/login">Login</a></li>
+            <li id="profile-item" style="display: none;">
+              <a href="#" id="logoutLink">Logout</a>
+              <img src="${pageContext.request.contextPath}/images/profile.png" alt="Profile" class="profile-icon" />
+              <span id="username"></span> <!-- Placeholder for user's name -->
+            </li>
+          </ul>
+          <label for="menu-btn" class="btn menu-btn">
+            <i class="fas fa-bars"></i>
+          </label>
+        </div>
+      </nav>
+
+
     <h1>Web Admin Dashboard</h1>
 
     <div id="userDetails">
-        <p>Welcome, <span id="userEmail"></span>!</p>
-        <p>Your role is: <span id="userRole"></span></p>
-        <h2>User details:</h2>
-        <p>Username: <span id="userUsername"></span></p>
+        <h2>Admin details:</h2>
+        <p>Welcome, <span id="userUsername"></span>!</p>
+        <p>Role: <span id="userRole"></span></p>
+        <p>Email: <span id="userEmail"></span>
+        </span></p>
     </div>
 
     <c:if test="${not empty error}">
@@ -29,7 +66,6 @@
     <a href="#" id="viewClubsList">View Clubs List</a>
     <br>
     <br>
-    <a href="#" id="logoutLink">Logout</a>
 
     <!-- Section to display JSON response -->
     <div id="jsonDisplay" style="margin-top: 20px;">

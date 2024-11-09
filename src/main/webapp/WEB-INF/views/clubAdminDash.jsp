@@ -5,8 +5,13 @@ pageEncoding="UTF-8"%>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<<<<<<< Updated upstream
     <title>Club admin Dash</title>
+=======
+    <title>Manage Events</title>
+>>>>>>> Stashed changes
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/common.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/nav.css">
     <link
@@ -761,6 +766,7 @@ pageEncoding="UTF-8"%>
             e.preventDefault(); // Prevent the default link behavior
             logout();
       });
+    
     </script>
   </body>
 </html>
