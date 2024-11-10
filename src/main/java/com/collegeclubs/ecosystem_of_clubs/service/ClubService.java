@@ -31,6 +31,10 @@ public class ClubService {
         return clubRepository.findAll();
     }
 
+    public Club findByClubId(String id) {
+        return clubRepository.findByClubId(id);
+    }
+
 
 
 }

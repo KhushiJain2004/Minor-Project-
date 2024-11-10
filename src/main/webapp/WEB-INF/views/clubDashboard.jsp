@@ -31,7 +31,7 @@
         .mainContainer
         {
             position:absolute;
-            margin-top:50%;   
+            margin-top:80%;   
             width:80%;
         }
 
@@ -287,6 +287,7 @@
             />
           </a>
         </div>
+        <h2>Ecosystem of clubs!</h2>
         <input type="radio" name="slider" id="menu-btn" />
         <input type="radio" name="slider" id="close-btn" />
         <ul class="nav-links">

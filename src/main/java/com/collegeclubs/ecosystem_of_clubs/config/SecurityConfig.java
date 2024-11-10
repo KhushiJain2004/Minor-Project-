@@ -40,7 +40,7 @@ import com.collegeclubs.ecosystem_of_clubs.service.MyUserDetailsService;
                 .authorizeHttpRequests(request -> request
                     .requestMatchers("/clubAdmin/").hasAuthority("CLUB_ADMIN")
                     .requestMatchers("/api/auth/register").permitAll()
-                    .requestMatchers("/webAdmin/","/api/user/list","api/clubs/list").hasAuthority("WEB_ADMIN")
+                    .requestMatchers("/webAdmin/","/api/user/list").hasAuthority("WEB_ADMIN")
                     .requestMatchers("/**","/home").permitAll() 
                     .anyRequest().authenticated()
                     )

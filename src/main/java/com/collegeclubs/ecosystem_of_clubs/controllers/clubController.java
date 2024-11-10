@@ -6,13 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.collegeclubs.ecosystem_of_clubs.model.Club;
-import com.collegeclubs.ecosystem_of_clubs.repositories.ClubRepository;
 import com.collegeclubs.ecosystem_of_clubs.service.ClubService;
 
 import jakarta.servlet.http.HttpSession;
@@ -26,8 +24,7 @@ public class clubController {
     @Autowired
     private ClubService clubService;
 
-    @Autowired
-    private ClubRepository clubRepository;
+   
 
     // private JwTUtil jwt;
 
@@ -56,24 +53,10 @@ public class clubController {
 
     
 
-    // @PostMapping("/login")
-    // public ResponseEntity<?> login(@RequestBody ClubAdmin request)
-    // {
-    //     ClubAdmin clubAdmin= clubAdminService.findByEmail(request.getEmail());
-
-    //     if(clubAdmin==null || !encoder.matches(request.getPassword(),clubAdmin.getPassword())) 
-    //     {
-    //         return new ResponseEntity<>("Invalid username or password", HttpStatus.UNAUTHORIZED);
-    //     }
-    //     Club club= clubRepository.findByAdmin(clubAdmin);
-
-    //     return new ResponseEntity<>(club, HttpStatus.OK);
-    // }
-
-    @PostMapping("")
+    @GetMapping("")
     public ResponseEntity<?> getClub(@RequestParam String id) {
         
-        Club club=clubRepository.findByClubId(id);
+        Club club=clubService.findByClubId(id);
         if(club==null) return new ResponseEntity<>("Club not found",HttpStatus.NO_CONTENT);
         return new ResponseEntity<>(club,HttpStatus.OK);
     }

@@ -51,21 +51,9 @@ $(document).ready(function () {
             contentType: "application/json", 
             data: JSON.stringify(loginData),
             success: function (response) {
-
-                console.log(response);
                 localStorage.setItem("token", response.token);
                 localStorage.setItem("user", JSON.stringify(response.user));
-                switch (response.role) {
-                    case 'WEB_ADMIN':
-                        fetchDashboard("/webAdmin/dashboard");
-                        break;
-                    case 'CLUB_ADMIN':
-                        fetchDashboard("/clubAdmin/dashboard");
-                        break;
-                    default:
-                        fetchDashboard("/home");
-                        break;
-                }
+                navigateToDashboard(response.role);  // Navigate based on role
             },
             error: function (xhr, status, error) {
                 console.error("Login failed:", error);
@@ -74,6 +62,19 @@ $(document).ready(function () {
             }
         });
     });
+
+    function navigateToDashboard(role) {
+        const baseUrl = window.location.origin;
+    
+        // Set target URL based on user role
+        const targetUrl = role === "WEB_ADMIN" ? `${baseUrl}/webAdmin/dashboard` 
+                        : role === "CLUB_ADMIN" ? `${baseUrl}/clubAdmin/dashboard` 
+                        : `${baseUrl}/user/dashboard`;
+    
+        // Navigate directly to the URL, allowing backend to handle authentication
+        window.location.href = targetUrl;
+    }
+    
 
     function fetchDashboard(url) {
         const token = localStorage.getItem("token");

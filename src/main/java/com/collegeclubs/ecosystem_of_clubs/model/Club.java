@@ -1,5 +1,7 @@
 package com.collegeclubs.ecosystem_of_clubs.model;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -12,6 +14,7 @@ public class Club {
     private String slogan;
     private String logo;
     private String description;
+    private List<ClubMember> positionHolders;
 
     private String adminId;
 
@@ -26,7 +29,15 @@ public class Club {
         this.description = description;
         this.adminId = adminId;
     }
-
+    public Club(String clubId, String clubName, String slogan, String logo, String description, List<ClubMember> positionHolders, String adminId) {
+        this.clubId = clubId;
+        this.clubName = clubName;
+        this.slogan = slogan;
+        this.logo = logo;
+        this.description = description;
+        this.positionHolders = positionHolders;
+        this.adminId = adminId;
+    }
     // Getters and Setters
 
     public String getClubId() {
@@ -75,6 +86,14 @@ public class Club {
 
     public void setAdminId(String adminId) {
         this.adminId = adminId;
+    }
+
+    public List<ClubMember> getPositionHolders() {
+        return positionHolders;
+    }
+
+    public void setPositionHolders(List<ClubMember> positionHolders) {
+        this.positionHolders = positionHolders;
     }
    
 }

@@ -60,3 +60,13 @@ const usernameSpan = document.getElementById('username');
 // });
 //       ;
 
+
+$(document).ajaxSend(function(event, jqxhr, settings) {
+  const token = localStorage.getItem("token");
+
+  if (token && settings.url.includes("/dashboard")) {
+      jqxhr.setRequestHeader("Authorization", "Bearer " + token);
+  }
+});
+
+
