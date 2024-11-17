@@ -5,16 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Club Dashboard</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/nav.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/common.js"></script>
+    <script src="${pageContext.request.contextPath}/js/nav.js"></script>
+    <script src="${pageContext.request.contextPath}/js/clubProfile.js"></script>
     <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
-  />
+    />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/nav.css">
     <style>
         body {
             background-color: #E2F3FB;
@@ -278,37 +280,41 @@
 <body>
     <header>
         <nav>
-      <div class="wrapper">
-        <div class="logo">
-          <a href="#">
-            <img
-              src="images/UPES University of Petroleum and Energy Studies.png"
-              alt="Logo"
-            />
-          </a>
-        </div>
-        <h2>Ecosystem of clubs!</h2>
-        <input type="radio" name="slider" id="menu-btn" />
-        <input type="radio" name="slider" id="close-btn" />
-        <ul class="nav-links">
-          <label for="close-btn" class="btn close-btn">
-            <i class="fas fa-times"></i>
-          </label>
-          <li><a href="/">Home</a></li>
-          <li><a href="/clubs">Clubs</a></li>
-          <!-- <li><a href="clubAdminDash.jsp">Feedback</a></li> -->
-          <li id="login-link"><a href="/login">Login</a></li>
-          <li id="profile-item" style="display: none;">
-            <a href="#" id="logoutLink">Logout</a>
-            <img src="images/profile.png" alt="Profile" class="profile-icon" />
-             <span id="username"></span> 
-          </li>
-        </ul>
-        <label for="menu-btn" class="btn menu-btn">
-          <i class="fas fa-bars"></i>
-        </label>
-      </div>
-    </nav>
+            <div class="wrapper">
+              <div class="logo">
+                <a href="#">
+                  <img src="images/UPES University of Petroleum and Energy Studies.png" alt="Logo" />
+                </a>
+              </div>
+              <input type="radio" name="slider" id="menu-btn" />
+              <input type="radio" name="slider" id="close-btn" />
+              <ul class="nav-links">
+                <label for="close-btn" class="btn close-btn">
+                  <i class="fas fa-times"></i>
+                </label>
+                <li><a href="/home">Home</a></li>
+                <!-- <li><a href="/clubs">Clubs</a></li> -->
+                <li id="club-dropdown">
+                  <a href="#">Clubs</a>
+                  <ul class="dropdown-list" id="club-dropdown-list">
+                    <!-- Club names will be dynamically inserted here -->
+                     <!-- <li>sample</li>
+                     <li>sample</li>
+                     <li>sample</li> -->
+                  </ul>
+                </li>
+                <li id="login-link"><a href="/login">Login</a></li>
+                <li id="profile-item" style="display: none;">
+                  <a href="#" id="logoutLink">Logout</a>
+                  <img src="images/profile.png" alt="Profile" class="profile-icon" />
+                  <span id="username"></span> 
+                </li>
+              </ul>
+              <label for="menu-btn" class="btn menu-btn">
+                <i class="fas fa-bars"></i>
+              </label>
+            </div>
+          </nav>
 </header>
 
     <div class="mainContainer">
@@ -316,24 +322,24 @@
             <div class="bg-image"></div>
             <img src="images/logo.jpeg" alt="Club Logo" class="clublogo">
             <div class="content">
-                <h1>Club Name</h1>
-                <p class="bio">This is a short bio or about the club. It should provide a brief overview of the club's mission, activities, and values. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla ullam optio sed! Exercitationem vero, enim dolores pariatur quaerat vel suscipit, officia debitis, ratione facere molestias cupiditate rem repellendus? Accusamus, blanditiis.</p>
+                <h1 id="clubName">Club Name</h1>
+                <p class="bio" id="description">This is a short bio or about the club. It should provide a brief overview of the club's mission, activities, and values. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla ullam optio sed! Exercitationem vero, enim dolores pariatur quaerat vel suscipit, officia debitis, ratione facere molestias cupiditate rem repellendus? Accusamus, blanditiis.</p>
                 <p class="keywords">Keywords: Music, Arts, Technology</p>
                 <div class="members">
                     <div class="member">
                         <img src="images/pic.png" alt="Member 1">
-                        <div class="member-name">Member Name 1</div>
-                        <div class="member-designation">Designation 1</div>
+                        <div class="member-name" id="member1name">Member Name 1</div>
+                        <div class="member-designation" id="member1designation">Designation 1</div>
                     </div>
                     <div class="member">
                         <img src="images/pic.png" alt="Member 2">
-                        <div class="member-name">Member Name 2</div>
-                        <div class="member-designation">Designation 2</div>
+                        <div class="member-name" id="member2name">Member Name 2</div>
+                        <div class="member-designation" id="member2designation">Designation 2</div>
                     </div>
                     <div class="member">
                         <img src="images/pic.png" alt="Member 3">
-                        <div class="member-name">Member Name 3</div>
-                        <div class="member-designation">Designation 3</div>
+                        <div class="member-name" id="member3name" >Member Name 3</div>
+                        <div class="member-designation" id="member3designation">Designation 3</div>
                     </div>
                 </div>
             </div>

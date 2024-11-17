@@ -1,8 +1,12 @@
 package com.collegeclubs.ecosystem_of_clubs.model;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection="ClubMember")
 public class ClubMember {
     private String name;
     private String designation;
+    
 
     public ClubMember(String designation, String name) {
         this.designation = designation;

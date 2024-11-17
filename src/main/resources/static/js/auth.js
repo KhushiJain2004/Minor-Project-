@@ -142,49 +142,67 @@ $(document).ready(function () {
             });
         });
         
+
+
+
+
+    $("#clubAdminForm").submit(function (e) {
+        e.preventDefault();
+        console.log("submitted");
     
-$("#clubAdminForm").submit(function (e) {
-    e.preventDefault();
-
-    var user = {
-        username: $("#clubAdminUsername").val(),
-        email: $("#clubAdminEmail").val(),
-        password: $("#clubAdminPassword").val(),
-        role: "CLUB_ADMIN" 
-    };
-
-    var club = {
-        clubName: $("#clubName").val(),
-        slogan: $("#slogan").val(),
-        description: $("#description").val()
-    };
-
-   
-    var data = {
-        user: user,
-        club: club
-    };
-
-    $.ajax({
-        url: "http://localhost:8080/api/auth/register", 
-        type: "POST",
-        contentType: 'application/json', 
-        data: JSON.stringify(data), 
-        success: function (response) {
-          
-            localStorage.setItem('registrationSuccess', 'true');
-            localStorage.setItem('registrationSuccessMsg', 'Club registered successfully!! Login to access dashboard');
-            window.location.replace("http://localhost:8080/login");
-        },
-        error: function (xhr, status, error) {
-            console.error("Club Admin registration failed:", error);
-            const errorMessage = xhr.responseJSON ? xhr.responseJSON.message : "Registration failed";
-            toastr.error(errorMessage);
-        }
+        var user = {
+            username: $("#clubAdminUsername").val(),
+            email: $("#clubAdminEmail").val(),
+            password: $("#clubAdminPassword").val(),
+            role: "CLUB_ADMIN" 
+        };
+    
+        var club = {
+            clubName: $("#clubName").val(),
+            slogan: $("#slogan").val(),
+            description: $("#description").val()
+        };
+        var clubMembers = [
+            {
+                name: $("#member1Name").val(),
+                designation: $("#member1Designation").val()
+            },
+            {
+                name: $("#member2Name").val(),
+                designation: $("#member2Designation").val()
+            },
+            {
+                name: $("#member3Name").val(),
+                designation: $("#member3Designation").val()
+            }
+        ];
+        var data = {
+            user: user,
+            club: club,
+            clubMembers: clubMembers
+        };
+        // console.log(data);
+    
+        $.ajax({
+            url: "http://localhost:8080/api/auth/register", 
+            type: "POST",
+            contentType: 'application/json; charset=UTF-8', 
+            data: JSON.stringify(data), 
+            success: function (response) {
+              
+                localStorage.setItem('registrationSuccess', 'true');
+                localStorage.setItem('registrationSuccessMsg', 'Club registered successfully!! Login to access dashboard');
+                window.location.replace("http://localhost:8080/login");
+            },
+            error: function (xhr, status, error) {
+                console.error("Club Admin registration failed:", error);
+                const errorMessage = xhr.responseJSON ? xhr.responseJSON.message : "Registration failed";
+                toastr.error(errorMessage);
+            }
+        });
     });
+    
 });
-
-
-    });
     
+
 });

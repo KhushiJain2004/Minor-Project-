@@ -12,7 +12,6 @@ public class Club {
     private String clubId;
     private String clubName;
     private String slogan;
-    private String logo;
     private String description;
     private List<ClubMember> positionHolders;
 
@@ -21,19 +20,17 @@ public class Club {
     public Club() {
     }
 
-    public Club(String clubId, String clubName, String slogan, String logo, String description, String adminId) {
+    public Club(String clubId, String clubName, String slogan, String description, String adminId) {
         this.clubId = clubId;
         this.clubName = clubName;
         this.slogan = slogan;
-        this.logo = logo;
         this.description = description;
         this.adminId = adminId;
     }
-    public Club(String clubId, String clubName, String slogan, String logo, String description, List<ClubMember> positionHolders, String adminId) {
+    public Club(String clubId, String clubName, String slogan, String description, List<ClubMember> positionHolders, String adminId) {
         this.clubId = clubId;
         this.clubName = clubName;
         this.slogan = slogan;
-        this.logo = logo;
         this.description = description;
         this.positionHolders = positionHolders;
         this.adminId = adminId;
@@ -64,13 +61,13 @@ public class Club {
         this.slogan = slogan;
     }
 
-    public String getLogo() {
-        return logo;
-    }
+    // public String getLogo() {
+    //     return logo;
+    // }
 
-    public void setLogo(String logo) {
-        this.logo = logo;
-    }
+    // public void setLogo(String logo) {
+    //     this.logo = logo;
+    // }
 
     public String getDescription() {
         return description;

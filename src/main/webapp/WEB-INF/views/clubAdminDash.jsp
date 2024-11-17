@@ -9,6 +9,7 @@ pageEncoding="UTF-8"%>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/common.js"></script>
+    <script src="${pageContext.request.contextPath}/js/nav.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/nav.css">
     <link
     rel="stylesheet"
@@ -464,6 +465,8 @@ pageEncoding="UTF-8"%>
         </label>
       </div>
     </nav>
+
+    
 
     <div class="sidebar">
       <div class="admin-photo">

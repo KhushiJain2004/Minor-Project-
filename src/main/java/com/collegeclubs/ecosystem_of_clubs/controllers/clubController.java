@@ -25,24 +25,6 @@ public class clubController {
     private ClubService clubService;
 
    
-
-    // private JwTUtil jwt;
-
-    // @PostMapping("/register")
-    // public ResponseEntity<?> registerClub(@RequestBody ClubRegistrationRequest request)
-    // {
-    //     try {
-    //         ClubAdmin admin=request.getAdmin();
-    //         Club club=request.getClub();
-
-    //         Club registeredClub=clubService.registerClub(club, admin);  
-    //         return ResponseEntity.ok(registeredClub);
-
-    //     } catch (Exception e) {
-    //         return ResponseEntity.badRequest().body(e.getMessage());
-    //     }
-    // }
-
     @GetMapping("/list")
     public ResponseEntity<Object> getAllClubs(HttpSession session) {
 

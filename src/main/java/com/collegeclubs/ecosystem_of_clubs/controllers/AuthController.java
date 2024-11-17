@@ -1,6 +1,7 @@
 package com.collegeclubs.ecosystem_of_clubs.controllers;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.collegeclubs.ecosystem_of_clubs.dto.LoginRequest;
 import com.collegeclubs.ecosystem_of_clubs.dto.RegistrationRequest;
 import com.collegeclubs.ecosystem_of_clubs.model.Club;
+import com.collegeclubs.ecosystem_of_clubs.model.ClubMember;
 import com.collegeclubs.ecosystem_of_clubs.model.Role;
 import com.collegeclubs.ecosystem_of_clubs.model.User;
+import com.collegeclubs.ecosystem_of_clubs.service.ClubMemberService;
 import com.collegeclubs.ecosystem_of_clubs.service.ClubService;
 import com.collegeclubs.ecosystem_of_clubs.service.UserService;
-
-import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/api/auth")
@@ -31,9 +32,11 @@ public class AuthController {
     
     @Autowired
     private UserService userService;
+    @Autowired
+    private ClubMemberService clubMemberService;
     
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody @Valid RegistrationRequest request)  {
+    public ResponseEntity<?> registerUser(@RequestBody  RegistrationRequest request)  {
 
         try {
             User user =request.getUser();
@@ -43,9 +46,18 @@ public class AuthController {
 
         if(user.getRole()==Role.CLUB_ADMIN)  
         {
+            Optional<Club> checkClub=clubService.findByClubName(request.getClub().getClubName());
+            if(checkClub.isPresent()) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Club already exists");
+
             User admin=user;
             user.setRole(Role.CLUB_ADMIN);
-            Club club=clubService.registerClub(request.getClub(), admin);
+
+            List<ClubMember> members=request.getClubMembers();
+            for(ClubMember member:members)
+            {
+                clubMemberService.save(member);
+            }
+            Club club=clubService.registerClub(request.getClub(), admin,members);
             return new ResponseEntity<>(club, HttpStatus.OK);
         }
         

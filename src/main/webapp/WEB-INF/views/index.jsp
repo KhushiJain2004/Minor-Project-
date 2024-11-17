@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/nav.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/common.js"></script>
+    <script src="${pageContext.request.contextPath}/js/nav.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
       integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
       crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -234,12 +235,21 @@
             <i class="fas fa-times"></i>
           </label>
           <li><a href="#">Home</a></li>
-          <li><a href="/clubs">Clubs</a></li>
+          <!-- <li><a href="/clubs">Clubs</a></li> -->
+          <li id="club-dropdown">
+            <a href="#">Clubs</a>
+            <ul class="dropdown-list" id="club-dropdown-list">
+              <!-- Club names will be dynamically inserted here -->
+               <!-- <li>sample</li>
+               <li>sample</li>
+               <li>sample</li> -->
+            </ul>
+          </li>
           <li id="login-link"><a href="/login">Login</a></li>
           <li id="profile-item" style="display: none;">
             <a href="#" id="logoutLink">Logout</a>
             <img src="images/profile.png" alt="Profile" class="profile-icon" />
-            <span id="username"></span> <!-- Placeholder for user's name -->
+            <span id="username"></span> 
           </li>
         </ul>
         <label for="menu-btn" class="btn menu-btn">
@@ -247,6 +257,7 @@
         </label>
       </div>
     </nav>
+    
 
 
     <div class="banner-image">
