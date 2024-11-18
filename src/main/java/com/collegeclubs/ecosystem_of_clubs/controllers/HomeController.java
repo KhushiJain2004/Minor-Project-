@@ -33,10 +33,11 @@ public class HomeController {
     @GetMapping("/clubAdmin/dashboard") 
     public String displayDash() {
     
+        System.out.println("reached");
+    
     return "clubAdminDash"; 
     }
 
-    // @PreAuthorize("hasAuthority('WEB_ADMIN')")
     @GetMapping("/webAdmin/dashboard") 
     public String displayWebDash(Model model) {
 

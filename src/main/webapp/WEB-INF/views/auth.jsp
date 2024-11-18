@@ -83,36 +83,62 @@
                 </div>
 
                 <!-- Club Admin Registration Form -->
-                <div id="clubAdminRegistration" style="display: none;">
-                    <form id="clubAdminForm" action="${pageContext.request.contextPath}/api/auth/register" method="post" enctype="multipart/form-data">
-                        <div>
-                            <label for="clubAdminEmail">Email:</label>
-                            <input type="email" id="clubAdminEmail" name="email" required>
+                <div id="clubAdminRegistration" style="display: none;" >
+                    <form id="clubAdminForm" action="${pageContext.request.contextPath}/api/auth/register" method="post">
+                        <div class="clubRegister">
+                            <div class="admin">
+                                <h3>Club Admin Details</h3>
+                                <div>
+                                    <label for="clubAdminEmail">Email:</label>
+                                    <input type="email" id="clubAdminEmail" name="email" required>
+                                </div>
+                                <div>
+                                    <label for="clubAdminUsername">Username:</label>
+                                    <input type="text" id="clubAdminUsername" name="username" required>
+                                </div>
+                                <div>
+                                    <label for="clubAdminPassword">Password:</label>
+                                    <input type="password" id="clubAdminPassword" name="password" required>
+                                </div>
+                            </div>
+                            <div class="clubDetails">
+                                <h3>Club Details</h3>
+                                <div>
+                                    <label for="clubName">Club Name:</label>
+                                    <input type="text" id="clubName" name="clubName" required>
+                                </div>
+                                <div>
+                                    <label for="slogan">Slogan:</label>
+                                    <input type="text" id="slogan" name="slogan">
+                                </div>
+                                <div>
+                                    <label for="description">Description:</label>
+                                    <textarea id="description" name="description"></textarea>
+        
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <label for="clubAdminUsername">Username:</label>
-                            <input type="text" id="clubAdminUsername" name="username" required>
-                        </div>
-                        <div>
-                            <label for="clubAdminPassword">Password:</label>
-                            <input type="password" id="clubAdminPassword" name="password" required>
-                        </div>
-                        <div>
-                            <label for="clubName">Club Name:</label>
-                            <input type="text" id="clubName" name="clubName" required>
-                        </div>
-                        <div>
-                            <label for="slogan">Slogan:</label>
-                            <input type="text" id="slogan" name="slogan">
-                        </div>
-                        <div>
-                            <label for="description">Description:</label>
-                            <textarea id="description" name="description"></textarea>
-                        </div>
-                        <!-- <div>
-                            <label for="logo">Logo:</label>
-                            <input type="file" id="logo" name="logo">
-                        </div> -->
+                            <div class="members">
+                                <h3>Club Members</h3>
+                                <div class="memberBox">
+                                    <label for="member1Name">Member 1 Name:</label>
+                                    <input type="text" id="member1Name" name="members[0].name" required>
+                                    <label for="member1Designation">Designation:</label>
+                                    <input type="text" id="member1Designation" name="members[0].designation" required>
+                                </div>
+                                <div class="memberBox">
+                                    <label for="member2Name">Member 2 Name:</label>
+                                    <input type="text" id="member2Name" name="members[1].name" required>
+                                    <label for="member2Designation">Designation:</label>
+                                    <input type="text" id="member2Designation" name="members[1].designation" required>
+                                </div>
+                                <div class="memberBox">
+                                    <label for="member3Name">Member 3 Name:</label>
+                                    <input type="text" id="member3Name" name="members[2].name" required>
+                                    <label for="member3Designation">Designation:</label>
+                                    <input type="text" id="member3Designation" name="members[2].designation" required>
+                                </div>
+                            </div>
                         <button type="submit">Register as Club Admin</button>
                     </form>
                 </div>

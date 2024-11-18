@@ -1,5 +1,7 @@
 package com.collegeclubs.ecosystem_of_clubs.model;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -10,23 +12,29 @@ public class Club {
     private String clubId;
     private String clubName;
     private String slogan;
-    private String logo;
     private String description;
+    private List<ClubMember> positionHolders;
 
     private String adminId;
 
     public Club() {
     }
 
-    public Club(String clubId, String clubName, String slogan, String logo, String description, String adminId) {
+    public Club(String clubId, String clubName, String slogan, String description, String adminId) {
         this.clubId = clubId;
         this.clubName = clubName;
         this.slogan = slogan;
-        this.logo = logo;
         this.description = description;
         this.adminId = adminId;
     }
-
+    public Club(String clubId, String clubName, String slogan, String description, List<ClubMember> positionHolders, String adminId) {
+        this.clubId = clubId;
+        this.clubName = clubName;
+        this.slogan = slogan;
+        this.description = description;
+        this.positionHolders = positionHolders;
+        this.adminId = adminId;
+    }
     // Getters and Setters
 
     public String getClubId() {
@@ -53,13 +61,13 @@ public class Club {
         this.slogan = slogan;
     }
 
-    public String getLogo() {
-        return logo;
-    }
+    // public String getLogo() {
+    //     return logo;
+    // }
 
-    public void setLogo(String logo) {
-        this.logo = logo;
-    }
+    // public void setLogo(String logo) {
+    //     this.logo = logo;
+    // }
 
     public String getDescription() {
         return description;
@@ -75,6 +83,14 @@ public class Club {
 
     public void setAdminId(String adminId) {
         this.adminId = adminId;
+    }
+
+    public List<ClubMember> getPositionHolders() {
+        return positionHolders;
+    }
+
+    public void setPositionHolders(List<ClubMember> positionHolders) {
+        this.positionHolders = positionHolders;
     }
    
 }

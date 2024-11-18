@@ -7,7 +7,9 @@ pageEncoding="UTF-8"%>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Club admin Dash</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/common.js"></script>
+    <script src="${pageContext.request.contextPath}/js/nav.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/nav.css">
     <link
     rel="stylesheet"
@@ -441,6 +443,7 @@ pageEncoding="UTF-8"%>
             />
           </a>
         </div>
+        <h2>Ecosystem of clubs!</h2>
         <input type="radio" name="slider" id="menu-btn" />
         <input type="radio" name="slider" id="close-btn" />
         <ul class="nav-links">
@@ -462,6 +465,8 @@ pageEncoding="UTF-8"%>
         </label>
       </div>
     </nav>
+
+    
 
     <div class="sidebar">
       <div class="admin-photo">
@@ -761,6 +766,7 @@ pageEncoding="UTF-8"%>
             e.preventDefault(); // Prevent the default link behavior
             logout();
       });
+    
     </script>
   </body>
 </html>

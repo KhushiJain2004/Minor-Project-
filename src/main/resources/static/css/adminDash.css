@@ -1,0 +1,114 @@
+/* Global Styles */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #8baebd;
+}
+
+a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+h1, h2 {
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-size: 28px;
+    text-align: center;
+    color: #444;
+}
+
+h2 {
+    font-size: 22px;
+    color: #555;
+}
+
+/* Dashboard Styles */
+
+.dashboard {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.dashboard:hover {
+    transform: translateY(-5px);
+}
+
+#userDetails {
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #f0f8ff; /* Light blue background */
+    border: 1px solid #b0e0e6; /* Light border */
+    border-radius: 10px;
+}
+
+#userDetails p {
+    margin-bottom: 10px;
+}
+
+#userDetails span {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Links Styles */
+
+.link-group {
+    margin-top: 30px;
+}
+
+.link-group a {
+    display: block;
+    margin-bottom: 15px;
+    padding: 15px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 8px;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.link-group a:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+/* JSON Display Styles */
+
+#jsonDisplay {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: auto; /* Allow scrolling for long JSON */
+}
+
+#jsonOutput {
+    font-family: 'Courier New', monospace;
+    white-space: pre-wrap;
+    background-color: #fff; /* White background for JSON */
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
