@@ -48,7 +48,7 @@ public class Events {
 
     // Getters and Setters
     public String getId() {
-        return id; // MongoDB will auto-generate this ID
+        return id; // MongoDB auto-generate ID
     }
 
     public void setId(String id) {
