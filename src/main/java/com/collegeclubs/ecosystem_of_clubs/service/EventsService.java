@@ -27,6 +27,14 @@ public class EventsService {
         return eventsRepository.findOngoingEvents(currentTime);
     }
 
+    public List<Events> getPastEvents(LocalDateTime currentTime) {
+        return eventsRepository.findPastEvents(currentTime);
+    }
+
+    public List<Events> getFeaturedEvents() {
+        return eventsRepository.findFeaturedEvents();
+    }
+
     public Optional<Events> getEventById(String eventId) {
         return eventsRepository.findById(eventId);
     }

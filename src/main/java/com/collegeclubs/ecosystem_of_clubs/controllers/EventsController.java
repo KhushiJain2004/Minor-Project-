@@ -42,6 +42,18 @@ public class EventsController {
         return ResponseEntity.ok(eventsService.getOngoingEvents(LocalDateTime.now()));
     }
 
+    // Get past events
+    @GetMapping("/past")
+    public ResponseEntity<List<Events>> getPastEvents() {
+        return ResponseEntity.ok(eventsService.getPastEvents(LocalDateTime.now()));
+    }
+
+    // Get featured events
+    @GetMapping("/featured")
+    public ResponseEntity<List<Events>> getFeaturedEvents() {
+        return ResponseEntity.ok(eventsService.getFeaturedEvents());
+    }
+
     // Get event by ID
     @GetMapping("/{eventId}")
     public ResponseEntity<Events> getEventById(@PathVariable String eventId) {
@@ -60,7 +72,26 @@ public class EventsController {
     // Delete an event by ID
     @DeleteMapping("/{eventId}")
     public ResponseEntity<Void> deleteEvent(@PathVariable String eventId) {
-        eventsService.deleteEventById(eventId);
-        return ResponseEntity.noContent().build();
+        if (eventsService.getEventById(eventId).isPresent()) {
+            eventsService.deleteEventById(eventId);
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
     }
+
+
+    // Update an existing event
+    @PutMapping("/{eventId}")
+    public ResponseEntity<Events> updateEvent(
+            @PathVariable String eventId,
+            @Valid @RequestBody Events updatedEvent) {
+        return eventsService.getEventById(eventId)
+                .map(existingEvent -> {
+                    updatedEvent.setId(eventId); // Ensure the ID is preserved
+                    Events savedEvent = eventsService.saveOrUpdateEvent(updatedEvent);
+                    return ResponseEntity.ok(savedEvent);
+                })
+                .orElse(ResponseEntity.notFound().build());
+    }
+
 }

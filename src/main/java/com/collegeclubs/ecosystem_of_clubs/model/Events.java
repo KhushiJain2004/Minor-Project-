@@ -3,7 +3,6 @@ package com.collegeclubs.ecosystem_of_clubs.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
@@ -11,9 +10,8 @@ import java.util.List;
 
 @Document(collection = "Events")
 public class Events {
-
     @Id
-    private String id;
+    private String id; // This will map to MongoDB's _id field
 
     @NotBlank(message = "Club ID cannot be blank")
     private String clubId;
@@ -21,123 +19,61 @@ public class Events {
     @NotBlank(message = "Event name cannot be blank")
     private String eventName;
 
-    private String eventType;
-
     private String eventDescription;
 
     @NotNull(message = "Start time is required")
-    @Future(message = "Start time must be in the future")
     private LocalDateTime startTime;
 
     @NotNull(message = "End time is required")
-    @Future(message = "End time must be in the future")
     private LocalDateTime endTime;
 
     private List<String> tags;
+
+    private boolean featured; // Added the 'featured' field
 
     private Contact contact;
 
     public static class Contact {
         private String name;
         private String email;
-        private String phoneNumber;
+        private String phone; // Updated to match MongoDB field name
 
-        // Getters and Setters for Contact class
-        public String getName() {
-            return name;
-        }
+        // Getters and Setters
+        public String getName() { return name; }
+        public void setName(String name) { this.name = name; }
 
-        public void setName(String name) {
-            this.name = name;
-        }
+        public String getEmail() { return email; }
+        public void setEmail(String email) { this.email = email; }
 
-        public String getEmail() {
-            return email;
-        }
-
-        public void setEmail(String email) {
-            this.email = email;
-        }
-
-        public String getPhoneNumber() {
-            return phoneNumber;
-        }
-
-        public void setPhoneNumber(String phoneNumber) {
-            this.phoneNumber = phoneNumber;
-        }
+        public String getPhone() { return phone; } // Updated getter and setter
+        public void setPhone(String phone) { this.phone = phone; }
     }
 
-    // Getters and Setters for Events class
-    public String getId() {
-        return id;
-    }
+    // Getters and Setters for Events
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+    public String getClubId() { return clubId; }
+    public void setClubId(String clubId) { this.clubId = clubId; }
 
-    public String getClubId() {
-        return clubId;
-    }
+    public String getEventName() { return eventName; }
+    public void setEventName(String eventName) { this.eventName = eventName; }
 
-    public void setClubId(String clubId) {
-        this.clubId = clubId;
-    }
+    public String getEventDescription() { return eventDescription; }
+    public void setEventDescription(String eventDescription) { this.eventDescription = eventDescription; }
 
-    public String getEventName() {
-        return eventName;
-    }
+    public LocalDateTime getStartTime() { return startTime; }
+    public void setStartTime(LocalDateTime startTime) { this.startTime = startTime; }
 
-    public void setEventName(String eventName) {
-        this.eventName = eventName;
-    }
+    public LocalDateTime getEndTime() { return endTime; }
+    public void setEndTime(LocalDateTime endTime) { this.endTime = endTime; }
 
-    public String getEventType() {
-        return eventType;
-    }
+    public List<String> getTags() { return tags; }
+    public void setTags(List<String> tags) { this.tags = tags; }
 
-    public void setEventType(String eventType) {
-        this.eventType = eventType;
-    }
+    public boolean isFeatured() { return featured; }
+    public void setFeatured(boolean featured) { this.featured = featured; }
 
-    public String getEventDescription() {
-        return eventDescription;
-    }
-
-    public void setEventDescription(String eventDescription) {
-        this.eventDescription = eventDescription;
-    }
-
-    public LocalDateTime getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(LocalDateTime startTime) {
-        this.startTime = startTime;
-    }
-
-    public LocalDateTime getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(LocalDateTime endTime) {
-        this.endTime = endTime;
-    }
-
-    public List<String> getTags() {
-        return tags;
-    }
-
-    public void setTags(List<String> tags) {
-        this.tags = tags;
-    }
-
-    public Contact getContact() {
-        return contact;
-    }
-
-    public void setContact(Contact contact) {
-        this.contact = contact;
-    }
+    public Contact getContact() { return contact; }
+    public void setContact(Contact contact) { this.contact = contact; }
 }
