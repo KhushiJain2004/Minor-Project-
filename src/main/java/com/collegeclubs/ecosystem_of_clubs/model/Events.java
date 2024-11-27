@@ -1,13 +1,11 @@
 package com.collegeclubs.ecosystem_of_clubs.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -17,47 +15,34 @@ public class Events {
     @Id
     private String id;
 
-    @NotBlank(message = "Club ID cannot be null or blank")
+    @NotBlank(message = "Club ID cannot be blank")
     private String clubId;
 
-    @NotBlank(message = "Event name cannot be null or blank")
-    @Size(max = 100, message = "Event name should not exceed 100 characters")
+    @NotBlank(message = "Event name cannot be blank")
     private String eventName;
 
     private String eventType;
 
-    @Size(max = 200, message = "Event description should not exceed 200 characters")
     private String eventDescription;
 
-    @NotNull(message = "Start time cannot be null")
-    @Future(message = "Start time must be a future date")
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @NotNull(message = "Start time is required")
+    @Future(message = "Start time must be in the future")
     private LocalDateTime startTime;
 
-    @NotNull(message = "End time cannot be null")
-    @Future(message = "End time must be a future date")
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @NotNull(message = "End time is required")
+    @Future(message = "End time must be in the future")
     private LocalDateTime endTime;
 
-    // New field for tags (interest tags for event recommendations)
     private List<String> tags;
 
-    // New nested Contact class
     private Contact contact;
 
-    // Default and parameterized constructors, getters, and setters remain the same
-
     public static class Contact {
-        @NotBlank(message = "Contact name cannot be null or blank")
         private String name;
-
-        @NotBlank(message = "Email cannot be null or blank")
         private String email;
-
-        @NotBlank(message = "Phone number cannot be null or blank")
         private String phoneNumber;
 
-        // Getters and Setters for Contact fields
+        // Getters and Setters for Contact class
         public String getName() {
             return name;
         }
@@ -83,8 +68,7 @@ public class Events {
         }
     }
 
-    // Getters and Setters for Events fields
-
+    // Getters and Setters for Events class
     public String getId() {
         return id;
     }
