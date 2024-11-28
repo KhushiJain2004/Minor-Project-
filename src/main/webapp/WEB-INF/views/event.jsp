@@ -5,19 +5,177 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Club Dashboard</title>
+     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/nav.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/common.js"></script>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <style>
         body {
             background-color: #E2F3FB;
             margin: 0;
             font-family: 'Poppins', sans-serif;
         }
-        header, footer {
+        footer {
             background-color: #027AA8;
             height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
+        nav {
+        position: absolute; 
+        top: 0; 
+        left: 0; 
+        width: 100%; 
+        background-color: #e9f2f9; 
+        z-index: 1000; 
+      }
+
+      nav .wrapper {
+        position: relative;
+        max-width: 2000px;
+        padding: 0px 30px;
+        height: 70px;
+        line-height: 70px;
+        background-color: #fff;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      /* Logo styling */
+      .wrapper .logo {
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        padding: 50px; 
+      }
+
+      .logo a:hover img {
+        transform: scale(1.05); 
+      }
+
+      /* Responsive adjustments */
+      @media screen and (max-width: 970px) {
+        .logo img {
+          height: 80px;
+          width: 40px; 
+        }
+      }
+
+      @media screen and (max-width: 600px) {
+        .logo img {
+          height: 80px;
+          width: 40px; 
+        }
+      }
+
+      /* Nav links styling */
+      .wrapper .nav-links {
+        display: inline-flex;
+      }
+
+      .nav-links li {
+        list-style: none;
+      }
+
+      .nav-links li a {
+        color: #027aa8;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: 500;
+        padding: 9px 15px;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+      }
+
+      .nav-links li a:hover {
+        background: #96badf;
+      }
+
+      /* Mobile nav toggle button */
+      .wrapper .btn {
+        color: #fff;
+        font-size: 20px;
+        cursor: pointer;
+        display: none;
+      }
+
+      .wrapper .btn.close-btn {
+        position: absolute;
+        right: 30px;
+        top: 10px;
+      }
+
+      /* Mobile view styles */
+      @media screen and (max-width: 970px) {
+        .wrapper .btn {
+          display: block;
+        }
+
+        ::-webkit-scrollbar {
+          width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+          background: #027aa8;
+        }
+        ::-webkit-scrollbar-thumb {
+          background: #027aa8;
+        }
+        #menu-btn:checked ~ .nav-links {
+          left: 0%;
+        }
+        #menu-btn:checked ~ .btn.menu-btn {
+          display: none;
+        }
+        #close-btn:checked ~ .btn.menu-btn {
+          display: block;
+        }
+        .nav-links li {
+          margin: 15px 10px;
+        }
+        .nav-links li a {
+          padding: 0 20px;
+          display: block;
+          font-size: 20px;
+        }
+        .nav-links .drop-menu {
+          position: static;
+          opacity: 1;
+          top: 65px;
+          visibility: visible;
+          padding-left: 20px;
+          width: 100%;
+          max-height: 0px;
+          overflow: hidden;
+          box-shadow: none;
+          transition: all 0.3s ease;
+        }
+
+         .drop-menu li {
+          margin: 0;
+        }
+        .drop-menu li a {
+          border-radius: 5px;
+          font-size: 18px;
+        }
+      }
+
+      /* Nav input styling */
+      nav input {
+        display: none;
+      }
 
         .container {
             position: relative;
@@ -171,6 +329,28 @@
             flex-wrap: wrap;
             gap: 20px;
         }
+
+        .event-filters {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 20px auto;
+        max-width: 80%;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .event-filters input, .event-filters select {
+        padding: 10px;
+        font-size: 16px;
+        margin-right: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        outline: none;
+        }
+
         /* Responsive design */
         @media (max-width: 768px) {
             .event-card {
@@ -258,7 +438,58 @@
     </style>
 </head>
 <body>
-    <header></header>
+    <nav>
+      <div class="wrapper">
+        <div class="logo">
+          <a href="#">
+            <img
+              src="${pageContext.request.contextPath}/images/UPES University of Petroleum and Energy Studies.png"
+              alt="Logo"
+            />
+          </a>
+        </div>
+        <input type="radio" name="slider" id="menu-btn" />
+        <input type="radio" name="slider" id="close-btn" />
+        <ul class="nav-links">
+          <label for="close-btn" class="btn close-btn">
+            <i class="fas fa-times"></i>
+          </label>
+          <li><a href="/home">Home</a></li>
+          <li><a href="/clubs">Clubs</a></li>
+          <!-- <li><a href="clubAdminDash.jsp">Feedback</a></li> -->
+          <li id="login-link"><a href="/login">Login</a></li>
+          <li id="profile-item" style="display: none;">
+            <a href="#" id="logoutLink">Logout</a>
+            <img src="${pageContext.request.contextPath}/images/profile.png" alt="Profile" class="profile-icon" />
+            <span id="username"></span> <!-- Placeholder for user's name -->
+          </li>
+        </ul>
+        <label for="menu-btn" class="btn menu-btn">
+          <i class="fas fa-bars"></i>
+        </label>
+      </div>
+    </nav>
+    <div class="event-filters">
+        <input 
+            type="text" 
+            id="search-bar" 
+            placeholder="Search events..." 
+            oninput="filterEvents()" 
+        />
+        <select id="keyword-filter" onchange="filterEvents()">
+            <option value="">All Keywords</option>
+            <option value="Keyword1">Keyword1</option>
+            <option value="Keyword2">Keyword2</option>
+            <option value="Keyword3">Keyword3</option>
+        </select>
+        <select id="sort-filter" onchange="sortEvents()">
+            <option value="">Sort By</option>
+            <option value="a-z">A-Z</option>
+            <option value="z-a">Z-A</option>
+            <option value="newest">Newest</option>
+            <option value="oldest">Oldest</option>
+        </select>
+    </div>    
     
 <div class="event-section">
     <h2>Ongoing Events</h2>
@@ -331,6 +562,57 @@
         document.getElementById("close-popup").onclick = function() {
             document.getElementById("event-popup").style.display = "none"; 
         }
+
+    // Search and filter function
+    function filterEvents() {
+        const searchValue = document.getElementById("search-bar").value.toLowerCase();
+        const keywordValue = document.getElementById("keyword-filter").value.toLowerCase();
+
+        const events = document.querySelectorAll(".event-card");
+
+        events.forEach((event) => {
+            const description = event.querySelector(".event-description").textContent.toLowerCase();
+
+            // Check if the event matches the search and keyword filters
+            const matchesSearch = description.includes(searchValue);
+            const matchesKeyword = keywordValue === "" || description.includes(keywordValue);
+
+            if (matchesSearch && matchesKeyword) {
+                event.style.display = "flex"; // Show matching events
+            } else {
+                event.style.display = "none"; // Hide non-matching events
+            }
+        });
+    }
+
+    // Sort function
+    function sortEvents() {
+        const sortValue = document.getElementById("sort-filter").value;
+        const container = document.querySelector(".event-container");
+
+        const events = Array.from(container.children);
+
+        events.sort((a, b) => {
+            const textA = a.querySelector(".event-description").textContent.trim();
+            const textB = b.querySelector(".event-description").textContent.trim();
+
+            if (sortValue === "a-z") {
+                return textA.localeCompare(textB);
+            } else if (sortValue === "z-a") {
+                return textB.localeCompare(textA);
+            } else if (sortValue === "newest") {
+                // Assuming newest events are displayed at the end of the list initially
+                return container.children.length - events.indexOf(b);
+            } else if (sortValue === "oldest") {
+                return events.indexOf(a) - events.indexOf(b);
+            }
+            return 0;
+        });
+
+        // Reorganize sorted elements back into the container
+        events.forEach((event) => container.appendChild(event));
+    }
     </script>
+
 </body>
 </html>
