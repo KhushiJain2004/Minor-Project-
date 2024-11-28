@@ -7,11 +7,14 @@ import org.springframework.stereotype.Repository;
 
 import com.collegeclubs.ecosystem_of_clubs.model.Club;
 
+
+
 @Repository
 public interface ClubRepository extends MongoRepository<Club,String>{
     // Club findbyClubName(String clubName);
     // Club findByAdmin(ClubAdmin admin);
     Club findByClubId(String clubId);
+    Club findByAdminId(String adminId);
 
     public Optional<Club> findByClubName(String name);
 

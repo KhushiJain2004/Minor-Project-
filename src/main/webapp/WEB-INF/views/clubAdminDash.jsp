@@ -7,8 +7,11 @@ pageEncoding="UTF-8"%>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Club admin Dash</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/common.js"></script>
+    <script src="${pageContext.request.contextPath}/js/clubAdminDash.js"></script>
     <script src="${pageContext.request.contextPath}/js/nav.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/nav.css">
     <link
@@ -363,8 +366,8 @@ pageEncoding="UTF-8"%>
       }
 
       .sidebar {
-        width: 250px;
-        height: 150vh;
+        width: 18%;
+        min-height: 150vh;
         background-color: #2c3e50;
         color: #ecf0f1;
         padding: 20px;
@@ -375,7 +378,9 @@ pageEncoding="UTF-8"%>
         position: fixed; /* Fix the sidebar's position */
         left: 0; /* Align it to the left */
         top: 73px; /* Align it to the top */
+        box-sizing: border-box;
       }
+
 
       .admin-photo img {
         width: 100px;
@@ -387,7 +392,7 @@ pageEncoding="UTF-8"%>
 
       .admin-details {
         text-align: center;
-        margin-bottom: auto;
+        margin-bottom: 20px;
       }
 
       .admin-name {
@@ -414,25 +419,99 @@ pageEncoding="UTF-8"%>
       }
 
       /* Logout Button Styles */
-      .logout-button {
-        margin-top: auto;
-        width: 100%;
+      .dash-button {
+        /* margin-top: auto; */
+        width: 60%;
         padding: 10px;
-        background-color: #e74c3c;
-        color: #fff;
+        background-color: white;
+        color: black;
         border: none;
         border-radius: 5px;
         cursor: pointer;
         font-size: 16px;
         transition: background-color 0.3s;
+        margin: 20px 0;;
       }
 
       .logout-button:hover {
         background-color: #c0392b;
       }
+      .updateForm {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 80%;
+            max-width: 500px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 2;
+            border-radius:1px solid black;
+
+        }
+      #updateModal
+      {
+            display: none; 
+            position: fixed; 
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1; 
+      }
+      .mainContent
+      {
+        position: fixed;
+        right:0;
+        width:82%;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+      }
+      .listField
+      {
+        display: flex;
+        /* flex-direction: column; */
+        justify-content: space-between;
+      }
+      .listField button
+      {
+        height:20px;
+      }
+      .inputContainer
+      {
+        display: flex;
+        flex-direction: column;
+      }
+      .inputContainer input{
+        display: block;
+      }
+      .socialMediaField
+      {
+        display: flex;
+        justify-content: space-between;
+        gap:10px;
+      }
     </style>
   </head>
   <body>
+    <script>
+      const clubAdmin=JSON.parse(localStorage.getItem("user"));
+      console.log(clubAdmin);
+      // console.log(clubAdmin.email);
+      $(document).ready(function(e){
+        document.getElementById("adminName").innerText=clubAdmin.username;
+        // document.getElementById("clubName").textContent=clubAdmin.username;
+        document.getElementById("email").textContent=clubAdmin.email;
+        document.getElementById("role").textContent=clubAdmin.role;
+
+      })
+    </script>
     <nav>
       <div class="wrapper">
         <div class="logo">
@@ -473,92 +552,177 @@ pageEncoding="UTF-8"%>
         <img src="https://via.placeholder.com/100" alt="Admin Photo" />
       </div>
       <div class="admin-details">
-        <h2 class="admin-name">John Doe</h2>
-        <p class="club-name">Tech Club</p>
-        <p class="position">Club President</p>
-        <p class="email">john.doe@example.com</p>
+        <h2 class="admin-name" id="adminName"></h2>
+        <!-- <p class="club-name" id="clubName">${status}</p> -->
+        <p class="position" id="role">Club President</p>
+        <p class="email" id="email">john.doe@example.com</p>
         <p class="contact">+123456789</p>
       </div>
 
-      <button class="logout-button">Logout</button>
+      <button class="dash-button" id="updateButton">Update Profile</button>
+      <button class="dash-button" onclick="logout()">Logout</button>
     </div>
 
-    <!-- Regular Task Manager Section -->
-    <div class="section">
-      <h2>Upcomming events</h2>
-      <div class="task-container" id="taskContainer">
-        <div class="add-card" onclick="showModal()">
-          <i class="fa fa-plus"></i>
+    <div class="mainContent">
+      <!-- Modal for Update Form -->
+    <div class="updateModal" id="updateModal" style="display: none;">
+      <div class="updateForm">
+        <h2>Update Club Profile</h2>
+        <div class="field">
+          <label for="clubName">Club Name</label>
+          <input type="text" id="clubName" placeholder="Club Name">
         </div>
+        <div class="field">
+          <label for="clubSlogan">Club Slogan</label>
+          <input type="text" id="clubSlogan" placeholder="Club Slogan">
+        </div>
+        <div class="field">
+          <label for="clubDescription">Club Description</label>
+          <input id="clubDescription" placeholder="Club Description">
+        </div>
+        <div class="field">
+          <label for="contactEmail">Contact Email</label>
+          <input type="email" id="contactEmail" placeholder="Contact Email">
+        </div>
+        <div class="field">
+          <label for="contactPhone">Contact Phone</label>
+          <input type="text" id="contactPhone" placeholder="Contact Phone Number">
+        </div>
+        <div class="field">
+          <label for="memberBenefits">Membership Benefits</label>
+          <input id="memberBenefits" placeholder="Benefits for Club Members">
+        </div>
+        <div class="field">
+          <label for="memberFee">Membership Fee</label>
+          <input type="text" id="memberFee" placeholder="Membership Fee">
+        </div>
+        <div class="field">
+          <div class="listField">
+            <label for="achievements">Achievements</label>
+            <button type="button" id="addInputFields">Add More</button>
+          </div>
+            <div  class="inputContainer" id="inputContainer">
+              <input type="text" name="achievements" placeholder="Enter an achievement">
+            </div>
+        </div>
+        <div class="field">
+          <div class="listField">
+            <label for="">Social Media Links</label>
+            <button type="button" id="addSocialMediaField">Add More</button>
+          </div>
+          <div id="socialMediaContainer" class="inputContainer">
+            <div class="socialMediaField">
+              <input type="text" name="socialMediaKey" placeholder="Platform (e.g., Facebook)">
+              <input type="text" name="socialMediaValue" placeholder="URL (e.g., https://facebook.com)">
+            </div>
+          </div>
+        </div> 
+        <div class="field">
+          <label for="">Position Holders</label>
+          <div id="positionHoldersContainer">
+            <label for="">Member1</label>
+            <div class="positionHolderField">
+              <input type="text" name="name1" placeholder="Name">
+              <input type="text" name="designation1" placeholder="Designation">
+            </div>
+          </div>
+          <div id="positionHoldersContainer">
+            <label for="">Member2</label>
+            <div class="positionHolderField">
+              <input type="text" name="name2" placeholder="Name">
+              <input type="text" name="designation2" placeholder="Designation">
+            </div>
+          </div>
+          <div id="positionHoldersContainer">
+            <label for="">Member3</label>
+            <div class="positionHolderField">
+              <input type="text" name="name3" placeholder="Name">
+              <input type="text" name="designation3" placeholder="Designation">
+            </div>
+          </div>
+        </div>  
+        <button id="submitButton">Submit</button>     
       </div>
     </div>
 
-    <!-- Important Events Section -->
-    <div class="section">
-      <h2>Important Events</h2>
-      <div class="task-container" id="importantEventContainer">
-        <div class="add-card" onclick="showEventModal()">
-          <i class="fa fa-plus"></i>
+      
+      <!-- Regular Task Manager Section -->
+      <div class="section">
+        <h2>Upcomming events</h2>
+        <div class="task-container" id="taskContainer">
+          <div class="add-card" onclick="showModal()">
+            <i class="fa fa-plus"></i>
+          </div>
         </div>
       </div>
-    </div>
-
-    <!-- Modal for Adding/Editing Task -->
-    <div id="taskModal" class="modal">
-      <div class="modal-content">
-        <div class="modal-header">Add Task</div>
-        <div class="input-group">
-          <label for="taskInput">Task:</label>
-          <input type="text" id="taskInput" />
-        </div>
-        <div class="input-group">
-          <label for="eventDescription">Event Description:</label>
-          <textarea id="eventDescription"></textarea>
-        </div>
-        <div class="input-group">
-          <label for="dateFrom">Date From:</label>
-          <input type="date" id="dateFrom" />
-        </div>
-        <div class="input-group">
-          <label for="dateTo">Date To:</label>
-          <input type="date" id="dateTo" />
-        </div>
-        <div class="input-group">
-          <label for="eventManager">Event Manager:</label>
-          <input type="text" id="eventManager" />
-        </div>
-        <div class="modal-footer">
-          <button onclick="saveTask()">Add</button>
+  
+      <!-- Important Events Section -->
+      <div class="section">
+        <h2>Important Events</h2>
+        <div class="task-container" id="importantEventContainer">
+          <div class="add-card" onclick="showEventModal()">
+            <i class="fa fa-plus"></i>
+          </div>
         </div>
       </div>
-    </div>
-
-    <!-- Modal for Important Events -->
-    <div id="eventModal" class="modal">
-      <div class="modal-content">
-        <div class="modal-header">Add Important Event</div>
-        <div class="input-group">
-          <label for="eventInput">Event:</label>
-          <input type="text" id="eventInput" />
+  
+      <!-- Modal for Adding/Editing Task -->
+      <div id="taskModal" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">Add Task</div>
+          <div class="input-group">
+            <label for="taskInput">Task:</label>
+            <input type="text" id="taskInput" />
+          </div>
+          <div class="input-group">
+            <label for="eventDescription">Event Description:</label>
+            <textarea id="eventDescription"></textarea>
+          </div>
+          <div class="input-group">
+            <label for="dateFrom">Date From:</label>
+            <input type="date" id="dateFrom" />
+          </div>
+          <div class="input-group">
+            <label for="dateTo">Date To:</label>
+            <input type="date" id="dateTo" />
+          </div>
+          <div class="input-group">
+            <label for="eventManager">Event Manager:</label>
+            <input type="text" id="eventManager" />
+          </div>
+          <div class="modal-footer">
+            <button onclick="saveTask()">Add</button>
+          </div>
         </div>
-        <div class="input-group">
-          <label for="importantEventDescription">Event Description:</label>
-          <textarea id="importantEventDescription"></textarea>
-        </div>
-        <div class="input-group">
-          <label for="eventDateFrom">Date From:</label>
-          <input type="date" id="eventDateFrom" />
-        </div>
-        <div class="input-group">
-          <label for="eventDateTo">Date To:</label>
-          <input type="date" id="eventDateTo" />
-        </div>
-        <div class="input-group">
-          <label for="importantEventManager">Event Manager:</label>
-          <input type="text" id="importantEventManager" />
-        </div>
-        <div class="modal-footer">
-          <button onclick="saveImportantEvent()">Add</button>
+      </div>
+  
+      <!-- Modal for Important Events -->
+      <div id="eventModal" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">Add Important Event</div>
+          <div class="input-group">
+            <label for="eventInput">Event:</label>
+            <input type="text" id="eventInput" />
+          </div>
+          <div class="input-group">
+            <label for="importantEventDescription">Event Description:</label>
+            <textarea id="importantEventDescription"></textarea>
+          </div>
+          <div class="input-group">
+            <label for="eventDateFrom">Date From:</label>
+            <input type="date" id="eventDateFrom" />
+          </div>
+          <div class="input-group">
+            <label for="eventDateTo">Date To:</label>
+            <input type="date" id="eventDateTo" />
+          </div>
+          <div class="input-group">
+            <label for="importantEventManager">Event Manager:</label>
+            <input type="text" id="importantEventManager" />
+          </div>
+          <div class="modal-footer">
+            <button onclick="saveImportantEvent()">Add</button>
+          </div>
         </div>
       </div>
     </div>
@@ -566,6 +730,39 @@ pageEncoding="UTF-8"%>
     <script>
       let tasks = [];
       let importantEvents = [];
+
+      document.getElementById("updateButton").addEventListener("click", function() {
+            document.getElementById("updateModal").style.display = "block";
+        });
+
+        
+        document.getElementById("updateModal").addEventListener("click",function (e) {
+          if(e.target==document.getElementById("updateModal")) 
+          {
+            resetModal(document.getElementById("updateModal"));
+            document.getElementById("updateModal").style.display="none";
+          }
+        })
+        document.getElementById("addInputFields").addEventListener("click",function () {
+          const div=document.getElementById("inputContainer");
+          
+          const input=document.createElement("input");
+          input.type = "text";
+          input.name = "achievements";
+          input.placeholder = "Enter an achievement";
+          div.appendChild(input);
+          
+        })
+        document.getElementById("addSocialMediaField").addEventListener("click", () => {
+          const container = document.getElementById("socialMediaContainer");
+          const field = document.createElement("div");
+          field.className = "socialMediaField";
+          field.innerHTML = `
+            <input type="text" name="socialMediaKey" placeholder="Platform (e.g., Facebook)">
+            <input type="text" name="socialMediaValue" placeholder="URL (e.g., https://facebook.com)">
+          `;
+          container.appendChild(field);
+        });
 
       // Task Modal Functions
       function showModal(editTaskIndex = null) {

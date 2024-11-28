@@ -3,18 +3,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.collegeclubs.ecosystem_of_clubs.service.JwtService;
-import com.collegeclubs.ecosystem_of_clubs.service.MyUserDetailsService;
-
 
 @Controller
 public class HomeController {
-    JwtService jwtService;
-    MyUserDetailsService userService;
 
     @GetMapping("/") 
     public String displayroot() {
         return "index"; 
+    }
+    @GetMapping("/event") 
+    public String displayEvent() {
+        return "event"; 
     }
     @GetMapping("/home") 
     public String displayhome() {
