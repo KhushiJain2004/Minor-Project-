@@ -6,9 +6,11 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +24,9 @@ import com.collegeclubs.ecosystem_of_clubs.model.User;
 import com.collegeclubs.ecosystem_of_clubs.service.ClubMemberService;
 import com.collegeclubs.ecosystem_of_clubs.service.ClubService;
 import com.collegeclubs.ecosystem_of_clubs.service.UserService;
+
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("/api/auth")
@@ -78,16 +83,38 @@ public class AuthController {
         try {
             System.out.println("Received login request for email: " + request.getEmail());
             HashMap<String,Object> response= userService.verifyUserAndGenerateToken(request.getEmail(),request.getPassword(),request.getRole());
-            model.addAttribute("status", "Login successful!"); 
+            String token=(String) response.get("token");
+            ResponseCookie cookie = ResponseCookie.from("Authorization", token)
+            .httpOnly(true)
+            .secure(true) // Set to true in production (requires HTTPS)
+            .path("/")    // Available across the application
+            .maxAge(7 * 24 * 60 * 60) // 7 days expiry
+            .sameSite("Strict")       // Prevent cross-site usage
+            .build();
+
     
-            return new ResponseEntity<>(response,HttpStatus.OK);
+            return ResponseEntity.ok()
+            .header("Set-Cookie", cookie.toString())
+            .body(response);
             
           } catch (Exception e) {
             model.addAttribute("status", e.getMessage()); 
     
             return new ResponseEntity<>(e.getMessage(),HttpStatus.FORBIDDEN);
           }
-       
+    }
+    @GetMapping("/logout")
+    public ResponseEntity<String> logout(HttpServletResponse response) {
+
+        // Clear the cookie
+        System.out.println("requested for logout");
+        Cookie cookie = new Cookie("Authorization", null); // Name of the cookie
+        cookie.setPath("/"); // Set path to match the original cookie
+        cookie.setHttpOnly(true);
+        cookie.setMaxAge(0); // Expire the cookie immediately
+        response.addCookie(cookie);
+
+        return new ResponseEntity<>("logged out", HttpStatus.OK);
     }
         // @PostMapping("/login")
         // public RedirectView login(@RequestParam String email,

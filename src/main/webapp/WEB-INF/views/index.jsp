@@ -259,10 +259,10 @@
     </nav>
     
 
-
+<!-- 
     <div class="banner-image">
       <img src="${pageContext.request.contextPath}/images/banner.jpeg" alt="Banner Image" style="width: 100%; height: auto; display: block; margin: 80px auto; margin-top: 100px;" />
-    </div>
+    </div> -->
     
     
     <div class="container">
@@ -350,7 +350,7 @@
       });
 
       // Automatic slide every 3 seconds
-      setInterval(slideNext, 5000);
+      setInterval(slideNext, 4000);
 
       // Logout function handler
       $("#logoutLink").on("click", function (e) {

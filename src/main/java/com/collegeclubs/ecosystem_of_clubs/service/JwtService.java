@@ -1,12 +1,10 @@
 package com.collegeclubs.ecosystem_of_clubs.service;
 
-import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,26 +14,25 @@ import com.collegeclubs.ecosystem_of_clubs.model.User;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 
 @Service
 public class JwtService {
 
-    private String secretKey="";
+    private final String secretKey="strongSecretKey7821#&!!*hhbhnfvjbwejqlkmdeqldmkqehbfhqcjqkdoqwdmqke";
  
-   public JwtService()
-   {
-        try{
-            KeyGenerator key= KeyGenerator.getInstance("HmacSHA256");
-            SecretKey sk=key.generateKey();
-            secretKey=Base64.getEncoder().encodeToString(sk.getEncoded());
-        }
-        catch(NoSuchAlgorithmException e)
-        {
-            throw new RuntimeException(e);
-        }
-   }
+//    public JwtService()
+//    {
+//         try{
+//             KeyGenerator key= KeyGenerator.getInstance("HmacSHA256");
+//             SecretKey sk=key.generateKey();
+//             secretKey=Base64.getEncoder().encodeToString(sk.getEncoded());
+//         }
+//         catch(NoSuchAlgorithmException e)
+//         {
+//             throw new RuntimeException(e);
+//         }
+//    }
 
 
     public String generateToken(String userId)
@@ -54,9 +51,12 @@ public class JwtService {
     }
 
     private SecretKey getKey() {
-        byte[] keybytes=Decoders.BASE64.decode(secretKey);
-        return Keys.hmacShaKeyFor(keybytes);
+         return Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
     }
+    // private SecretKey getKey() {
+    //     byte[] keybytes=Decoders.BASE64.decode(secretKey);
+    //     return Keys.hmacShaKeyFor(keybytes);
+    // }
 
     public String extractUserId(String token) {
         return extractClaims(token).getSubject();  // The subject is the user ID

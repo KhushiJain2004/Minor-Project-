@@ -33,69 +33,117 @@ $(document).ready(function () {
         $('#loginRole').val(selectedRole);
     });
    
-    $("#loginForm").submit(function (e) {
-        e.preventDefault(); 
-
+    document.getElementById("loginForm").addEventListener("submit", async function (e) {
+        e.preventDefault();
+    
         console.log("Form submission prevented");
-
-        var loginData = {
-            email: $("#loginEmail").val(),
-            password: $("#loginPassword").val(),
-            role: $("#loginRole").val()
+    
+        const loginData = {
+            email: document.getElementById("loginEmail").value,
+            password: document.getElementById("loginPassword").value,
+            role: document.getElementById("loginRole").value,
         };
         console.log(loginData);
-
-        $.ajax({
-            url: "/api/auth/login", 
-            type: "POST",
-            contentType: "application/json", 
-            data: JSON.stringify(loginData),
-            success: function (response) {
-                localStorage.setItem("token", response.token);
-                localStorage.setItem("user", JSON.stringify(response.user));
-                navigateToDashboard(response.role);  // Navigate based on role
-            },
-            error: function (xhr, status, error) {
-                console.error("Login failed:", error);
-                const errorMessage = xhr.responseJSON ? xhr.responseJSON.message : "Bad credentials";
-                toastr.error(errorMessage || "Login failed"); 
+    
+        try {
+            const response = await fetch("/api/auth/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(loginData),
+            });
+    
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error("Login failed:", errorData);
+                const errorMessage = errorData.message || "Login failed";
+                toastr.error(errorMessage);
+                return;
             }
-        });
+    
+            const responseData = await response.json();
+            localStorage.setItem("token", responseData.token);
+            localStorage.setItem("user", JSON.stringify(responseData.user));
+            navigateToDashboard(responseData.role); // Navigate based on role
+        } catch (error) {
+            console.error("An error occurred during login:", error);
+            toastr.error("Something went wrong. Please try again later.");
+        }
     });
-
-    function navigateToDashboard(role) {
-        const baseUrl = window.location.origin;
     
-        // Set target URL based on user role
-        const targetUrl = role === "WEB_ADMIN" ? `${baseUrl}/webAdmin/dashboard` 
-                        : role === "CLUB_ADMIN" ? `${baseUrl}/clubAdmin/dashboard` 
-                        : `${baseUrl}/user/dashboard`;
+    async function navigateToDashboard(role) {
+        let dashboardUrl;
     
-        // Navigate directly to the URL, allowing backend to handle authentication
-        window.location.href = targetUrl;
-    }
+        switch (role) {
+            case "WEB_ADMIN":
+                dashboardUrl = "/webAdmin/dashboard";
+                break;
+            case "CLUB_ADMIN":
+                dashboardUrl = "/clubAdmin/dashboard";
+                break;
+            case "END_USER":
+                dashboardUrl = "/home";
+                break;
+            default:
+                toastr.error("Invalid role. Cannot navigate to dashboard.");
+                return;
+        }
     
-
-    function fetchDashboard(url) {
-        const token = localStorage.getItem("token");
-        console.log(token);
-        $.ajax({
-            url: url,
-            type: "GET",
-            headers: {
-                "Authorization": "Bearer " + token
-            },
-            success: function (response) {
-                console.log("Dashboard data:", response);
-                window.location.replace(url);
-            },
-            error: function (xhr, status, error) {
-                console.error("Access denied:", error);
-
-                window.location.replace("/login");
+        try {
+            const response = await fetch(dashboardUrl, {
+                method: "GET",
+                credentials: "include", // Include cookies in the request
+            });
+            if (response.status === 401) {
+                toastr.error("Invalid authentication. Please log in again.");
+                window.location.href = "/login"; // Redirect to login
+                return;
             }
-        });
+    
+            if (response.status === 403) {
+                toastr.error("Access denied. You do not have sufficient privileges.");
+                return;
+            }
+    
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error("Navigation failed:", errorData);
+                toastr.error("Failed to access the dashboard. Please try again.");
+                return;
+            }
+
+            console.log(response);
+            // Redirect to the dashboard if access is granted
+            window.location.href = dashboardUrl;
+        } catch (error) {
+            console.error("An error occurred while navigating:", error);
+            toastr.error("Something went wrong. Please try again later.");
+        }
     }
+    
+    
+
+    // function fetchDashboard(url) {
+    //     const token = localStorage.getItem("token");
+    //     console.log(token);
+    //     $.ajax({
+    //         url: url,
+    //         type: "GET",
+    //         headers: {
+    //             "Authorization": "Bearer " + token
+    //         },
+    //         success: function (response) {
+    //             console.log("Dashboard data:", response);
+    //             window.location.replace(url);
+    //         },
+    //         error: function (xhr, status, error) {
+    //             console.error("Access denied:", error);
+
+    //             window.location.replace("/login");
+    //         }
+    //     });
+    // }
 
 
     $(document).ready(function () {

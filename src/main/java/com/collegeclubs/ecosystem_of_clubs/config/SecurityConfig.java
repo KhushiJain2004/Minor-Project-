@@ -12,11 +12,15 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.collegeclubs.ecosystem_of_clubs.filters.JwtFilter;
 import com.collegeclubs.ecosystem_of_clubs.service.MyUserDetailsService;
+
+import jakarta.servlet.http.HttpServletResponse;
 
     @Configuration
     @EnableWebSecurity
@@ -38,17 +42,21 @@ import com.collegeclubs.ecosystem_of_clubs.service.MyUserDetailsService;
                 // .cors(cors->cors.disable())
                 .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(request -> request
-                    .requestMatchers("/clubAdmin/").hasAuthority("CLUB_ADMIN")
-                    .requestMatchers("/api/auth/register").permitAll()
-                    .requestMatchers("/webAdmin/","/api/user/list").hasAuthority("WEB_ADMIN")
-                    .requestMatchers("/**","/home").permitAll() 
-                    .anyRequest().authenticated()
-                    )
+                .requestMatchers("/","/logout","/home").permitAll() 
+                .requestMatchers("/api/auth/**").permitAll()
+                .requestMatchers("/clubAdmin/**").hasAuthority("CLUB_ADMIN")
+                .requestMatchers("/webAdmin/**","/api/user/list").hasAuthority("WEB_ADMIN")
+                .requestMatchers("/**","/home").permitAll()
+                .anyRequest().authenticated())
                 .httpBasic(basic->{})
                 .formLogin(login -> login
                     .loginPage("/login") // Custom login page
                     .permitAll()
                 )
+                .exceptionHandling(exceptionHandling -> exceptionHandling
+                .authenticationEntryPoint(customAuthenticationEntryPoint()) // Handle auth failures
+                .accessDeniedHandler(customAccessDeniedHandler()) // Handle access denials
+        )
                 // .logout(logout -> logout
                 //     .permitAll())
                 
@@ -57,6 +65,23 @@ import com.collegeclubs.ecosystem_of_clubs.service.MyUserDetailsService;
                 .build();
 
                 
+        }
+        @Bean
+        public AuthenticationEntryPoint customAuthenticationEntryPoint() {
+            return (request, response, authException) -> {
+                response.setContentType("application/json");
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                response.getWriter().write("{\"error\": \"Invalid authentication. Please log in again.\"}");
+            };
+        }
+
+        @Bean
+        public AccessDeniedHandler customAccessDeniedHandler() {
+            return (request, response, accessDeniedException) -> {
+                response.setContentType("application/json");
+                response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                response.getWriter().write("{\"error\": \"Access denied. You do not have sufficient privileges.\"}");
+            };
         }
 
 
