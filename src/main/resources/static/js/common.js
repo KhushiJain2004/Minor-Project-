@@ -1,17 +1,23 @@
-function logout() {
-  $.ajax({
-      url: '/logout', // URL for your logout endpoint
-      type: 'POST', // or 'GET'
-      success: function(response) {
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
-          window.location.href = '/login'; // Redirect after logout
-      },
-      error: function(xhr, status, error) {
-          console.error('Logout failed: ', error);
-      }
-  });
+async function logout() {
+  try {
+      const response=await fetch("/api/auth/logout", {
+          method: "GET",
+          credentials: "include", // Ensure cookies are included
+      });
+
+      console.log(response);
+      // Clear token from localStorage (if used)
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+
+      // Redirect to login page
+      window.location.href = "/login";
+  } catch (error) {
+      console.error("Logout failed:", error);
+      toastr.error("Failed to log out. Please try again.");
+  }
 }
+
 // navbar.js
 document.addEventListener("DOMContentLoaded", function () {
   const user = JSON.parse(localStorage.getItem('user'));
