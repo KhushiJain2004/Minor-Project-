@@ -49,4 +49,9 @@ public class EventsService {
     public void deleteEventById(String eventId) {
         eventsRepository.deleteById(eventId);
     }
+
+
+    public List<Events> getEventsByTags(List<String> tags) {
+        return eventsRepository.findByTagsIn(tags);
+    }
 }

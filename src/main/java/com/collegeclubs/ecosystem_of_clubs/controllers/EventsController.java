@@ -94,4 +94,15 @@ public class EventsController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    // Get events by tags
+    @GetMapping("/filter-by-tags")
+    public ResponseEntity<List<Events>> getEventsByTags(@RequestParam List<String> tags) {
+        List<Events> events = eventsService.getEventsByTags(tags);
+        if (events.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(events);
+    }
+
+
 }
