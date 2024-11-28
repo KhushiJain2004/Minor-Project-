@@ -19,4 +19,8 @@ public interface EventsRepository extends MongoRepository<Events, String> {
     List<Events> findFeaturedEvents();
 
     List<Events> findByClubId(String clubId);
+
+    @Query("{ 'tags': { $in: ?0 } }")
+    List<Events> findByTagsIn(List<String> tags);
+
 }
