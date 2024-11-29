@@ -24,11 +24,13 @@
             padding: 0;
             box-sizing: border-box;
         }
+        
         body {
             background-color: #E2F3FB;
             margin: 0;
             font-family: 'Quicksand', sans-serif;
         }
+
         header, footer {
             background-color: #027AA8;
             height: 60px;
