@@ -67,8 +67,8 @@
         }
 
         .club-image img {
-            width: 350px; 
-            height: 350px; 
+            width: 400px; 
+            height: 400px; 
             display: block;
             object-fit: cover; 
             padding-right: 0; 
