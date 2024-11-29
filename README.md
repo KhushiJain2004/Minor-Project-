@@ -1,8 +1,6 @@
 # Ecosystem of Clubs
 ---
 
-# Ecosystem of College Clubs
-
 A centralized web platform designed for college clubs and students, where club admins can manage their clubs, events, and students can browse, register, and get personalized event recommendations based on their interests.
 
 ## Features
