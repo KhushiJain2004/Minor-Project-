@@ -428,7 +428,7 @@
 
         .social-media ul li a:hover i {
             transform: scale(1.2); 
-        }
+        }   
     </style>
 </head>
 <body>
