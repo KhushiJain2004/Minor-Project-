@@ -488,6 +488,10 @@
             margin-top: 10px;
         }
 
+        .social-icons a{
+            text-decoration: none;
+        }
+
         .icon-circle {
             width: 40px;
             height: 40px;
