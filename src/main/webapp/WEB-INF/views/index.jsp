@@ -235,7 +235,7 @@
             <i class="fas fa-times"></i>
           </label>
           <li><a href="#">Home</a></li>
-          <!-- <li><a href="/clubs">Clubs</a></li> -->
+          <li><a href="/event">Events</a></li>
           <li id="club-dropdown">
             <a href="#">Clubs</a>
             <ul class="dropdown-list" id="club-dropdown-list">

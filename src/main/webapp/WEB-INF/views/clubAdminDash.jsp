@@ -624,7 +624,6 @@ button:hover {
             />
           </a>
         </div>
-        <h2>Ecosystem of clubs!</h2>
         <input type="radio" name="slider" id="menu-btn" />
         <input type="radio" name="slider" id="close-btn" />
         <ul class="nav-links">
@@ -632,7 +631,12 @@ button:hover {
             <i class="fas fa-times"></i>
           </label>
           <li><a href="/home">Home</a></li>
-          <li><a href="/clubs">Clubs</a></li>
+          <li><a href="/event">Events</a></li>
+          <li id="club-dropdown">
+            <a href="#">Clubs</a>
+            <ul class="dropdown-list" id="club-dropdown-list">
+            </ul>
+          </li>
           <!-- <li><a href="clubAdminDash.jsp">Feedback</a></li> -->
           <li id="login-link"><a href="/login">Login</a></li>
           <li id="profile-item" style="display: none;">

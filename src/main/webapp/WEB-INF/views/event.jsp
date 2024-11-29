@@ -439,36 +439,41 @@
 </head>
 <body>
     <nav>
-      <div class="wrapper">
-        <div class="logo">
-          <a href="#">
-            <img
-              src="${pageContext.request.contextPath}/images/UPES University of Petroleum and Energy Studies.png"
-              alt="Logo"
-            />
-          </a>
-        </div>
-        <input type="radio" name="slider" id="menu-btn" />
-        <input type="radio" name="slider" id="close-btn" />
-        <ul class="nav-links">
-          <label for="close-btn" class="btn close-btn">
-            <i class="fas fa-times"></i>
+        <div class="wrapper">
+          <div class="logo">
+            <a href="#">
+              <img
+                src="${pageContext.request.contextPath}/images/UPES University of Petroleum and Energy Studies.png"
+                alt="Logo"
+              />
+            </a>
+          </div>
+          <input type="radio" name="slider" id="menu-btn" />
+          <input type="radio" name="slider" id="close-btn" />
+          <ul class="nav-links">
+            <label for="close-btn" class="btn close-btn">
+              <i class="fas fa-times"></i>
+            </label>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/event">Events</a></li>
+            <li id="club-dropdown">
+              <a href="#">Clubs</a>
+              <ul class="dropdown-list" id="club-dropdown-list">
+              </ul>
+            </li>
+            <!-- <li><a href="clubAdminDash.jsp">Feedback</a></li> -->
+            <li id="login-link"><a href="/login">Login</a></li>
+            <li id="profile-item" style="display: none;">
+              <a href="#" id="logoutLink">Logout</a>
+              <img src="${pageContext.request.contextPath}/images/profile.png" alt="Profile" class="profile-icon" />
+              <span id="username"></span> <!-- Placeholder for user's name -->
+            </li>
+          </ul>
+          <label for="menu-btn" class="btn menu-btn">
+            <i class="fas fa-bars"></i>
           </label>
-          <li><a href="/home">Home</a></li>
-          <li><a href="/clubs">Clubs</a></li>
-          <!-- <li><a href="clubAdminDash.jsp">Feedback</a></li> -->
-          <li id="login-link"><a href="/login">Login</a></li>
-          <li id="profile-item" style="display: none;">
-            <a href="#" id="logoutLink">Logout</a>
-            <img src="${pageContext.request.contextPath}/images/profile.png" alt="Profile" class="profile-icon" />
-            <span id="username"></span> <!-- Placeholder for user's name -->
-          </li>
-        </ul>
-        <label for="menu-btn" class="btn menu-btn">
-          <i class="fas fa-bars"></i>
-        </label>
-      </div>
-    </nav>
+        </div>
+      </nav>
     <div class="event-filters">
         <input 
             type="text" 
