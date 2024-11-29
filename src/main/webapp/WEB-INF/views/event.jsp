@@ -23,7 +23,7 @@
         body {
             background-color: #E2F3FB;
             margin: 0;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Quicksand', sans-serif;
         }
         footer {
             background-color: #027AA8;
@@ -260,21 +260,79 @@
             margin-bottom: 20px;
             color: #027AA8;
         }
-        .event-card {
-            width: 30%; 
-            height: 300px;
-            position: relative;
-            color: white;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            transition: transform 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 20px;
-            overflow: hidden;
-            box-sizing: border-box;
-        }
+        .event-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px; /* Add some spacing between cards */
+    max-width: 80%;
+    margin: 40px auto;
+}
+
+.event-card {
+    flex: 1 1 calc(25% - 20px); /* Adjust width to fit 4 cards per row with gaps */
+    display: flex; 
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.8); 
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.event-card img {
+    width: 100%;
+    height: 150px; /* Adjust height as needed */
+    object-fit: cover;
+}
+
+.event-details {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.event-description {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.read-more-btn {
+    align-self: flex-start;
+    background-color: #027AA8;
+    color: white;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.read-more-btn:hover {
+    background-color: #005f7f;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 1024px) {
+    .event-card {
+        flex: 1 1 calc(33.33% - 20px); /* 3 cards per row on medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .event-card {
+        flex: 1 1 calc(50% - 20px); /* 2 cards per row on small screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .event-card {
+        flex: 1 1 100%; /* 1 card per row on extra-small screens */
+    }
+}
+
         .event-card:hover {
             transform: scale(1.05);
         }
