@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Club Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/common.js"></script>
     <script src="${pageContext.request.contextPath}/js/nav.js"></script>
@@ -21,7 +22,7 @@
         body {
             background-color: #E2F3FB;
             margin: 0;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Quicksand', sans-serif;
         }
         header, footer {
             background-color: #027AA8;
