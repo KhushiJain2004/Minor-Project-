@@ -197,19 +197,6 @@ pageEncoding="UTF-8"%>
           box-shadow: none;
           transition: all 0.3s ease;
         }
-        /* .nav-links .mobile-item {
-          display: block;
-          color: #f2f2f2;
-          font-size: 20px;
-          font-weight: 500;
-          padding-left: 20px;
-          cursor: pointer;
-          border-radius: 5px;
-          transition: all 0.3s ease;
-        }
-        .nav-links .mobile-item:hover {
-          background: #027aa8;
-        } */
         .drop-menu li {
           margin: 0;
         }
@@ -258,10 +245,10 @@ pageEncoding="UTF-8"%>
       .task-details {
         font-size: 16px;
         margin-bottom: 15px;
-        max-height: 260px; /* Adjust based on your preference */
-        overflow: hidden; /* Hide overflow */
-        text-overflow: ellipsis; /* Show ellipsis (...) when text overflows */
-        white-space: nowrap; /* Prevent text from wrapping */
+        max-height: 260px; 
+        overflow: hidden; 
+        text-overflow: ellipsis; 
+        white-space: nowrap; 
       }
 
       .task-details strong {
@@ -376,9 +363,9 @@ pageEncoding="UTF-8"%>
         flex-direction: column;
         align-items: center;
         box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-        position: fixed; /* Fix the sidebar's position */
-        left: 0; /* Align it to the left */
-        top: 73px; /* Align it to the top */
+        position: fixed; 
+        left: 0; 
+        top: 73px; 
         box-sizing: border-box;
       }
 
@@ -437,67 +424,182 @@ pageEncoding="UTF-8"%>
       .logout-button:hover {
         background-color: #c0392b;
       }
-      .updateForm {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            max-width: 80%;
-            max-width: 500px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            z-index: 2;
-            border-radius:1px solid black;
+      
+      /* Modal container */
+.updateModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+}
 
-        }
-      #updateModal
-      {
-            display: none; 
-            position: fixed; 
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1; 
-      }
-      .mainContent
-      {
-        position: fixed;
-        right:0;
-        width:82%;
-        box-sizing: border-box;
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        align-items: center;
-      }
-      .listField
-      {
-        display: flex;
-        /* flex-direction: column; */
-        justify-content: space-between;
-      }
-      .listField button
-      {
-        height:20px;
-      }
-      .inputContainer
-      {
-        display: flex;
-        flex-direction: column;
-      }
-      .inputContainer input{
-        display: block;
-      }
-      .socialMediaField
-      {
-        display: flex;
-        justify-content: space-between;
-        gap:10px;
-      }
+/* Form container */
+.updateForm {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 30px;
+  width: 90vw;
+  max-width: 1200px;
+  max-height: 90vh; /* Ensures it doesn't overflow the screen */
+  overflow-y: auto; /* Adds scroll for content overflow */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Form header */
+.updateForm h2 {
+  flex-basis: 100%;
+  text-align: center;
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Field styles */
+.field {
+  flex-basis: calc(50% - 20px); /* Two fields per row */
+  display: flex;
+  flex-direction: column;
+}
+
+.field label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #555;
+}
+
+.field input[type="text"],
+.field input[type="email"] {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+
+.field input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  outline: none;
+}
+
+/* Full-width fields */
+.inputContainer,
+.positionHolderField {
+  flex-basis: 100%;
+}
+
+/* Button styles */
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* List fields (Achievements and Social Media) */
+.listField {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.socialMediaField {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.positionHolderField {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+/* Submit button */
+#submitButton {
+  flex-basis: 100%;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .field {
+    flex-basis: 100%; /* Single field per row on smaller screens */
+  }
+
+  .updateForm {
+    width: 95vw;
+    flex-direction: column;
+  }
+
+  #submitButton {
+    margin-top: 10px;
+
+    /* Styling for the delete button */
+.deleteAchievementBtn {
+  background-color: #ff4d4d;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  font-size: 14px;
+  margin-left: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.deleteAchievementBtn:hover {
+  background-color: #cc0000;
+}
+
+/* Ensure the achievement field items are aligned properly */
+.achievementField {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.achievementField input {
+  flex: 1;
+}
+
+  }
+}
+
     </style>
   </head>
   <body>
@@ -523,7 +625,6 @@ pageEncoding="UTF-8"%>
             />
           </a>
         </div>
-        <h2>Ecosystem of clubs!</h2>
         <input type="radio" name="slider" id="menu-btn" />
         <input type="radio" name="slider" id="close-btn" />
         <ul class="nav-links">
@@ -531,7 +632,12 @@ pageEncoding="UTF-8"%>
             <i class="fas fa-times"></i>
           </label>
           <li><a href="/home">Home</a></li>
-          <li><a href="/clubs">Clubs</a></li>
+          <li><a href="/event">Events</a></li>
+          <li id="club-dropdown">
+            <a href="#">Clubs</a>
+            <ul class="dropdown-list" id="club-dropdown-list">
+            </ul>
+          </li>
           <!-- <li><a href="clubAdminDash.jsp">Feedback</a></li> -->
           <li id="login-link"><a href="/login">Login</a></li>
           <li id="profile-item" style="display: none;">
@@ -602,10 +708,14 @@ pageEncoding="UTF-8"%>
             <label for="achievements">Achievements</label>
             <button type="button" id="addInputFields">Add More</button>
           </div>
-            <div  class="inputContainer" id="inputContainer">
+          <div class="inputContainer" id="inputContainer">
+            <div class="achievementField">
               <input type="text" name="achievements" placeholder="Enter an achievement">
+              <button type="button" class="deleteAchievementBtn">❌</button>
             </div>
+          </div>
         </div>
+        
         <div class="field">
           <div class="listField">
             <label for="">Social Media Links</label>
@@ -657,15 +767,7 @@ pageEncoding="UTF-8"%>
         </div>
       </div>
   
-      <!-- Important Events Section -->
-      <div class="section">
-        <h2>Important Events</h2>
-        <div class="task-container" id="importantEventContainer">
-          <div class="add-card" onclick="showEventModal()">
-            <i class="fa fa-plus"></i>
-          </div>
-        </div>
-      </div>
+      
   
       <!-- Modal for Adding/Editing Task -->
       <div id="taskModal" class="modal">
@@ -697,63 +799,37 @@ pageEncoding="UTF-8"%>
         </div>
       </div>
   
-      <!-- Modal for Important Events -->
-      <div id="eventModal" class="modal">
-        <div class="modal-content">
-          <div class="modal-header">Add Important Event</div>
-          <div class="input-group">
-            <label for="eventInput">Event:</label>
-            <input type="text" id="eventInput" />
-          </div>
-          <div class="input-group">
-            <label for="importantEventDescription">Event Description:</label>
-            <textarea id="importantEventDescription"></textarea>
-          </div>
-          <div class="input-group">
-            <label for="eventDateFrom">Date From:</label>
-            <input type="date" id="eventDateFrom" />
-          </div>
-          <div class="input-group">
-            <label for="eventDateTo">Date To:</label>
-            <input type="date" id="eventDateTo" />
-          </div>
-          <div class="input-group">
-            <label for="importantEventManager">Event Manager:</label>
-            <input type="text" id="importantEventManager" />
-          </div>
-          <div class="modal-footer">
-            <button onclick="saveImportantEvent()">Add</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <script>
-      let tasks = [];
-      let importantEvents = [];
-
-      document.getElementById("updateButton").addEventListener("click", function() {
-            document.getElementById("updateModal").style.display = "block";
+      
+      <script>
+        let tasks = [];
+        let importantEvents = [];
+      
+        // Show update modal
+        document.getElementById("updateButton").addEventListener("click", function () {
+          document.getElementById("updateModal").style.display = "block";
         });
-
-        
-        document.getElementById("updateModal").addEventListener("click",function (e) {
-          if(e.target==document.getElementById("updateModal")) 
-          {
+      
+        // Close update modal on outside click
+        document.getElementById("updateModal").addEventListener("click", function (e) {
+          if (e.target == document.getElementById("updateModal")) {
             resetModal(document.getElementById("updateModal"));
-            document.getElementById("updateModal").style.display="none";
+            document.getElementById("updateModal").style.display = "none";
           }
-        })
-        document.getElementById("addInputFields").addEventListener("click",function () {
-          const div=document.getElementById("inputContainer");
-          
-          const input=document.createElement("input");
-          input.type = "text";
-          input.name = "achievements";
-          input.placeholder = "Enter an achievement";
-          div.appendChild(input);
-          
-        })
+        });
+      
+        // Add dynamic achievement fields
+        document.getElementById("addInputFields").addEventListener("click", function () {
+          const div = document.getElementById("inputContainer");
+          const field = document.createElement("div");
+          field.className = "achievementField";
+          field.innerHTML = `
+            <input type="text" name="achievements" placeholder="Enter an achievement">
+            <button type="button" class="deleteAchievementBtn">❌</button>
+          `;
+          div.appendChild(field);
+        });
+      
+        // Add dynamic social media fields
         document.getElementById("addSocialMediaField").addEventListener("click", () => {
           const container = document.getElementById("socialMediaContainer");
           const field = document.createElement("div");
@@ -761,205 +837,219 @@ pageEncoding="UTF-8"%>
           field.innerHTML = `
             <input type="text" name="socialMediaKey" placeholder="Platform (e.g., Facebook)">
             <input type="text" name="socialMediaValue" placeholder="URL (e.g., https://facebook.com)">
+            <button type="button" class="deleteSocialMediaBtn">❌</button>
           `;
           container.appendChild(field);
         });
-
-      // Task Modal Functions
-      function showModal(editTaskIndex = null) {
-        const taskModal = document.getElementById("taskModal");
-        resetModal(taskModal); // Reset modal fields
-
-        if (editTaskIndex !== null) {
-          const task = tasks[editTaskIndex];
-          document.getElementById("taskInput").value = task.name;
-          document.getElementById("eventDescription").value = task.description;
-          document.getElementById("dateFrom").value = task.dateFrom;
-          document.getElementById("dateTo").value = task.dateTo;
-          document.getElementById("eventManager").value = task.eventManager;
-          taskModal.dataset.editing = editTaskIndex;
-        }
-        taskModal.style.display = "flex";
-      }
-
-      function hideModal() {
-        document.getElementById("taskModal").style.display = "none";
-      }
-
-      function saveTask() {
-        const taskInput = document.getElementById("taskInput").value;
-        const eventDescription =
-          document.getElementById("eventDescription").value;
-        const dateFrom = document.getElementById("dateFrom").value;
-        const dateTo = document.getElementById("dateTo").value;
-        const eventManager = document.getElementById("eventManager").value;
-        const taskModal = document.getElementById("taskModal");
-        const editTaskIndex = taskModal.dataset.editing;
-
-        if (taskInput.trim() !== "" && eventManager.trim() !== "") {
-          const taskData = {
-            name: taskInput,
-            description: eventDescription,
-            dateFrom: dateFrom,
-            dateTo: dateTo,
-            eventManager: eventManager,
-          };
-
-          if (editTaskIndex) {
-            tasks[editTaskIndex] = taskData;
-          } else {
-            tasks.push(taskData);
+      
+        // Ensure delete button works for achievements
+        document.getElementById("inputContainer").addEventListener("click", function (e) {
+          if (e.target.classList.contains("deleteAchievementBtn")) {
+            e.target.parentElement.remove();
           }
-
-          renderTasks();
-          hideModal();
-        }
-      }
-
-      function renderTasks() {
-        const taskContainer = document.getElementById("taskContainer");
-        taskContainer.innerHTML =
-          '<div class="add-card" onclick="showModal()"><i class="fa fa-plus"></i></div>'; // Reset task list
-
-        tasks.forEach((task, index) => {
-          const taskCard = document.createElement("div");
-          taskCard.classList.add("task-card");
-
-          taskCard.innerHTML = `
-                <div class="task-details">
-                    <strong>${task.name}</strong><br>
-                    <span>${task.description}</span><br>
-                    <span>From: ${task.dateFrom}</span><br>
-                    <span>To: ${task.dateTo}</span><br>
-                    <span>Manager: ${task.eventManager}</span>
-                </div>
-                <div class="task-actions">
-                    <a href="#" onclick="deleteTask(${index})">Delete</a>
-                    <a href="#" onclick="showModal(${index})">Change</a>
-                </div>
-            `;
-
-          taskContainer.appendChild(taskCard);
         });
-      }
-
-      function deleteTask(index) {
-        if (confirm("Are you sure you want to delete this task?")) {
-          tasks.splice(index, 1);
-          renderTasks();
-        }
-      }
-
-      // Important Event Modal Functions
-      function showEventModal(editEventIndex = null) {
-        const eventModal = document.getElementById("eventModal");
-        resetModal(eventModal); // Reset modal fields
-
-        if (editEventIndex !== null) {
-          const event = importantEvents[editEventIndex];
-          document.getElementById("eventInput").value = event.name;
-          document.getElementById("importantEventDescription").value =
-            event.description;
-          document.getElementById("eventDateFrom").value = event.dateFrom;
-          document.getElementById("eventDateTo").value = event.dateTo;
-          document.getElementById("importantEventManager").value =
-            event.eventManager;
-          eventModal.dataset.editing = editEventIndex;
-        }
-        eventModal.style.display = "flex";
-      }
-
-      function hideEventModal() {
-        document.getElementById("eventModal").style.display = "none";
-      }
-
-      function saveImportantEvent() {
-        const eventInput = document.getElementById("eventInput").value;
-        const importantEventDescription = document.getElementById(
-          "importantEventDescription"
-        ).value;
-        const eventDateFrom = document.getElementById("eventDateFrom").value;
-        const eventDateTo = document.getElementById("eventDateTo").value;
-        const importantEventManager = document.getElementById(
-          "importantEventManager"
-        ).value;
-        const eventModal = document.getElementById("eventModal");
-        const editEventIndex = eventModal.dataset.editing;
-
-        if (eventInput.trim() !== "" && importantEventManager.trim() !== "") {
-          const eventData = {
-            name: eventInput,
-            description: importantEventDescription,
-            dateFrom: eventDateFrom,
-            dateTo: eventDateTo,
-            eventManager: importantEventManager,
-          };
-
-          if (editEventIndex) {
-            importantEvents[editEventIndex] = eventData;
-          } else {
-            importantEvents.push(eventData);
+      
+        // Ensure delete button works for social media fields
+        document.getElementById("socialMediaContainer").addEventListener("click", (e) => {
+          if (e.target.classList.contains("deleteSocialMediaBtn")) {
+            e.target.parentElement.remove();
           }
-
-          renderImportantEvents();
-          hideEventModal();
-        }
-      }
-
-      function renderImportantEvents() {
-        const importantEventContainer = document.getElementById(
-          "importantEventContainer"
-        );
-        importantEventContainer.innerHTML =
-          '<div class="add-card" onclick="showEventModal()"><i class="fa fa-plus"></i></div>'; // Reset list
-
-        importantEvents.forEach((event, index) => {
-          const eventCard = document.createElement("div");
-          eventCard.classList.add("task-card");
-
-          eventCard.innerHTML = `
-                <div class="task-details">
-                    <strong>${event.name}</strong><br>
-                    <span>${event.description}</span><br>
-                    <span>From: ${event.dateFrom}</span><br>
-                    <span>To: ${event.dateTo}</span><br>
-                    <span>Manager: ${event.eventManager}</span>
-                </div>
-                <div class="task-actions">
-                    <a href="#" onclick="deleteImportantEvent(${index})">Delete</a>
-                    <a href="#" onclick="showEventModal(${index})">Change</a>
-                </div>
-            `;
-
-          importantEventContainer.appendChild(eventCard);
         });
-      }
-
-      function deleteImportantEvent(index) {
-        if (confirm("Are you sure you want to delete this event?")) {
-          importantEvents.splice(index, 1);
-          renderImportantEvents();
+      
+        // Task Modal Functions
+        function showModal(editTaskIndex = null) {
+          const taskModal = document.getElementById("taskModal");
+          resetModal(taskModal); // Reset modal fields
+      
+          if (editTaskIndex !== null) {
+            const task = tasks[editTaskIndex];
+            document.getElementById("taskInput").value = task.name;
+            document.getElementById("eventDescription").value = task.description;
+            document.getElementById("dateFrom").value = task.dateFrom;
+            document.getElementById("dateTo").value = task.dateTo;
+            document.getElementById("eventManager").value = task.eventManager;
+            taskModal.dataset.editing = editTaskIndex;
+          }
+          taskModal.style.display = "flex";
         }
-      }
-
-      // Helper: Reset Modal Inputs
-      function resetModal(modal) {
-        modal.dataset.editing = "";
-        const inputs = modal.querySelectorAll("input, textarea");
-        inputs.forEach((input) => (input.value = ""));
-      }
-
-      // Close modal when clicking outside of it
-      window.onclick = function (event) {
-        const taskModal = document.getElementById("taskModal");
-        const eventModal = document.getElementById("eventModal");
-        if (event.target == taskModal) {
-          hideModal();
+      
+        function hideModal() {
+          document.getElementById("taskModal").style.display = "none";
         }
-        if (event.target == eventModal) {
-          hideEventModal();
+      
+        function saveTask() {
+          const taskInput = document.getElementById("taskInput").value;
+          const eventDescription =
+            document.getElementById("eventDescription").value;
+          const dateFrom = document.getElementById("dateFrom").value;
+          const dateTo = document.getElementById("dateTo").value;
+          const eventManager = document.getElementById("eventManager").value;
+          const taskModal = document.getElementById("taskModal");
+          const editTaskIndex = taskModal.dataset.editing;
+      
+          if (taskInput.trim() !== "" && eventManager.trim() !== "") {
+            const taskData = {
+              name: taskInput,
+              description: eventDescription,
+              dateFrom: dateFrom,
+              dateTo: dateTo,
+              eventManager: eventManager,
+            };
+      
+            if (editTaskIndex) {
+              tasks[editTaskIndex] = taskData;
+            } else {
+              tasks.push(taskData);
+            }
+      
+            renderTasks();
+            hideModal();
+          }
         }
-      };
+      
+        function renderTasks() {
+          const taskContainer = document.getElementById("taskContainer");
+          taskContainer.innerHTML =
+            '<div class="add-card" onclick="showModal()"><i class="fa fa-plus"></i></div>'; // Reset task list
+      
+          tasks.forEach((task, index) => {
+            const taskCard = document.createElement("div");
+            taskCard.classList.add("task-card");
+      
+            taskCard.innerHTML = `
+                  <div class="task-details">
+                      <strong>${task.name}</strong><br>
+                      <span>${task.description}</span><br>
+                      <span>From: ${task.dateFrom}</span><br>
+                      <span>To: ${task.dateTo}</span><br>
+                      <span>Manager: ${task.eventManager}</span>
+                  </div>
+                  <div class="task-actions">
+                      <a href="#" onclick="deleteTask(${index})">Delete</a>
+                      <a href="#" onclick="showModal(${index})">Change</a>
+                  </div>
+              `;
+      
+            taskContainer.appendChild(taskCard);
+          });
+        }
+      
+        function deleteTask(index) {
+          if (confirm("Are you sure you want to delete this task?")) {
+            tasks.splice(index, 1);
+            renderTasks();
+          }
+        }
+      
+        // Important Event Modal Functions
+        function showEventModal(editEventIndex = null) {
+          const eventModal = document.getElementById("eventModal");
+          resetModal(eventModal); // Reset modal fields
+      
+          if (editEventIndex !== null) {
+            const event = importantEvents[editEventIndex];
+            document.getElementById("eventInput").value = event.name;
+            document.getElementById("importantEventDescription").value =
+              event.description;
+            document.getElementById("eventDateFrom").value = event.dateFrom;
+            document.getElementById("eventDateTo").value = event.dateTo;
+            document.getElementById("importantEventManager").value =
+              event.eventManager;
+            eventModal.dataset.editing = editEventIndex;
+          }
+          eventModal.style.display = "flex";
+        }
+      
+        function hideEventModal() {
+          document.getElementById("eventModal").style.display = "none";
+        }
+      
+        function saveImportantEvent() {
+          const eventInput = document.getElementById("eventInput").value;
+          const importantEventDescription = document.getElementById(
+            "importantEventDescription"
+          ).value;
+          const eventDateFrom = document.getElementById("eventDateFrom").value;
+          const eventDateTo = document.getElementById("eventDateTo").value;
+          const importantEventManager = document.getElementById(
+            "importantEventManager"
+          ).value;
+          const eventModal = document.getElementById("eventModal");
+          const editEventIndex = eventModal.dataset.editing;
+      
+          if (eventInput.trim() !== "" && importantEventManager.trim() !== "") {
+            const eventData = {
+              name: eventInput,
+              description: importantEventDescription,
+              dateFrom: eventDateFrom,
+              dateTo: eventDateTo,
+              eventManager: importantEventManager,
+            };
+      
+            if (editEventIndex) {
+              importantEvents[editEventIndex] = eventData;
+            } else {
+              importantEvents.push(eventData);
+            }
+      
+            renderImportantEvents();
+            hideEventModal();
+          }
+        }
+      
+        function renderImportantEvents() {
+          const importantEventContainer = document.getElementById(
+            "importantEventContainer"
+          );
+          importantEventContainer.innerHTML =
+            '<div class="add-card" onclick="showEventModal()"><i class="fa fa-plus"></i></div>'; // Reset list
+      
+          importantEvents.forEach((event, index) => {
+            const eventCard = document.createElement("div");
+            eventCard.classList.add("task-card");
+      
+            eventCard.innerHTML = `
+                  <div class="task-details">
+                      <strong>${event.name}</strong><br>
+                      <span>${event.description}</span><br>
+                      <span>From: ${event.dateFrom}</span><br>
+                      <span>To: ${event.dateTo}</span><br>
+                      <span>Manager: ${event.eventManager}</span>
+                  </div>
+                  <div class="task-actions">
+                      <a href="#" onclick="deleteImportantEvent(${index})">Delete</a>
+                      <a href="#" onclick="showEventModal(${index})">Change</a>
+                  </div>
+              `;
+      
+            importantEventContainer.appendChild(eventCard);
+          });
+        }
+      
+        function deleteImportantEvent(index) {
+          if (confirm("Are you sure you want to delete this event?")) {
+            importantEvents.splice(index, 1);
+            renderImportantEvents();
+          }
+        }
+      
+        // Reset modal inputs
+        function resetModal(modal) {
+          modal.dataset.editing = "";
+          const inputs = modal.querySelectorAll("input, textarea");
+          inputs.forEach((input) => (input.value = ""));
+        }
+      
+        // Close modal when clicking outside of it
+        window.onclick = function (event) {
+          const taskModal = document.getElementById("taskModal");
+          const eventModal = document.getElementById("eventModal");
+          if (event.target == taskModal) {
+            hideModal();
+          }
+          if (event.target == eventModal)
+            hideEventModal();
+        };
       $("#logoutLink").on("click", function(e) {
             e.preventDefault(); // Prevent the default link behavior
             logout();
