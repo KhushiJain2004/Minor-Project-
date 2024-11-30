@@ -1,9 +1,14 @@
 // Fetch ongoing events from the backend
+$(document).ready(function()
+{
+    fetchEvents();
+
 function fetchEvents() {
     fetch('/api/events/ongoing')
         .then(response => response.json())
         .then(events => {
             // Call a function to render events
+            console.log(events);    
             renderEvents(events);
         })
         .catch(error => console.log('Error fetching events:', error));
@@ -21,10 +26,10 @@ function renderEvents(events) {
 
         const eventContent = `
             <div class="event-logo">
-                <img src="${event.logo}" alt="${event.name} Logo">
+                <img src="${event.logo}" alt="${event.eventName} Logo">
             </div>
-            <h3 class="event-description">${event.name}</h3>
-            <p>${event.description}</p>
+            <h3 class="event-description">${event.eventName}</h3>
+            <p>${event.eventDescription}</p>
             <button class="read-more-btn" onclick="openEventPopup(${event.id})">Read More</button>
         `;
 
@@ -69,4 +74,4 @@ document.querySelector('.register-btn').addEventListener('click', () => {
     })
     .catch(error => console.log('Error registering for event:', error));
 });
-
+})  
