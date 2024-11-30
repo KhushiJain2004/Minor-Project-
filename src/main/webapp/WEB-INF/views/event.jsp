@@ -493,6 +493,89 @@
             margin: 10px 0;
             color: #027AA8;
         }
+
+        .footer {
+            background-color: #027AA8; /* Dark background for contrast */
+            color: white; /* White text color */
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-content {
+            width: 90%;
+            max-width: 1200px;
+            text-align: center;
+        }
+
+        .top-left {
+            text-align: left;
+            width: 100%;
+        }
+
+        .top-left h3 {
+            margin: 0;
+            color: white;
+        }
+
+        .middle p {
+            margin: 5px 0;
+            color: white;
+            font-size: 16px;
+        }
+
+        .middle a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 10px 0;
+            display: inline-block;
+        }
+
+        .middle a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-line {
+            width: 80%;
+            margin: 15px auto;
+            border: 0.5px solid white;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .social-icons a{
+            text-decoration: none;
+        }
+
+        .icon-circle {
+            width: 40px;
+            height: 40px;
+            background-color: white; /* White circles */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .icon-circle:hover {
+            transform: scale(1.1);
+        }
+
+        .icon-circle i {
+            color: #027AA8; /* Icon color */
+            font-size: 20px;
+        }
     </style>
 </head>
 <body>
@@ -615,7 +698,35 @@
         </div>
     </div>
 
-    <footer></footer>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="middle">
+                <p>Made in Response to Minor Project 1</p>
+                <a href="https://github.com/your-repo-link" target="_blank">Click to View GitHub Repository</a>
+            </div>
+            <hr class="footer-line" />
+            <div class="social-icons">
+                <a href="https://www.instagram.com/upes_dehradun/" target="_blank" class="icon-circle">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="https://www.facebook.com/UPESddnuk" target="_blank" class="icon-circle">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+                <a href="https://www.youtube.com/user/UPESUniversity/featured" target="_blank" class="icon-circle">
+                    <i class="fa-brands fa-youtube"></i>
+                </a>
+                <a href="https://www.linkedin.com/school/upesdehradun/posts/?feedView=all" target="_blank" class="icon-circle">
+                    <i class="fa-brands fa-linkedin-in"></i>
+                </a>
+                <a href="https://x.com/UPESDehradun" target="_blank" class="icon-circle">
+                    <i class="fa-brands fa-x-twitter"></i>
+                </a>
+                <a href="https://www.upes.ac.in/" target="_blank" class="icon-circle">
+                    <i class="fa-solid fa-link"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
 
     <script>
         function openPopup() {

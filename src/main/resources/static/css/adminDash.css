@@ -112,3 +112,86 @@ h2 {
     border-radius: 5px;
     border: 1px solid #ccc;
 }
+
+.footer {
+    background-color: #027AA8; /* Dark background for contrast */
+    color: white; /* White text color */
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-content {
+    width: 90%;
+    max-width: 1200px;
+    text-align: center;
+}
+
+.top-left {
+    text-align: left;
+    width: 100%;
+}
+
+.top-left h3 {
+    margin: 0;
+    color: white;
+}
+
+.middle p {
+    margin: 5px 0;
+    color: white;
+    font-size: 16px;
+}
+
+.middle a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 10px 0;
+    display: inline-block;
+}
+
+.middle a:hover {
+    text-decoration: underline;
+}
+
+.footer-line {
+    width: 80%;
+    margin: 15px auto;
+    border: 0.5px solid white;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.social-icons a{
+    text-decoration: none;
+}
+
+.icon-circle {
+    width: 40px;
+    height: 40px;
+    background-color: white; /* White circles */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.icon-circle:hover {
+    transform: scale(1.1);
+}
+
+.icon-circle i {
+    color: #027AA8; /* Icon color */
+    font-size: 20px;
+}
