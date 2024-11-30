@@ -8,6 +8,7 @@
      <link rel="stylesheet" href="${pageContext.request.contextPath}/css/nav.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/common.js"></script>
+    <script src="${pageContext.request.contextPath}/js/events.js"></script>
     <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -470,12 +471,7 @@
       </div>
     </nav>
     <div class="event-filters">
-        <input 
-            type="text" 
-            id="search-bar" 
-            placeholder="Search events..." 
-            oninput="filterEvents()" 
-        />
+        <input type="text" id="search-bar" placeholder="Search events..." oninput="filterEvents()" />
         <select id="keyword-filter" onchange="filterEvents()">
             <option value="">All Keywords</option>
             <option value="Keyword1">Keyword1</option>
@@ -494,42 +490,9 @@
 <div class="event-section">
     <h2>Ongoing Events</h2>
     <div class="event-container">
-        <div class="event-card" style="background-image: url('event.jpg');">
-            <div class="event-logo"><img src="event_logo.png" alt="Event Logo 1"></div>
-            <div class="event-description">CLUB NAME <br>Ongoing Event 1 - A brief description.</div>
-            <button class="read-more-btn" onclick="openPopup()">Read More</button>
-        </div>
-        <div class="event-card" style="background-image: url('event.jpg');">
-            <div class="event-logo"><img src="event_logo.png" alt="Event Logo 2"></div>
-            <div class="event-description">CLUB NAME <br>Ongoing Event 2 - A brief description.</div>
-            <button class="read-more-btn" onclick="openPopup()">Read More</button>
-        </div>
-        <div class="event-card" style="background-image: url('event.jpg');">
-            <div class="event-logo"><img src="event_logo.png" alt="Event Logo 3"></div>
-            <div class="event-description">CLUB NAME <br>Ongoing Event 3 - A brief description.</div>
-            <button class="read-more-btn" onclick="openPopup()">Read More</button>
-        </div>
-    </div>
-    <h2>Upcoming Events</h2>
-    <div class="event-container">
-        <div class="event-card" style="background-image: url('event.jpg');">
-            <div class="event-logo"><img src="event_logo.png" alt="Event Logo 4"></div>
-            <div class="event-description">CLUB NAME <br>Upcoming Event 1 - A brief description.</div>
-            <button class="read-more-btn" onclick="openPopup()">Read More</button> 
-        </div>
-        <div class="event-card" style="background-image: url('event.jpg');">
-            <div class="event-logo"><img src="event_logo.png" alt="Event Logo 5"></div>
-            <div class="event-description">CLUB NAME <br>Upcoming Event 2 - A brief description.</div>
-            <button class="read-more-btn" onclick="openPopup()">Read More</button>
-        </div>
-        <div class="event-card" style="background-image: url('event.jpg');">
-            <div class="event-logo"><img src="event_logo.png" alt="Event Logo 6"></div>
-            <div class="event-description">CLUB NAME <br>Upcoming Event 3 - A brief description.</div>
-            <button class="read-more-btn" onclick="openPopup()">Read More</button> 
-        </div>
+        <!-- Events will be rendered dynamically here -->
     </div>
 </div>
-
 
     <!-- Popup -->
     <div id="event-popup" class="hidden popup">
