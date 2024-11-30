@@ -79,6 +79,36 @@
         <pre id="jsonOutput"></pre> <!-- Using <pre> tag to format JSON -->
     </div>
 
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="middle">
+                <p>Made in Response to Minor Project 1</p>
+                <a href="https://github.com/your-repo-link" target="_blank">Click to View GitHub Repository</a>
+            </div>
+            <hr class="footer-line" />
+            <div class="social-icons">
+                <a href="https://www.instagram.com/upes_dehradun/" target="_blank" class="icon-circle">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="https://www.facebook.com/UPESddnuk" target="_blank" class="icon-circle">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+                <a href="https://www.youtube.com/user/UPESUniversity/featured" target="_blank" class="icon-circle">
+                    <i class="fa-brands fa-youtube"></i>
+                </a>
+                <a href="https://www.linkedin.com/school/upesdehradun/posts/?feedView=all" target="_blank" class="icon-circle">
+                    <i class="fa-brands fa-linkedin-in"></i>
+                </a>
+                <a href="https://x.com/UPESDehradun" target="_blank" class="icon-circle">
+                    <i class="fa-brands fa-x-twitter"></i>
+                </a>
+                <a href="https://www.upes.ac.in/" target="_blank" class="icon-circle">
+                    <i class="fa-solid fa-link"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
     <script>
         $(document).ready(function() {
             // Get the token and user details from localStorage
