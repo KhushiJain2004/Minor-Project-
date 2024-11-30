@@ -433,9 +433,6 @@
                 <a href="https://www.linkedin.com/school/upesdehradun/posts/?feedView=all" target="_blank" class="icon-circle">
                     <i class="fa-brands fa-linkedin-in"></i>
                 </a>
-                <a href="https://x.com/UPESDehradun" target="_blank" class="icon-circle">
-                    <i class="fa-brands fa-x-twitter"></i>
-                </a>
                 <a href="https://www.upes.ac.in/" target="_blank" class="icon-circle">
                     <i class="fa-solid fa-link"></i>
                 </a>
