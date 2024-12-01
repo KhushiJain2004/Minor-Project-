@@ -22,10 +22,11 @@ public class EventsService {
     private EventsRepository eventsRepository;
 
     @Autowired
-    private MongoTemplate mongoTemplate;  // Inject MongoTemplate
+    private MongoTemplate mongoTemplate;
 
-    public List<Events> getAllEvents() {
-        return eventsRepository.findAll();
+    // Get all events with sorting
+    public List<Events> getAllEvents(Sort sort) {
+        return eventsRepository.findAll(sort);
     }
 
     public List<Events> getEventsByClub(String clubId) {
@@ -74,12 +75,11 @@ public class EventsService {
                 Aggregation.group("tags"), // Group by tag
                 Aggregation.sort(Sort.by(Sort.Order.asc("tags"))) // Sort alphabetically
         );
-    
+
         AggregationResults<TagAggregationResult> result = mongoTemplate.aggregate(aggregation, Events.class, TagAggregationResult.class);
-        
+
         return result.getMappedResults().stream()
                 .map(TagAggregationResult::getTags)
                 .collect(Collectors.toList());
     }
-    
 }

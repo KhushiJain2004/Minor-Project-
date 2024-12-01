@@ -386,43 +386,41 @@
     </footer>
     <script>
         // Fetch and render events from backend
-    function fetchEvents() {
-    fetch('http://localhost:8080/api/events')
-    .then(response => response.json())
-    .then(events => {
-        console.log('Fetched events:', events);
-        const container = document.getElementById('event-container');
-        container.innerHTML = ''; 
-
-        if (Array.isArray(events) && events.length > 0) {
-            events.forEach(event => {
-                const eventCard = document.createElement('div');
-                eventCard.classList.add('event-card');
-                // Store additional data attributes for sorting
-                eventCard.dataset.name = event.eventName.toLowerCase();
-                eventCard.dataset.startDate = event.startDate || new Date().toISOString();
-
-                eventCard.innerHTML = `
-                    <div class="event-card-header">
-                        <img src="${event.clubLogoUrl}" alt="${event.clubName} Logo" class="event-logo">
-                        <h3>${event.eventName}</h3>
-                    </div>
-                    <img src="${event.eventImageUrl}" alt="${event.eventName}" class="event-image">
-                    <div class="event-details">
-                        <p class="event-description">${event.description}</p>
-                        <button class="read-more-btn" onclick="openEventDetails(${event.id})">Read More</button>
-                    </div>
-                `;
-                container.appendChild(eventCard);
+        function fetchEvents() {
+            fetch('http://localhost:8080/api/events')  // Ensure this matches your backend endpoint
+            .then(response => response.json())
+            .then(events => {
+                console.log('Fetched events:', events); // Log the events array to the console
+                const container = document.getElementById('event-container');
+                container.innerHTML = ''; // Clear existing events
+    
+                if (Array.isArray(events) && events.length > 0) {
+                    events.forEach(event => {
+                        const eventCard = document.createElement('div');
+                        eventCard.classList.add('event-card');
+                        eventCard.dataset.startDate = event.startDate; // Store the event date for sorting
+    
+                        eventCard.innerHTML = `
+                            <div class="event-card-header">
+                                <img src="${event.clubLogoUrl}" alt="${event.clubName} Logo" class="event-logo">
+                                <h3>${event.eventName}</h3>
+                            </div>
+                            <img src="${event.eventImageUrl}" alt="${event.eventName}" class="event-image">
+                            <div class="event-details">
+                                <p class="event-description">${event.description}</p>
+                                <button class="read-more-btn" onclick="openEventDetails(${event.id})">Read More</button>
+                            </div>
+                        `;
+                        container.appendChild(eventCard);
+                    });
+                } else {
+                    console.log('No events found or incorrect data structure.');
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching events:', error);
             });
-        } else {
-            console.log('No events found or incorrect data structure.');
         }
-    })
-    .catch(error => {
-        console.error('Error fetching events:', error);
-    });
-}
     
         // Call fetchEvents when the page loads
         document.addEventListener('DOMContentLoaded', fetchEvents);
@@ -447,48 +445,48 @@
                 }
             });
         }
-
-// Function to sort events based on the selected option
+    
+        // Function to sort events based on the selected option
+    // Function to sort events based on the selected option
 function sortEvents() {
     const sortValue = document.getElementById("sort-filter").value;
     const container = document.querySelector(".event-container");
-    const events = Array.from(container.querySelectorAll(".event-card"));
+    const events = Array.from(container.children);
 
     events.sort((a, b) => {
-        switch(sortValue) {
-            case "a-z":
-                return a.dataset.name.localeCompare(b.dataset.name);
-            case "z-a":
-                return b.dataset.name.localeCompare(a.dataset.name);
-            case "newest":
-                // Convert startDate to Date objects for correct comparison
-                const dateA = new Date(a.dataset.startDate);
-                const dateB = new Date(b.dataset.startDate);
-                return dateB - dateA; // Newest first (b - a for descending order)
-            case "oldest":
-                const dateAOld = new Date(a.dataset.startDate);
-                const dateBOld = new Date(b.dataset.startDate);
-                return dateAOld - dateBOld; // Oldest first (a - b for ascending order)
-            default:
-                return 0; // No sorting
+        let comparison = 0;
+
+        if (sortValue === "a-z") {
+            // Sort alphabetically (A-Z)
+            const textA = a.querySelector(".event-details h3").textContent.trim().toLowerCase();
+            const textB = b.querySelector(".event-details h3").textContent.trim().toLowerCase();
+            if (textA < textB) comparison = -1;
+            if (textA > textB) comparison = 1;
+        } else if (sortValue === "z-a") {
+            // Sort alphabetically (Z-A)
+            const textA = a.querySelector(".event-details h3").textContent.trim().toLowerCase();
+            const textB = b.querySelector(".event-details h3").textContent.trim().toLowerCase();
+            if (textA > textB) comparison = -1;
+            if (textA < textB) comparison = 1;
+        } else if (sortValue === "newest") {
+            // Sort by newest (based on the event start date)
+            const dateA = new Date(a.dataset.startDate);
+            const dateB = new Date(b.dataset.startDate);
+            comparison = dateB - dateA; // Newest first
+        } else if (sortValue === "oldest") {
+            // Sort by oldest (based on the event start date)
+            const dateA = new Date(a.dataset.startDate);
+            const dateB = new Date(b.dataset.startDate);
+            comparison = dateA - dateB; // Oldest first
         }
+
+        return comparison;
     });
 
-    // Re-insert sorted events back into the container
-    events.forEach(event => {
-        container.appendChild(event);
-    });
+    // Clear the container and re-append the sorted events
+    events.forEach(event => container.appendChild(event));
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    fetchEvents();
-    
-    // Attach sorting event listener
-    const sortFilter = document.getElementById("sort-filter");
-    if (sortFilter) {
-        sortFilter.addEventListener("change", sortEvents);
-    }
-});
     
         // Function to open event details (to be implemented)
         function openEventDetails(eventId) {
@@ -500,7 +498,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById("search-bar").addEventListener("input", filterEvents);
         document.getElementById("keyword-filter").addEventListener("input", filterEvents);
         document.getElementById("sort-filter").addEventListener("change", sortEvents);
-    </script>   
-           
+    </script>
+               
 </body>
 </html>
