@@ -23,4 +23,6 @@ public interface EventsRepository extends MongoRepository<Events, String> {
     @Query("{ 'tags': { $in: ?0 } }")
     List<Events> findByTagsIn(List<String> tags);
 
+    List<Events> findByStartTimeAfter(LocalDateTime currentTime);
+
 }

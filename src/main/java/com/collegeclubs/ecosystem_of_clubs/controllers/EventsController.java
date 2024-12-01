@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -104,5 +105,12 @@ public class EventsController {
         return ResponseEntity.ok(events);
     }
 
+    // Render events page with the list of events
+    @GetMapping("/events")
+    public String showEventsPage(Model model) {
+        List<Events> eventsList = eventsService.getAllEvents();
+        model.addAttribute("events", eventsList);
+        return "events"; // Maps to /WEB-INF/views/events.jsp
+    }
 
 }
