@@ -27,6 +27,10 @@ public class EventPageController {
         List<Events> upcomingEvents = eventsService.getUpcomingEvents(LocalDateTime.now());
         model.addAttribute("upcomingEvents", upcomingEvents);
 
+        // Fetch distinct tags
+        List<String> distinctTags = eventsService.getDistinctTags();
+        model.addAttribute("distinctTags", distinctTags);
+
         return "event"; // Name of your JSP file
     }
 }

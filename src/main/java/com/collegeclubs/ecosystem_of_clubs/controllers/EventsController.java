@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
+
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.collegeclubs.ecosystem_of_clubs.model.Events;
 import com.collegeclubs.ecosystem_of_clubs.service.EventsService;
 
+
 @RestController
 @RequestMapping("/api/events")
 @Validated
@@ -31,10 +33,10 @@ public class EventsController {
     @Autowired
     private EventsService eventsService;
 
-    // Get all events
+    // Get all events with sorting functionality
     @GetMapping
     public ResponseEntity<List<Events>> getAllEvents() {
-        return ResponseEntity.ok(eventsService.getAllEvents());
+        return ResponseEntity.ok(eventsService.getAllEvents(Sort.by(Sort.Order.asc("startTime"))));
     }
 
     // Get events by club
@@ -90,7 +92,6 @@ public class EventsController {
         return ResponseEntity.notFound().build();
     }
 
-
     // Update an existing event
     @PutMapping("/{eventId}")
     public ResponseEntity<Events> updateEvent(
@@ -117,10 +118,22 @@ public class EventsController {
 
     // Render events page with the list of events
     @GetMapping("/events")
-    public String showEventsPage(Model model) {
-        List<Events> eventsList = eventsService.getAllEvents();
+    public String showEventsPage(Model model,
+                                  @RequestParam(name = "sortBy", defaultValue = "startTime") String sortBy,
+                                  @RequestParam(name = "direction", defaultValue = "asc") String direction) {
+        // Fetch all events and apply sorting based on parameters
+        Sort sort = direction.equalsIgnoreCase("asc") 
+                    ? Sort.by(Sort.Order.asc(sortBy)) 
+                    : Sort.by(Sort.Order.desc(sortBy));
+        
+        List<Events> eventsList = eventsService.getAllEvents(sort);
         model.addAttribute("events", eventsList);
         return "events"; // Maps to /WEB-INF/views/events.jsp
     }
-
+    // Get all distinct tags
+    @GetMapping("/tags")
+    public ResponseEntity<List<String>> getAllTags() {
+        List<String> tags = eventsService.getDistinctTags();  // You may already have this method
+        return ResponseEntity.ok(tags);
+    }
 }
