@@ -352,18 +352,27 @@
     
     <div class="container">
       <div class="slide">
-        <div class="item" style="background-image: url('images/group.jpg')">
+        <div class="item" style="background-image: url('/images/fipi.jpg')">
           <div class="content">
-            <div class="name">UPES ACM</div>
+            <div class="name">UPES FIPI Student Chapter</div>
             <div class="des">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab, eum!
             </div>
             <button>See More</button>
           </div>
         </div>
-        <div class="item" style="background-image: url('/images/mtc.jpeg')">
+        <div class="item" style="background-image: url('images/mtc.jpg')">
           <div class="content">
             <div class="name">Microsoft Technical Community - UPES</div>
+            <div class="des">
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab, eum!
+            </div>
+            <button>See More</button>
+          </div>
+        </div>
+        <div class="item" style="background-image: url('/images/group.jpeg')">
+          <div class="content">
+            <div class="name">UPES ACM</div>
             <div class="des">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab, eum!
             </div>
@@ -382,15 +391,6 @@
         <div class="item" style="background-image: url('/images/inf.jpeg')">
           <div class="content">
             <div class="name">Infinity Club – Aerospace</div>
-            <div class="des">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab, eum!
-            </div>
-            <button>See More</button>
-          </div>
-        </div>
-        <div class="item" style="background-image: url('/images/fipi.jpg')">
-          <div class="content">
-            <div class="name">UPES FIPI Student Chapter</div>
             <div class="des">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab, eum!
             </div>
@@ -433,9 +433,6 @@
                 <a href="https://www.linkedin.com/school/upesdehradun/posts/?feedView=all" target="_blank" class="icon-circle">
                     <i class="fa-brands fa-linkedin-in"></i>
                 </a>
-                <a href="https://x.com/UPESDehradun" target="_blank" class="icon-circle">
-                    <i class="fa-brands fa-x-twitter"></i>
-                </a>
                 <a href="https://www.upes.ac.in/" target="_blank" class="icon-circle">
                     <i class="fa-solid fa-link"></i>
                 </a>
@@ -446,29 +443,50 @@
     <script>
       let next = document.querySelector(".next");
       let prev = document.querySelector(".prev");
+      let slideContainer = document.querySelector(".slide");
+      let autoSlideInterval; // To store the interval ID
 
       // Function to move the slider to the next item
       function slideNext() {
         let items = document.querySelectorAll(".item");
-        document.querySelector(".slide").appendChild(items[0]);
+        slideContainer.appendChild(items[0]); // Move the first item to the end
+      }
+
+      // Function to move the slider to the previous item
+      function slidePrev() {
+        let items = document.querySelectorAll(".item");
+        slideContainer.prepend(items[items.length - 1]); // Move the last item to the start
       }
 
       // Event listeners for manual controls
-      next.addEventListener("click", slideNext);
-
-      prev.addEventListener("click", function () {
-        let items = document.querySelectorAll(".item");
-        document.querySelector(".slide").prepend(items[items.length - 1]);
+      next.addEventListener("click", () => {
+        clearInterval(autoSlideInterval); // Stop automatic sliding when manually interacted
+        slideNext();
+        startAutoSlide(); // Restart automatic sliding
       });
 
-      // Automatic slide every 3 seconds
-      setInterval(slideNext, 4000);
+      prev.addEventListener("click", () => {
+        clearInterval(autoSlideInterval); // Stop automatic sliding when manually interacted
+        slidePrev();
+        startAutoSlide(); // Restart automatic sliding
+      });
+
+      // Function to start automatic sliding
+      function startAutoSlide() {
+        autoSlideInterval = setInterval(slideNext, 4000); // Automatically slide every 4 seconds
+      }
+
+      // Initialize the slider without immediate movement
+      window.addEventListener("DOMContentLoaded", () => {
+        startAutoSlide(); // Start the automatic slide only after the DOM has fully loaded
+      });
 
       // Logout function handler
       $("#logoutLink").on("click", function (e) {
         e.preventDefault(); // Prevent the default link behavior
         logout();
       });
+
     </script>
   </body>
 
