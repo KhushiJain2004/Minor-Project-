@@ -63,11 +63,11 @@
 
           <div class="social-media">
             <ul>
-              <li><a href="https://www.instagram.com" target="_blank"><i class="fa-brands fa-square-instagram"></i></a></li>
-              <li><a href="https://www.facebook.com" target="_blank"><i class="fa-brands fa-square-facebook"></i></a></li>
-              <li><a href="https://www.linkedin.com" target="_blank"><i class="fa-brands fa-linkedin"></i></a></li>
-              <li><a href="https://www.twitter.com" target="_blank"><i class="fa-brands fa-twitter"></i></a></li>
-              <li><a href="mailto:someone@example.com"><i class="fa-solid fa-envelope"></i></a></li>
+              <li><a  target="_blank" id="insta"><i class="fa-brands fa-square-instagram"></i></a></li>
+              <li><a  target="_blank" id="facebook"><i class="fa-brands fa-square-facebook"></i></a></li>
+              <li><a  target="_blank" id="linkedin"><i class="fa-brands fa-linkedin"></i></a></li>
+              <li><a  target="_blank" id="twitter"><i class="fa-brands fa-twitter"></i></a></li>
+              <li><a  id="email"><i class="fa-solid fa-envelope"></i></a></li>
             </ul>
           </div>
 

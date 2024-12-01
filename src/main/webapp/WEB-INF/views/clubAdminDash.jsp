@@ -15,6 +15,7 @@ pageEncoding="UTF-8"%>
     <script src="${pageContext.request.contextPath}/js/clubAdminDash.js"></script>
     <script src="${pageContext.request.contextPath}/js/nav.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/nav.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/adminDash.css">
     <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -39,91 +40,12 @@ pageEncoding="UTF-8"%>
         height: 100vh;
       }
 
-      nav {
-        position: absolute; /* Position it absolutely */
-        top: 0; /* Align to the top */
-        left: 0; /* Align to the left */
-        width: 100%; /* Full width */
-        background-color: #e9f2f9; /* Ensure background is set */
-        z-index: 1000; /* Ensure it stays above other content */
-      }
-
-      nav .wrapper {
-        position: relative;
-        max-width: 2000px;
-        padding: 0px 30px;
-        height: 70px;
-        line-height: 70px;
-        background-color: #fff;
-        margin: auto;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-
-      /* Logo styling */
-      .wrapper .logo {
-        display: flex; /* Flexbox for alignment */
-        align-items: center; /* Center vertically */
-        justify-content: center; /* Center horizontally */
-        padding: 50px; /* Optional: Add some padding around the logo */
-      }
-
-      /* .logo {
-        align-items: bottom;
-      }
-
-      /* Styling the logo image */
-      /* .logo img {
-        padding-top: 30px;
-        height: 250px; 
-        width: 300px; 
-        max-width: 100%; 
-        transition: transform 0.3s ease; 
-      } */ 
-
+      
       /* Adding a hover effect for the logo */
       .logo a:hover img {
         transform: scale(1.05); /* Slightly enlarge the logo on hover */
       }
 
-      /* Responsive adjustments */
-      @media screen and (max-width: 970px) {
-        .logo img {
-          height: 80px;
-          width: 40px; /* Adjust height for smaller screens */
-        }
-      }
-
-      @media screen and (max-width: 600px) {
-        .logo img {
-          height: 80px;
-          width: 40px; /* Adjust height for even smaller screens */
-        }
-      }
-
-      /* Nav links styling */
-      .wrapper .nav-links {
-        display: inline-flex;
-      }
-
-      .nav-links li {
-        list-style: none;
-      }
-
-      .nav-links li a {
-        color: #027aa8;
-        text-decoration: none;
-        font-size: 18px;
-        font-weight: 500;
-        padding: 9px 15px;
-        border-radius: 5px;
-        transition: all 0.3s ease;
-      }
-
-      .nav-links li a:hover {
-        background: #96badf;
-      }
 
       /* Mobile nav toggle button */
       .wrapper .btn {
@@ -177,39 +99,10 @@ pageEncoding="UTF-8"%>
         #close-btn:checked ~ .btn.menu-btn {
           display: block;
         }
-        .nav-links li {
-          margin: 15px 10px;
-        }
-        .nav-links li a {
-          padding: 0 20px;
-          display: block;
-          font-size: 20px;
-        }
-        .nav-links .drop-menu {
-          position: static;
-          opacity: 1;
-          top: 65px;
-          visibility: visible;
-          padding-left: 20px;
-          width: 100%;
-          max-height: 0px;
-          overflow: hidden;
-          box-shadow: none;
-          transition: all 0.3s ease;
-        }
-        .drop-menu li {
-          margin: 0;
-        }
-        .drop-menu li a {
-          border-radius: 5px;
-          font-size: 18px;
-        }
+        
       }
 
-      /* Nav input styling */
-      nav input {
-        display: none;
-      }
+
 
       .section {
         margin: 30px 0;
@@ -426,134 +319,7 @@ pageEncoding="UTF-8"%>
       }
       
       /* Modal container */
-.updateModal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: 1000;
-}
 
-/* Form container */
-.updateForm {
-  background-color: #fff;
-  border-radius: 10px;
-  padding: 30px;
-  width: 90vw;
-  max-width: 1200px;
-  max-height: 90vh; /* Ensures it doesn't overflow the screen */
-  overflow-y: auto; /* Adds scroll for content overflow */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  animation: fadeIn 0.3s ease;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: space-between;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* Form header */
-.updateForm h2 {
-  flex-basis: 100%;
-  text-align: center;
-  font-size: 28px;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-/* Field styles */
-.field {
-  flex-basis: calc(50% - 20px); /* Two fields per row */
-  display: flex;
-  flex-direction: column;
-}
-
-.field label {
-  margin-bottom: 5px;
-  font-weight: bold;
-  font-size: 14px;
-  color: #555;
-}
-
-.field input[type="text"],
-.field input[type="email"] {
-  padding: 10px;
-  font-size: 14px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  transition: all 0.3s;
-}
-
-.field input:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-  outline: none;
-}
-
-/* Full-width fields */
-.inputContainer,
-.positionHolderField {
-  flex-basis: 100%;
-}
-
-/* Button styles */
-button {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 10px 15px;
-  font-size: 14px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
-/* List fields (Achievements and Social Media) */
-.listField {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.socialMediaField {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-
-.positionHolderField {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-
-/* Submit button */
-#submitButton {
-  flex-basis: 100%;
-  padding: 12px;
-  font-size: 16px;
-  font-weight: bold;
-  margin-top: 20px;
-}
 
 /* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {
@@ -599,6 +365,8 @@ button:hover {
 
   }
 }
+
+
 
   .footer {
             background-color: #027AA8; /* Dark background for contrast */
@@ -811,9 +579,9 @@ button:hover {
             </div>
           </div>
         </div> 
-        <div class="field">
+        <div class="field position">
           <label for="">Position Holders</label>
-          <div id="positionHoldersContainer">
+          <div id="positionHoldersContainer" >
             <label for="">Member1</label>
             <div class="positionHolderField">
               <input type="text" name="name1" placeholder="Name">
@@ -835,7 +603,7 @@ button:hover {
             </div>
           </div>
         </div>  
-        <button id="submitButton">Submit</button>     
+        <button id="submitButton" class="button">Submit</button>     
       </div>
     </div>
 
@@ -882,7 +650,7 @@ button:hover {
         </div>
       </div>
 
-      <footer class="footer">
+      <!-- <footer class="footer">
         <div class="footer-content">
             <div class="middle">
                 <p>Made in Response to Minor Project 1</p>
@@ -908,7 +676,7 @@ button:hover {
             </div>
         </div>
     </footer>
-  
+   -->
       
       <script>
         let tasks = [];
@@ -947,7 +715,7 @@ button:hover {
           field.innerHTML = `
             <input type="text" name="socialMediaKey" placeholder="Platform (e.g., Facebook)">
             <input type="text" name="socialMediaValue" placeholder="URL (e.g., https://facebook.com)">
-            <button type="button" class="deleteSocialMediaBtn">❌</button>
+            <button type="button" class="removeButton deleteSocialMediaBtn">❌</button>
           `;
           container.appendChild(field);
         });
@@ -987,35 +755,35 @@ button:hover {
           document.getElementById("taskModal").style.display = "none";
         }
       
-        function saveTask() {
-          const taskInput = document.getElementById("taskInput").value;
-          const eventDescription =
-            document.getElementById("eventDescription").value;
-          const dateFrom = document.getElementById("dateFrom").value;
-          const dateTo = document.getElementById("dateTo").value;
-          const eventManager = document.getElementById("eventManager").value;
-          const taskModal = document.getElementById("taskModal");
-          const editTaskIndex = taskModal.dataset.editing;
+        // function saveTask() {
+        //   const taskInput = document.getElementById("taskInput").value;
+        //   const eventDescription =
+        //     document.getElementById("eventDescription").value;
+        //   const dateFrom = document.getElementById("dateFrom").value;
+        //   const dateTo = document.getElementById("dateTo").value;
+        //   const eventManager = document.getElementById("eventManager").value;
+        //   const taskModal = document.getElementById("taskModal");
+        //   const editTaskIndex = taskModal.dataset.editing;
       
-          if (taskInput.trim() !== "" && eventManager.trim() !== "") {
-            const taskData = {
-              name: taskInput,
-              description: eventDescription,
-              dateFrom: dateFrom,
-              dateTo: dateTo,
-              eventManager: eventManager,
-            };
+        //   if (taskInput.trim() !== "" && eventManager.trim() !== "") {
+        //     const taskData = {
+        //       name: taskInput,
+        //       description: eventDescription,
+        //       dateFrom: dateFrom,
+        //       dateTo: dateTo,
+        //       eventManager: eventManager,
+        //     };
       
-            if (editTaskIndex) {
-              tasks[editTaskIndex] = taskData;
-            } else {
-              tasks.push(taskData);
-            }
+        //     if (editTaskIndex) {
+        //       tasks[editTaskIndex] = taskData;
+        //     } else {
+        //       tasks.push(taskData);
+        //     }
       
-            renderTasks();
-            hideModal();
-          }
-        }
+        //     renderTasks();
+        //     hideModal();
+        //   }
+        // }
       
         function renderTasks() {
           const taskContainer = document.getElementById("taskContainer");

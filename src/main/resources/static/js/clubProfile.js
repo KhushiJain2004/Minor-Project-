@@ -13,9 +13,17 @@ $(document).ready(function () {
                 console.log(club);
                 clubName = club.clubName;
                 document.getElementById("clubName").textContent = club.clubName;
-                document.getElementById("slogan").textContent = club.clubName;
+                document.getElementById("slogan").textContent = club.slogan;
                 document.getElementById("description").textContent = club.description;
-                document.getElementById("achievements").textContent = club.achievements;
+                document.getElementById("achievements").textContent = "";
+                
+                club.achievements.forEach(achievement => {
+                    const li = document.createElement('li');
+                    li.style.listStyleType="none";
+                    li.textContent = achievement;
+                    document.getElementById("achievements").appendChild(li);
+                });
+
                 document.getElementById("membership").textContent = club.memberBenefits;
                 document.getElementById("member1name").textContent = club.positionHolders[0].name;
                 document.getElementById("member2name").textContent = club.positionHolders[1].name;
@@ -24,6 +32,14 @@ $(document).ready(function () {
                 document.getElementById("member1designation").textContent = club.positionHolders[0].designation;
                 document.getElementById("member2designation").textContent = club.positionHolders[1].designation;
                 document.getElementById("member3designation").textContent = club.positionHolders[2].designation;
+
+                Object.keys(club.socialMediaLinks).forEach(site => {
+                    const link = document.getElementById(site);
+                    if (link) {
+                        if(site=='email') link.href=`mailto:${club.socialMediaLinks.email}`;
+                        else link.href = club.socialMediaLinks[site];
+                    }
+                });
             }
         )
         .catch(error => console.error('Error fetching club details:', error));
