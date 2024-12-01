@@ -138,7 +138,8 @@ $(document).ready(function()
       
           const removeButton = document.createElement("button");
           removeButton.type = "button";
-          removeButton.textContent = "Remove";
+          removeButton.classList.add("removeButton");
+          removeButton.textContent = '❌';
           removeButton.addEventListener("click", () => 
           { 
             urlInput.value="remove";
