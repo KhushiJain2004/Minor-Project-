@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Club Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
      <link rel="stylesheet" href="${pageContext.request.contextPath}/css/nav.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/common.js"></script>
@@ -26,157 +26,13 @@
             margin: 0;
             font-family: 'Quicksand', sans-serif;
         }
-        footer {
+        header, footer {
             background-color: #027AA8;
             height: 60px;
             display: flex;
-            align-items: center;
+            align-items: right;
             justify-content: center;
         }
-        nav {
-        position: absolute; 
-        top: 0; 
-        left: 0; 
-        width: 100%; 
-        background-color: #e9f2f9; 
-        z-index: 1000; 
-      }
-
-      nav .wrapper {
-        position: relative;
-        max-width: 2000px;
-        padding: 0px 30px;
-        height: 70px;
-        line-height: 70px;
-        background-color: #fff;
-        margin: auto;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-
-      /* Logo styling */
-      .wrapper .logo {
-        display: flex; 
-        align-items: center; 
-        justify-content: center; 
-        padding: 50px; 
-      }
-
-      .logo a:hover img {
-        transform: scale(1.05); 
-      }
-
-      /* Responsive adjustments */
-      @media screen and (max-width: 970px) {
-        .logo img {
-          height: 80px;
-          width: 40px; 
-        }
-      }
-
-      @media screen and (max-width: 600px) {
-        .logo img {
-          height: 80px;
-          width: 40px; 
-        }
-      }
-
-      /* Nav links styling */
-      .wrapper .nav-links {
-        display: inline-flex;
-      }
-
-      .nav-links li {
-        list-style: none;
-      }
-
-      .nav-links li a {
-        color: #027aa8;
-        text-decoration: none;
-        font-size: 18px;
-        font-weight: 500;
-        padding: 9px 15px;
-        border-radius: 5px;
-        transition: all 0.3s ease;
-      }
-
-      .nav-links li a:hover {
-        background: #96badf;
-      }
-
-      /* Mobile nav toggle button */
-      .wrapper .btn {
-        color: #fff;
-        font-size: 20px;
-        cursor: pointer;
-        display: none;
-      }
-
-      .wrapper .btn.close-btn {
-        position: absolute;
-        right: 30px;
-        top: 10px;
-      }
-
-      /* Mobile view styles */
-      @media screen and (max-width: 970px) {
-        .wrapper .btn {
-          display: block;
-        }
-
-        ::-webkit-scrollbar {
-          width: 10px;
-        }
-        ::-webkit-scrollbar-track {
-          background: #027aa8;
-        }
-        ::-webkit-scrollbar-thumb {
-          background: #027aa8;
-        }
-        #menu-btn:checked ~ .nav-links {
-          left: 0%;
-        }
-        #menu-btn:checked ~ .btn.menu-btn {
-          display: none;
-        }
-        #close-btn:checked ~ .btn.menu-btn {
-          display: block;
-        }
-        .nav-links li {
-          margin: 15px 10px;
-        }
-        .nav-links li a {
-          padding: 0 20px;
-          display: block;
-          font-size: 20px;
-        }
-        .nav-links .drop-menu {
-          position: static;
-          opacity: 1;
-          top: 65px;
-          visibility: visible;
-          padding-left: 20px;
-          width: 100%;
-          max-height: 0px;
-          overflow: hidden;
-          box-shadow: none;
-          transition: all 0.3s ease;
-        }
-
-         .drop-menu li {
-          margin: 0;
-        }
-        .drop-menu li a {
-          border-radius: 5px;
-          font-size: 18px;
-        }
-      }
-
-      /* Nav input styling */
-      nav input {
-        display: none;
-      }
 
         .container {
             position: relative;
@@ -261,6 +117,7 @@
             margin-bottom: 20px;
             color: #027AA8;
         }
+
         .event-container {
     display: flex;
     flex-wrap: wrap;
@@ -319,6 +176,46 @@
 @media (max-width: 1024px) {
     .event-card {
         flex: 1 1 calc(33.33% - 20px); /* 3 cards per row on medium screens */
+
+        
+        .event-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping of elements */
+    justify-content: space-between; /* Add space between rows */
+    gap: 20px; /* Space between cards */
+}
+
+.event-card {
+    flex: 1 1 calc(25% - 20px); /* Each card takes up 25% width minus the gap */
+    max-width: calc(25% - 20px); /* Ensure max width matches */
+    min-width: 250px; /* Optional: Minimum width for a card */
+    height: 300px; /* Fixed height for uniformity */
+    position: relative;
+    color: white;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 20px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.event-card:hover {
+    transform: scale(1.05); /* Slightly increase size on hover */
+}
+
+@media (max-width: 1200px) {
+    .event-card {
+        flex: 1 1 calc(33.33% - 20px); /* Three cards per row */
+    }
+}
+
+@media (max-width: 992px) {
+    .event-card {
+        flex: 1 1 calc(50% - 20px); /* Two cards per row */
+
     }
 }
 
@@ -337,6 +234,13 @@
         .event-card:hover {
             transform: scale(1.05);
         }
+
+        flex: 1 1 100%; /* Single card per row on small screens */
+    }
+}
+
+        
+
         .event-card::before {
             content: "";
             position: absolute;
@@ -360,10 +264,14 @@
             border-radius: 50%;
             background-color: white;
             margin-bottom: 10px;
+            background-image: url('images/club-logo.png');
+            background-size: cover;
+            background-position: center;
+
         }
         .event-logo img {
-            width: 100%;
-            height: 100%;
+            width: 50px;
+            height: 50px;
             object-fit: cover;
             border-radius: 50%;
         }
@@ -388,37 +296,58 @@
             flex-wrap: wrap;
             gap: 20px;
         }
-
+        
         .event-filters {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin: 20px auto;
-        max-width: 80%;
-        background-color: rgba(255, 255, 255, 0.8);
-        padding: 10px;
-        border-radius: 10px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Ensure vertical alignment */
+    margin: 20px auto;
+    max-width: 60%;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
 
-        .event-filters input, .event-filters select {
-        padding: 10px;
-        font-size: 16px;
-        margin-right: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        outline: none;
-        }
+/* Group dropdowns on the left */
+.event-filters select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    margin-right: 10px; /* Space between dropdowns */
+}
 
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .event-card {
-                width: 100%; 
-            }
-        }
-        .hidden {
-            display: none;
-        }
+/* Style the search bar and increase its length */
+.event-filters input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none; /* Push the search bar to the right */
+    width: 80%; /* Set the width of the search bar */
+    max-width: 600px; /* Optional: Limit the maximum width */
+}
+
+/* Ensure all elements wrap properly on smaller screens */
+@media (max-width: 768px) {
+    .event-filters {
+        flex-wrap: wrap;
+        justify-content: center; /* Center items for smaller screens */
+    }
+
+    .event-filters select,
+    .event-filters input[type="text"] {
+        width: 100%; /* Stack elements vertically and make them full width */
+        margin: 5px 0; /* Add spacing between elements */
+    }
+}
+
+.hidden {
+    display: none;
+}
+
 
         .popup-content {
             background-color: white;
@@ -494,6 +423,7 @@
             margin: 10px 0;
             color: #027AA8;
         }
+
 
         .footer {
             background-color: #027AA8; /* Dark background for contrast */
@@ -577,38 +507,169 @@
             color: #027AA8; /* Icon color */
             font-size: 20px;
         }
+
+        nav {
+  width: 150%;
+  height: 80px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0px;
+  z-index: 1500;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: 80%;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo img {
+  max-width: 120px; /* Increase logo size */
+  height: auto; /* Maintain aspect ratio */
+  padding-top: 10px; /* Adjust vertical alignment */
+  transition: transform 0.3s ease;
+}
+
+.logo a:hover img {
+  transform: scale(1.05);
+}
+
+.nav-links {
+  display: inline-flex;
+}
+
+.nav-links li {
+  list-style: none;
+}
+
+.nav-links li a {
+  color: #027AA8;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 9px 15px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.nav-links li a:hover {
+  background: #96badf;
+}
+
+#club-dropdown {
+  position: relative;
+}
+
+#club-dropdown:hover .dropdown-list {
+  display: block;
+}
+
+.dropdown-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #fff;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #ddd;
+  display: none;
+  z-index: 1000;
+}
+
+.dropdown-list li a {
+  padding: 10px 15px;
+  color: #333;
+  display: block;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.dropdown-list li a:hover {
+  background: #f5f5f5;
+}
+
+@media screen and (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: left;
+    background: #fff;
+    width: 100%;
+    position: fixed;
+    top: 80px;
+    left: 0;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+  }
+
+  .nav-links li {
+    margin: 10px 0;
+  }
+
+  .menu-btn {
+    display: block;
+    color: #027AA8;
+    cursor: pointer;
+  }
+
+  .menu-btn .fas {
+    font-size: 28px;
+  }
+
+  input#menu-btn:checked ~ .nav-links {
+    display: flex;
+  }
+
+  input#close-btn:checked ~ .nav-links {
+    display: none;
+  }
+
+  .btn {
+    display: block;
+  }
+}
+
     </style>
 </head>
 <body>
-    <nav>
+    <header>
+      <nav>
         <div class="wrapper">
           <div class="logo">
             <a href="#">
-              <img
-                src="${pageContext.request.contextPath}/images/UPES University of Petroleum and Energy Studies.png"
-                alt="Logo"
-              />
+              <img src="images/UPES University of Petroleum and Energy Studies.png" alt="Logo" />
             </a>
           </div>
-          <input type="radio" name="slider" id="menu-btn" />
-          <input type="radio" name="slider" id="close-btn" />
           <ul class="nav-links">
             <label for="close-btn" class="btn close-btn">
               <i class="fas fa-times"></i>
             </label>
-            <li><a href="/home">Home</a></li>
+            <li><a href="#">Home</a></li>
             <li><a href="/event">Events</a></li>
             <li id="club-dropdown">
               <a href="#">Clubs</a>
               <ul class="dropdown-list" id="club-dropdown-list">
+                <!-- Club names will be dynamically inserted here -->
+                 <!-- <li>sample</li>
+                 <li>sample</li>
+                 <li>sample</li> -->
               </ul>
             </li>
-            <!-- <li><a href="clubAdminDash.jsp">Feedback</a></li> -->
             <li id="login-link"><a href="/login">Login</a></li>
             <li id="profile-item" style="display: none;">
               <a href="#" id="logoutLink">Logout</a>
-              <img src="${pageContext.request.contextPath}/images/profile.png" alt="Profile" class="profile-icon" />
-              <span id="username"></span> <!-- Placeholder for user's name -->
+              <img src="images/profile.png" alt="Profile" class="profile-icon" />
+              <span id="username"></span> 
             </li>
           </ul>
           <label for="menu-btn" class="btn menu-btn">
@@ -616,6 +677,7 @@
           </label>
         </div>
       </nav>
+    </header>
     <div class="event-filters">
         <input type="text" id="search-bar" placeholder="Search events..." oninput="filterEvents()" />
         <select id="keyword-filter" onchange="filterEvents()">
@@ -636,7 +698,48 @@
 <div class="event-section">
     <h2>Ongoing Events</h2>
     <div class="event-container">
+
         <!-- Events will be rendered dynamically here -->
+
+        <div class="event-card" style="background-image: url('images/event.jpg');">
+            <div class="event-logo" style="background-image: url('images/club-logo.png')"></div>
+            <div class="event-description">CLUB NAME <br>Ongoing Event 1 - A brief description.</div>
+            <button class="read-more-btn" onclick="openPopup()">Read More</button>
+        </div>
+        <div class="event-card" style="background-image: url('images/event.jpg');">
+            <div class="event-logo"style="background-image: url('images/club-logo.png') alt="Event Logo 2"></div>
+            <div class="event-description">CLUB NAME <br>Ongoing Event 2 - A brief description.</div>
+            <button class="read-more-btn" onclick="openPopup()">Read More</button>
+        </div>
+        <div class="event-card" style="background-image: url('images/event.jpg');">
+            <div class="event-logo"><img src="event_logo.png" alt="Event Logo 3"></div>
+            <div class="event-description">CLUB NAME <br>Ongoing Event 3 - A brief description.</div>
+            <button class="read-more-btn" onclick="openPopup()">Read More</button>
+        </div>
+    </div>
+    <h2>Upcoming Events</h2>
+    <div class="event-container">
+        <div class="event-card" style="background-image: url('images/event.jpg');">
+            <div class="event-logo"><img src="event_logo.png" alt="Event Logo 4"></div>
+            <div class="event-description">CLUB NAME <br>Upcoming Event 1 - A brief description.</div>
+            <button class="read-more-btn" onclick="openPopup()">Read More</button> 
+        </div>
+        <div class="event-card" style="background-image: url('images/event.jpg');">
+            <div class="event-logo"><img src="event_logo.png" alt="Event Logo 5"></div>
+            <div class="event-description">CLUB NAME <br>Upcoming Event 2 - A brief description.</div>
+            <button class="read-more-btn" onclick="openPopup()">Read More</button>
+        </div>
+        <div class="event-card" style="background-image: url('images/event.jpg');">
+            <div class="event-logo"><img src="event_logo.png" alt="Event Logo 6"></div>
+            <div class="event-description">CLUB NAME <br>Upcoming Event 3 - A brief description.</div>
+            <button class="read-more-btn" onclick="openPopup()">Read More</button> 
+        </div>
+        <div class="event-card" style="background-image: url('images/event.jpg');">
+            <div class="event-logo"><img src="event_logo.png" alt="Event Logo 6"></div>
+            <div class="event-description">CLUB NAME <br>Upcoming Event 3 - A brief description.</div>
+            <button class="read-more-btn" onclick="openPopup()">Read More</button> 
+        </div>
+
     </div>
 </div>
 

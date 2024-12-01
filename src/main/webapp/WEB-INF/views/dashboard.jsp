@@ -6,165 +6,240 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Admin Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/nav.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/adminDash.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="${pageContext.request.contextPath}/js/common.js"></script>
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            background: #4facfe;
+            color: #333;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #fff;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar h2 {
+            color: #4facfe;
+        }
+
+        .logout-button {
+            margin-top: auto;
+            background-color: #4facfe;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .logout-button:hover {
+            background-color: #333;
+        }
+
+        #content {
+            margin-left: 250px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .table-wrapper {
+            width: 80%;
+            max-height: 600px; /* Adjusted height */
+            overflow-y: auto; /* Enable vertical scrolling if content overflows */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            border-radius: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table th, table td {
+            padding: 16px; /* Increased padding */
+            text-align: left;
+            border: 1px solid #ddd;
+            vertical-align: middle;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        table th {
+            background-color: #4facfe;
+            color: white;
+        }
+
+        table td {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Styling for the delete button */
+        .delete-btn {
+            background-color: #f44336;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .delete-btn:hover {
+            background-color: #d32f2f;
+        }
+    </style>
 </head>
 <body>
-
-    <nav>
-        <div class="wrapper">
-          <div class="logo">
-            <a href="#">
-              <img
-                src="${pageContext.request.contextPath}/images/UPES University of Petroleum and Energy Studies.png"
-                alt="Logo"
-              />
-            </a>
-          </div>
-          <input type="radio" name="slider" id="menu-btn" />
-          <input type="radio" name="slider" id="close-btn" />
-          <ul class="nav-links">
-            <label for="close-btn" class="btn close-btn">
-              <i class="fas fa-times"></i>
-            </label>
-            <li><a href="/home">Home</a></li>
-            <li><a href="/event">Events</a></li>
-            <li id="club-dropdown">
-              <a href="#">Clubs</a>
-              <ul class="dropdown-list" id="club-dropdown-list">
-              </ul>
-            </li>
-            <!-- <li><a href="clubAdminDash.jsp">Feedback</a></li> -->
-            <li id="login-link"><a href="/login">Login</a></li>
-            <li id="profile-item" style="display: none;">
-              <a href="#" id="logoutLink">Logout</a>
-              <img src="${pageContext.request.contextPath}/images/profile.png" alt="Profile" class="profile-icon" />
-              <span id="username"></span> <!-- Placeholder for user's name -->
-            </li>
-          </ul>
-          <label for="menu-btn" class="btn menu-btn">
-            <i class="fas fa-bars"></i>
-          </label>
-        </div>
-      </nav>
-
-
-    <h1>Web Admin Dashboard</h1>
-
-    <div id="userDetails">
-        <h2>Admin details:</h2>
+    <div class="sidebar">
+        <h2>Admin Details</h2>
         <p>Welcome, <span id="userUsername"></span>!</p>
         <p>Role: <span id="userRole"></span></p>
-        <p>Email: <span id="userEmail"></span>
-        </span></p>
+        <p>Email: <span id="userEmail"></span></p>
+        <button class="logout-button" id="logoutLink">Logout</button>
     </div>
 
-    <c:if test="${not empty error}">
-        <p style="color: red;">${error}</p>
-    </c:if>
-    
-    <a href="#" id="viewUserList">View User List</a>
-    <br>
-    <a href="#" id="viewClubsList">View Clubs List</a>
-    <br>
-    <br>
-
-    <!-- Section to display JSON response -->
-    <div id="jsonDisplay" style="margin-top: 20px;">
-        <h2>Data Response:</h2>
-        <pre id="jsonOutput"></pre> <!-- Using <pre> tag to format JSON -->
-    </div>
-
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="middle">
-                <p>Made in Response to Minor Project 1</p>
-                <a href="https://github.com/your-repo-link" target="_blank">Click to View GitHub Repository</a>
-            </div>
-            <hr class="footer-line" />
-            <div class="social-icons">
-                <a href="https://www.instagram.com/upes_dehradun/" target="_blank" class="icon-circle">
-                    <i class="fa-brands fa-instagram"></i>
-                </a>
-                <a href="https://www.facebook.com/UPESddnuk" target="_blank" class="icon-circle">
-                    <i class="fa-brands fa-facebook-f"></i>
-                </a>
-                <a href="https://www.youtube.com/user/UPESUniversity/featured" target="_blank" class="icon-circle">
-                    <i class="fa-brands fa-youtube"></i>
-                </a>
-                <a href="https://www.linkedin.com/school/upesdehradun/posts/?feedView=all" target="_blank" class="icon-circle">
-                    <i class="fa-brands fa-linkedin-in"></i>
-                </a>                
-                <a href="https://www.upes.ac.in/" target="_blank" class="icon-circle">
-                    <i class="fa-solid fa-link"></i>
-                </a>
-            </div>
+    <div id="content">
+        <div class="table-wrapper" id="tableContainer" style="display: none;">
+            <table id="dataTable">
+                <thead>
+                    <tr>
+                        <th>S.No.</th>
+                        <th>Club Name</th>
+                        <th>Club Admin</th>
+                        <th>Actions</th> <!-- Delete button -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Table data will be dynamically injected here -->
+                </tbody>
+            </table>
         </div>
-    </footer>
+    </div>
 
     <script>
-        $(document).ready(function() {
-            // Get the token and user details from localStorage
+        $(document).ready(function () {
             const token = localStorage.getItem("token");
-            const user = JSON.parse(localStorage.getItem("user")); // Parse user details from localStorage
+            const user = JSON.parse(localStorage.getItem("user"));
 
-            // Display user details if available
             if (user) {
                 $("#userEmail").text(user.email);
                 $("#userRole").text(user.role);
                 $("#userUsername").text(user.username);
             } else {
                 alert("User details not found. Please log in again.");
-                window.location.href = "${pageContext.request.contextPath}/login"; // Redirect to login page
+                window.location.href = "${pageContext.request.contextPath}/login";
             }
 
-            // Function to make API call with token
+            function populateTable(data) {
+                const tableBody = $("#dataTable tbody");
+                tableBody.empty();
+
+                // Log the received data for debugging
+                console.log("Fetched club list data:", data);
+
+                data.forEach((item, index) => {
+                    const row = `<tr>
+                        <td>${index + 1}</td> <!-- Sequential number -->
+                        <td>${item.clubName}</td>
+                        <td>${item.clubAdmin}</td>
+                        <td><button class="delete-btn" data-id="${item.clubId}">Delete</button></td>
+                    </tr>`;
+                    tableBody.append(row);
+                });
+                $("#tableContainer").show();
+
+                // Bind the delete button click event
+                $(".delete-btn").on("click", function () {
+                    const clubId = $(this).data("id");
+                    const confirmed = confirm("Are you sure you want to delete this club?");
+                    if (confirmed) {
+                        deleteClub(clubId);
+                    }
+                });
+            }
+
+            function deleteClub(clubId) {
+                if (token) {
+                    $.ajax({
+                        url: `${pageContext.request.contextPath}/api/clubs/delete/${clubId}`,
+                        type: "DELETE",
+                        headers: {
+                            "Authorization": "Bearer " + token
+                        },
+                        success: function (response) {
+                            alert("Club deleted successfully.");
+                            location.reload(); // Reload the page to refresh the list
+                        },
+                        error: function () {
+                            alert("Failed to delete club. Please try again.");
+                        }
+                    });
+                } else {
+                    alert("You need to log in to delete a club.");
+                    window.location.href = "${pageContext.request.contextPath}/login";
+                }
+            }
+
             function fetchWithToken(url) {
                 if (token) {
                     $.ajax({
                         url: url,
                         type: "GET",
                         headers: {
-                            "Authorization": "Bearer " + token // Include token in headers
+                            "Authorization": "Bearer " + token
                         },
-                        success: function(response) {
-                            // Handle successful response by displaying JSON
-                            console.log(response); // For debugging
-                            $("#jsonOutput").text(JSON.stringify(response, null, 2)); // Pretty print JSON
+                        success: function (response) {
+                            populateTable(response);
                         },
-                        error: function(xhr, status, error) {
-                            console.error("Request failed:", error);
-                            alert("Failed to fetch data. Please check your authentication.");
-                            // Optionally, redirect to login if authentication fails
-                            window.location.href = "${pageContext.request.contextPath}/login"; // Redirect to login page
+                        error: function () {
+                            alert("Failed to fetch data. Please log in again.");
+                            window.location.href = "${pageContext.request.contextPath}/login";
                         }
                     });
                 } else {
                     alert("You need to log in to access this page.");
-                    window.location.href = "${pageContext.request.contextPath}/login"; // Redirect to login page if no token
+                    window.location.href = "${pageContext.request.contextPath}/login";
                 }
             }
 
-            // Event handler for viewing user list
-            $("#viewUserList").on("click", function(e) {
-                e.preventDefault(); // Prevent the default link behavior
-                fetchWithToken("${pageContext.request.contextPath}/api/user/list");
-            });
+            // Automatically fetch club list when the page loads
+            fetchWithToken("${pageContext.request.contextPath}/api/clubs/list");
 
-            // Event handler for viewing clubs list
-            $("#viewClubsList").on("click", function(e) {
-                e.preventDefault(); // Prevent the default link behavior
-                fetchWithToken("${pageContext.request.contextPath}/api/clubs/list");
+            $("#logoutLink").on("click", function () {
+                localStorage.clear();
+                window.location.href = "${pageContext.request.contextPath}/login";
             });
-
-            $("#logoutLink").on("click", function(e) {
-            e.preventDefault(); // Prevent the default link behavior
-            logout(); // Call the logout function
-    });
         });
     </script>
 </body>
