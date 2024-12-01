@@ -54,4 +54,9 @@ public class EventsService {
     public List<Events> getEventsByTags(List<String> tags) {
         return eventsRepository.findByTagsIn(tags);
     }
+
+    public List<Events> getUpcomingEvents(LocalDateTime currentTime) {
+        return eventsRepository.findByStartTimeAfter(currentTime);
+    }
 }
+

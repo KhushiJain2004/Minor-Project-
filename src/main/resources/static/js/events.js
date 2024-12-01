@@ -1,134 +1,77 @@
-// Fetch events for a particular club
-async function fetchClubEvents(clubId) {
-    try {
-        const response = await fetch(`/api/events/club/${clubId}`);
-        if (response.ok) {
-            const events = await response.json();
-            renderEvents(events); // Function to populate the table with events
-        } else {
-            console.error("Failed to fetch events for club.");
-        }
-    } catch (error) {
-        console.error("Error fetching club events:", error);
-    }
+// Fetch ongoing events from the backend
+$(document).ready(function()
+{
+    fetchEvents();
+
+function fetchEvents() {
+    fetch('/api/events/ongoing')
+        .then(response => response.json())
+        .then(events => {
+            // Call a function to render events
+            console.log(events);    
+            renderEvents(events);
+        })
+        .catch(error => console.log('Error fetching events:', error));
 }
 
-// Create or update an event
-async function saveEvent(eventData) {
-    try {
-        const method = eventData.id ? "PUT" : "POST";
-        const endpoint = eventData.id
-            ? `/api/events/${eventData.id}`
-            : `/api/events`;
-
-        const response = await fetch(endpoint, {
-            method: method,
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(eventData),
-        });
-
-        if (response.ok) {
-            console.log("Event saved successfully.");
-            const savedEvent = await response.json();
-            fetchClubEvents(eventData.clubId); // Refresh events
-            resetForm(); // Clear the form after saving
-        } else {
-            console.error("Failed to save event.");
-        }
-    } catch (error) {
-        console.error("Error saving event:", error);
-    }
-}
-
-// Delete an event
-async function deleteEvent(eventId, clubId) {
-    try {
-        const response = await fetch(`/api/events/${eventId}`, {
-            method: "DELETE",
-        });
-
-        if (response.ok) {
-            console.log("Event deleted successfully.");
-            fetchClubEvents(clubId); // Refresh events
-        } else {
-            console.error("Failed to delete event.");
-        }
-    } catch (error) {
-        console.error("Error deleting event:", error);
-    }
-}
-
-// Populate the form with event data for editing
-function populateForm(eventData) {
-    document.getElementById("eventId").value = eventData.id || "";
-    document.getElementById("eventName").value = eventData.eventName || "";
-    document.getElementById("eventDescription").value =
-        eventData.eventDescription || "";
-    document.getElementById("startTime").value = eventData.startTime || "";
-    document.getElementById("endTime").value = eventData.endTime || "";
-    document.getElementById("tags").value = eventData.tags
-        ? eventData.tags.join(", ")
-        : "";
-    document.getElementById("featured").checked = eventData.featured || false;
-    document.getElementById("contactName").value =
-        eventData.contact?.name || "";
-    document.getElementById("contactEmail").value =
-        eventData.contact?.email || "";
-    document.getElementById("contactPhone").value =
-        eventData.contact?.phone || "";
-}
-
-// Reset the form
-function resetForm() {
-    document.getElementById("eventForm").reset();
-    document.getElementById("eventId").value = "";
-}
-
-// Render events in the table
+// Render events on the page
 function renderEvents(events) {
-    const tableBody = document.querySelector("#eventsTable tbody");
-    tableBody.innerHTML = ""; // Clear existing rows
+    const eventContainer = document.querySelector('.event-container');
+    eventContainer.innerHTML = ''; // Clear existing events
 
-    events.forEach((event) => {
-        const row = document.createElement("tr");
+    events.forEach(event => {
+        const eventCard = document.createElement('div');
+        eventCard.classList.add('event-card');
+        eventCard.style.backgroundImage = `url(${event.image})`; // Set background image for event card
 
-        row.innerHTML = `
-            <td>${event.eventName}</td>
-            <td>${event.eventDescription}</td>
-            <td>${event.startTime}</td>
-            <td>${event.endTime}</td>
-            <td>${event.tags ? event.tags.join(", ") : "N/A"}</td>
-            <td>
-                <button onclick='populateForm(${JSON.stringify(event)})'>Edit</button>
-                <button onclick='deleteEvent("${event.id}", "${event.clubId}")'>Delete</button>
-            </td>
+        const eventContent = `
+            <div class="event-logo">
+                <img src="${event.logo}" alt="${event.eventName} Logo">
+            </div>
+            <h3 class="event-description">${event.eventName}</h3>
+            <p>${event.eventDescription}</p>
+            <button class="read-more-btn" onclick="openEventPopup(${event.id})">Read More</button>
         `;
-        tableBody.appendChild(row);
+
+        eventCard.innerHTML = eventContent;
+        eventContainer.appendChild(eventCard);
     });
 }
 
-// Form submit handler
-document.getElementById("eventForm").addEventListener("submit", (e) => {
-    e.preventDefault();
+// Open event popup for details
+function openEventPopup(eventId) {
+    fetch(`/api/events/${eventId}`)
+        .then(response => response.json())
+        .then(event => {
+            // Populate popup with event details
+            document.querySelector('.popup-info h3').textContent = event.name;
+            document.querySelector('.popup-info h4').textContent = event.clubName;
+            document.querySelector('.popup-image img').src = event.image;
+            document.querySelector('.popup-info p').textContent = event.description;
+            document.getElementById('event-popup').classList.remove('hidden');
+        })
+        .catch(error => console.log('Error fetching event details:', error));
+}
 
-    const eventData = {
-        id: document.getElementById("eventId").value,
-        clubId: "C12345", // Replace with the current club's ID
-        eventName: document.getElementById("eventName").value,
-        eventDescription: document.getElementById("eventDescription").value,
-        startTime: document.getElementById("startTime").value,
-        endTime: document.getElementById("endTime").value,
-        tags: document
-            .getElementById("tags")
-            .value.split(",")
-            .map((tag) => tag.trim()),
-        featured: document.getElementById("featured").checked,
-        contact: {
-            name: document.getElementById("contactName").value,
-            email: document.getElementById("contactEmail").value,
-            phone: document.getElementById("contactPhone").value,
-        },
-    };
-
-    saveEvent(eventData);
+// Close event popup
+document.getElementById('close-popup').addEventListener('click', () => {
+    document.getElementById('event-popup').classList.add('hidden');
 });
+
+document.querySelector('.register-btn').addEventListener('click', () => {
+    // Make an API call to register the user for the event
+    fetch(`/api/events/register`, {
+        method: 'POST',
+        body: JSON.stringify({ eventId: eventId, userId: userId }), // Replace with actual data
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert('Registration successful');
+        document.getElementById('event-popup').classList.add('hidden');
+    })
+    .catch(error => console.log('Error registering for event:', error));
+});
+})  
