@@ -1,8 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/nav.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/common.js"></script>
     <script src="${pageContext.request.contextPath}/js/events.js"></script>
@@ -35,7 +38,6 @@
         /* Navbar Styles */
         nav {
             position: fixed;
-
             top: 0;
             left: 0;
             width: 100%;
@@ -76,67 +78,12 @@
             text-align: center;
         }
 
-
-
         .event-container {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
             justify-content: center;
         }
-        
-        .event-filters {
-    display: flex;
-    justify-content: space-between;
-    align-items: center; /* Ensure vertical alignment */
-    margin: 20px auto;
-    max-width: 60%;
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-/* Group dropdowns on the left */
-.event-filters select {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    outline: none;
-    margin-right: 10px; /* Space between dropdowns */
-}
-
-/* Style the search bar and increase its length */
-.event-filters input[type="text"] {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    outline: none; /* Push the search bar to the right */
-    width: 80%; /* Set the width of the search bar */
-    max-width: 600px; /* Optional: Limit the maximum width */
-}
-
-/* Ensure all elements wrap properly on smaller screens */
-@media (max-width: 768px) {
-    .event-filters {
-        flex-wrap: wrap;
-        justify-content: center; /* Center items for smaller screens */
-    }
-
-    .event-filters select,
-    .event-filters input[type="text"] {
-        width: 100%; /* Stack elements vertically and make them full width */
-        margin: 5px 0; /* Add spacing between elements */
-    }
-}
-
-.hidden {
-    display: none;
-}
-
-
 
         .event-card {
             flex: 1 1 calc(30% - 20px);
@@ -160,7 +107,6 @@
             padding: 15px;
             background-color: #f4f4f4;
         }
-
 
         .event-logo {
             width: 60px;
@@ -325,141 +271,8 @@
                 width: 90%;
             }
         }
-
-        nav {
-  width: 150%;
-  height: 80px;
-  background: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: fixed;
-  top: 0;
-  left: 0px;
-  z-index: 1500;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.wrapper {
-  width: 100%;
-  max-width: 1200px;
-  margin-left: 80%;
-  padding: 0 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.logo img {
-  max-width: 120px; /* Increase logo size */
-  height: auto; /* Maintain aspect ratio */
-  padding-top: 10px; /* Adjust vertical alignment */
-  transition: transform 0.3s ease;
-}
-
-.logo a:hover img {
-  transform: scale(1.05);
-}
-
-.nav-links {
-  display: inline-flex;
-}
-
-.nav-links li {
-  list-style: none;
-}
-
-.nav-links li a {
-  color: #027AA8;
-  text-decoration: none;
-  font-size: 18px;
-  font-weight: 500;
-  padding: 9px 15px;
-  border-radius: 5px;
-  transition: all 0.3s ease;
-}
-
-.nav-links li a:hover {
-  background: #96badf;
-}
-
-#club-dropdown {
-  position: relative;
-}
-
-#club-dropdown:hover .dropdown-list {
-  display: block;
-}
-
-.dropdown-list {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: #fff;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  border: 1px solid #ddd;
-  display: none;
-  z-index: 1000;
-}
-
-.dropdown-list li a {
-  padding: 10px 15px;
-  color: #333;
-  display: block;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.dropdown-list li a:hover {
-  background: #f5f5f5;
-}
-
-@media screen and (max-width: 768px) {
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    position: left;
-    background: #fff;
-    width: 100%;
-    position: fixed;
-    top: 80px;
-    left: 0;
-    padding: 10px;
-    border-top: 1px solid #ddd;
-  }
-
-  .nav-links li {
-    margin: 10px 0;
-  }
-
-  .menu-btn {
-    display: block;
-    color: #027AA8;
-    cursor: pointer;
-  }
-
-  .menu-btn .fas {
-    font-size: 28px;
-  }
-
-  input#menu-btn:checked ~ .nav-links {
-    display: flex;
-  }
-
-  input#close-btn:checked ~ .nav-links {
-    display: none;
-  }
-
-  .btn {
-    display: block;
-  }
-}
-
     </style>
 </head>
-
 <body class="page-container">
     <nav>
         <div class="wrapper">
@@ -496,7 +309,6 @@
             </label>
         </div>
     </nav>
->>>>>>> 6350d4dbe3c769fc38c0628b663a60bb911a580c
 
     <div class="content-wrap">
         <!-- THIS IS THE TAGS SECTION -->
