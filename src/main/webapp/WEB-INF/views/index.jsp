@@ -370,9 +370,10 @@
             <button>See More</button>
           </div>
         </div>
-        <div class="item" style="background-image: url('/images/group.jpeg')">
+        
+        <div class="item" style="background-image: url('/images/inf.jpeg')">
           <div class="content">
-            <div class="name">UPES ACM</div>
+            <div class="name">Infinity Club – Aerospace</div>
             <div class="des">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab, eum!
             </div>
@@ -388,9 +389,9 @@
             <button>See More</button>
           </div>
         </div>
-        <div class="item" style="background-image: url('/images/inf.jpeg')">
+        <div class="item" style="background-image: url('/images/group.jpg')">
           <div class="content">
-            <div class="name">Infinity Club – Aerospace</div>
+            <div class="name">UPES ACM</div>
             <div class="des">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab, eum!
             </div>

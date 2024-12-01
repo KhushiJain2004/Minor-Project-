@@ -76,15 +76,15 @@
             <!-- <img src="images/logo.jpeg" alt="Club Logo" class="clublogo"> -->
             <div class="content">
                 <h2 class="welcome">Welcome to,</h2>
-                <h1 id="clubName">Club Name</h1>
-                <p class="bio" id="slogan">This is a short bio or about the club. It should provide a brief overview of the club's mission, activities, and values. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla ullam optio sed! Exercitationem vero, enim dolores pariatur quaerat vel suscipit, officia debitis, ratione facere molestias cupiditate rem repellendus? Accusamus, blanditiis.</p>
+                <h1 id="clubName"></h1>
+                <p class="bio" id="slogan"></p>
                 <!-- <p class="keywords">Keywords: Music, Arts, Technology</p>   -->
                 <!--  -->
-                </div>
+                
             </div>
         </div>
 
-        <hr>
+        <!-- <hr> -->
         <div class="info">
             <div class="about">
                 <h1>About Us</h1>
@@ -131,52 +131,53 @@
         </div>
     
         <!-- Event Section -->
-    <div class="event-section">
-        <h2>Ongoing Events</h2>
-        <div class="event-container">
-            <div class="event-card" style="background-image: url('images/event.jpg');">
-                <div class="event-logo"><img src="images/event_logo.png" alt="Event Logo 1"></div>
-                <div class="event-description">Ongoing Event 1 - A brief description.</div>
-                <button class="read-more-btn" onclick="openPopup()">Read More</button>
+        <div class="event-section">
+            <h2>Ongoing Events</h2>
+            <div class="event-container" id="ongoing">
+                
+                <!-- <div class="event-card" style="background-image: url('images/event.jpg');">
+                    <div class="event-logo"><img src="images/event_logo.png" alt="Event Logo 1"></div>
+                    <div class="event-description">Ongoing Event 1 - A brief description.</div>
+                    <button class="read-more-btn" onclick="openPopup()">Read More</button>
+                </div>
+                <div class="event-card" style="background-image: url('images/event.jpg');">
+                    <div class="event-logo"><img src="images/event_logo.png" alt="Event Logo 2"></div>
+                    <div class="event-description">Ongoing Event 2 - A brief description.</div>
+                    <button class="read-more-btn" onclick="openPopup()">Read More</button>
+                </div>
+                <div class="event-card" style="background-image: url('images/event.jpg');">
+                    <div class="event-logo"><img src="images/event_logo.png" alt="Event Logo 3"></div>
+                    <div class="event-description">Ongoing Event 3 - A brief description.</div>
+                    <button class="read-more-btn" onclick="openPopup()">Read More</button>
+                </div> -->
             </div>
-            <div class="event-card" style="background-image: url('images/event.jpg');">
-                <div class="event-logo"><img src="images/event_logo.png" alt="Event Logo 2"></div>
-                <div class="event-description">Ongoing Event 2 - A brief description.</div>
-                <button class="read-more-btn" onclick="openPopup()">Read More</button>
+            <h2 class="eventHeading">Upcoming Events</h2>
+            <div class="event-container" id="upcoming">
+                <!-- <div class="event-card" style="background-image: url('images/event.jpg');">
+                    <div class="event-logo"><img src="images/event_logo.png" alt="Event Logo 4"></div>
+                    <div class="event-description">Upcoming Event 1 - A brief description.</div>
+                    <button class="read-more-btn" onclick="openPopup()">Read More</button> 
+                </div>
+                <div class="event-card" style="background-image: url('images/event.jpg');">
+                    <div class="event-logo"><img src="images/event_logo.png" alt="Event Logo 5"></div>
+                    <div class="event-description">Upcoming Event 2 - A brief description.</div>
+                    <button class="read-more-btn" onclick="openPopup()">Read More</button>
+                </div>
+                <div class="event-card" style="background-image: url('images/event.jpg');">
+                    <div class="event-logo"><img src="images/event_logo.png" alt="Event Logo 6"></div>
+                    <div class="event-description">Upcoming Event 3 - A brief description.</div>
+                    <button class="read-more-btn" onclick="openPopup()">Read More</button> 
+                </div> -->
             </div>
-            <div class="event-card" style="background-image: url('images/event.jpg');">
-                <div class="event-logo"><img src="images/event_logo.png" alt="Event Logo 3"></div>
-                <div class="event-description">Ongoing Event 3 - A brief description.</div>
-                <button class="read-more-btn" onclick="openPopup()">Read More</button>
+            <h2 class="eventHeading">Featured Events</h2>
+            <div class="event-container" id="featured">
+                <!-- <div class="event-card" style="background-image: url('images/event.jpg');">
+                    <div class="event-logo"><img src="images/event_logo.png" alt="Event Logo 4"></div>
+                    <div class="event-description">Featured Event 1 - A brief description.</div>
+                    <button class="read-more-btn" onclick="openPopup()">Read More</button> 
+                </div> -->
             </div>
         </div>
-        <h2>Upcoming Events</h2>
-        <div class="event-container">
-            <div class="event-card" style="background-image: url('images/event.jpg');">
-                <div class="event-logo"><img src="images/event_logo.png" alt="Event Logo 4"></div>
-                <div class="event-description">Upcoming Event 1 - A brief description.</div>
-                <button class="read-more-btn" onclick="openPopup()">Read More</button> 
-            </div>
-            <div class="event-card" style="background-image: url('images/event.jpg');">
-                <div class="event-logo"><img src="images/event_logo.png" alt="Event Logo 5"></div>
-                <div class="event-description">Upcoming Event 2 - A brief description.</div>
-                <button class="read-more-btn" onclick="openPopup()">Read More</button>
-            </div>
-            <div class="event-card" style="background-image: url('images/event.jpg');">
-                <div class="event-logo"><img src="images/event_logo.png" alt="Event Logo 6"></div>
-                <div class="event-description">Upcoming Event 3 - A brief description.</div>
-                <button class="read-more-btn" onclick="openPopup()">Read More</button> 
-            </div>
-        </div>
-        <h2>Featured Events</h2>
-        <div class="event-container">
-            <div class="event-card" style="background-image: url('images/event.jpg');">
-                <div class="event-logo"><img src="images/event_logo.png" alt="Event Logo 4"></div>
-                <div class="event-description">Featured Event 1 - A brief description.</div>
-                <button class="read-more-btn" onclick="openPopup()">Read More</button> 
-            </div>
-        </div>
-    </div>
     
     
         <!-- Popup -->
@@ -185,7 +186,7 @@
                 <button id="close-popup" class="close-btn">&times;</button>
                 <div class="popup-header">
                     <div class="popup-logo">
-                        <img src="images/event_logo.png" alt="Event Logo">
+                        <h3></h3>
                     </div>
                     <button class="register-btn">Register</button>
                 </div>
@@ -195,6 +196,13 @@
                 <div class="popup-info">
                     <h3>Event Name</h3>
                     <p>Here is the detailed description of the event. This section will contain all the deep information about the event such as its schedule, speakers, venue, and more. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Blanditiis, ab officia at, aspernatur id optio expedita minus cupiditate fugiat dolorem velit incidunt! Nulla nihil architecto temporibus similique ullam neque non.</p>
+                    <h3>Events Starts on : </h3>
+                    <p id="startDate"></p>
+                    <h3>Events Ends on : </h3>
+                    <p id="endDate"></p>
+                    <h3>Contact Person :</h3>
+                    <p id="contactName"></p>
+                    <p id="contactEmail"></p>
                 </div>
             </div>
         </div>
@@ -208,7 +216,7 @@
         <div class="footer-content">
             <div class="middle">
                 <p>Made in Response to Minor Project 1</p>
-                <a href="https://github.com/your-repo-link" target="_blank">Click to View GitHub Repository</a>
+                <a href="https://github.com/KhushiJain2004/Minor-Project-" target="_blank">Click to View GitHub Repository</a>
             </div>
             <hr class="footer-line" />
             <div class="social-icons">
@@ -232,6 +240,10 @@
     </footer>
 
     <script>
+        $("#logoutLink").on("click", function (e) {
+        e.preventDefault(); // Prevent the default link behavior
+        logout();
+      });
         function openPopup() {
             document.getElementById("event-popup").style.display = "flex"; 
         }
