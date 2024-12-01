@@ -23,8 +23,17 @@ public class EventsController {
 
     // Get all events with sorting functionality
     @GetMapping
-    public ResponseEntity<List<Events>> getAllEvents() {
-        return ResponseEntity.ok(eventsService.getAllEvents(Sort.by(Sort.Order.asc("startTime"))));
+    public ResponseEntity<List<Events>> getAllEvents(
+            @RequestParam(name = "sortBy", defaultValue = "eventName") String sortBy,
+            @RequestParam(name = "direction", defaultValue = "asc") String direction) {
+
+        // Determine sorting direction
+        Sort sort = direction.equalsIgnoreCase("desc") 
+                    ? Sort.by(Sort.Order.desc(sortBy)) 
+                    : Sort.by(Sort.Order.asc(sortBy));
+
+        // Fetch sorted events
+        return ResponseEntity.ok(eventsService.getAllEvents(sort));
     }
 
     // Get events by club
