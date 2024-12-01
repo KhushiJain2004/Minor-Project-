@@ -3,11 +3,11 @@ body {
     background-color: #e9f2f9;
     margin: 0;
     padding: 0;
-    display: flex;
+    /* display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    height: 100vh;
+    flex-direction: column; */
+    /* height: 100vh; */
   }
   .profile-icon {
     width: 40px; 
@@ -31,7 +31,7 @@ body {
   }
 
   nav {
-    position: absolute; /* Position it absolutely */
+    position: fixed; /* Position it absolutely */
     top: 0; /* Align to the top */
     left: 0; /* Align to the left */
     width: 100%; /* Full width */

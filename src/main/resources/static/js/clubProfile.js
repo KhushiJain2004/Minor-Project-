@@ -8,9 +8,12 @@ $(document).ready(function () {
     .then(res=>res.json())
     .then(
         club=>{
-            // console.log(club);
+            console.log(club);
             document.getElementById("clubName").textContent=club.clubName;
+            document.getElementById("slogan").textContent=club.clubName;
             document.getElementById("description").textContent=club.description;
+            document.getElementById("achievements").textContent=club.achievements;
+            document.getElementById("membership").textContent=club.memberBenefits;
             document.getElementById("member1name").textContent=club.positionHolders[0].name;
             document.getElementById("member2name").textContent=club.positionHolders[1].name;
             document.getElementById("member3name").textContent=club.positionHolders[2].name;
