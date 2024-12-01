@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.data.domain.Sort;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -21,10 +21,19 @@ public class EventsController {
     @Autowired
     private EventsService eventsService;
 
-    // Get all events
+    // Get all events with sorting functionality
     @GetMapping
-    public ResponseEntity<List<Events>> getAllEvents() {
-        return ResponseEntity.ok(eventsService.getAllEvents());
+    public ResponseEntity<List<Events>> getAllEvents(
+            @RequestParam(name = "sortBy", defaultValue = "eventName") String sortBy,
+            @RequestParam(name = "direction", defaultValue = "asc") String direction) {
+
+        // Determine sorting direction
+        Sort sort = direction.equalsIgnoreCase("desc") 
+                    ? Sort.by(Sort.Order.desc(sortBy)) 
+                    : Sort.by(Sort.Order.asc(sortBy));
+
+        // Fetch sorted events
+        return ResponseEntity.ok(eventsService.getAllEvents(sort));
     }
 
     // Get events by club
@@ -80,7 +89,6 @@ public class EventsController {
         return ResponseEntity.notFound().build();
     }
 
-
     // Update an existing event
     @PutMapping("/{eventId}")
     public ResponseEntity<Events> updateEvent(
@@ -107,10 +115,22 @@ public class EventsController {
 
     // Render events page with the list of events
     @GetMapping("/events")
-    public String showEventsPage(Model model) {
-        List<Events> eventsList = eventsService.getAllEvents();
+    public String showEventsPage(Model model,
+                                  @RequestParam(name = "sortBy", defaultValue = "startTime") String sortBy,
+                                  @RequestParam(name = "direction", defaultValue = "asc") String direction) {
+        // Fetch all events and apply sorting based on parameters
+        Sort sort = direction.equalsIgnoreCase("asc") 
+                    ? Sort.by(Sort.Order.asc(sortBy)) 
+                    : Sort.by(Sort.Order.desc(sortBy));
+        
+        List<Events> eventsList = eventsService.getAllEvents(sort);
         model.addAttribute("events", eventsList);
         return "events"; // Maps to /WEB-INF/views/events.jsp
     }
-
+    // Get all distinct tags
+    @GetMapping("/tags")
+    public ResponseEntity<List<String>> getAllTags() {
+        List<String> tags = eventsService.getDistinctTags();  // You may already have this method
+        return ResponseEntity.ok(tags);
+    }
 }

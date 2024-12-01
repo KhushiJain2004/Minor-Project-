@@ -42,7 +42,7 @@ import jakarta.servlet.http.HttpServletResponse;
                 // .cors(cors->cors.disable())
                 .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(request -> request
-                .requestMatchers("/","/logout","/home").permitAll() 
+                .requestMatchers("/","/logout","/home",",/api/clubs/list").permitAll() 
                 .requestMatchers("/api/auth/**").permitAll()
                 .requestMatchers("/clubAdmin/**").hasAuthority("CLUB_ADMIN")
                 .requestMatchers("/webAdmin/**","/api/user/list").hasAuthority("WEB_ADMIN")

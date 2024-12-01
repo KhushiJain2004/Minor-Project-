@@ -3,298 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Club Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
-     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/nav.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/common.js"></script>
     <script src="${pageContext.request.contextPath}/js/events.js"></script>
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  />
-  <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            background-color: #E2F3FB;
+        /* Reset and Base Styles */
+        * {
             margin: 0;
-            font-family: 'Quicksand', sans-serif;
-        }
-        header, footer {
-            background-color: #027AA8;
-            height: 60px;
-            display: flex;
-            align-items: right;
-            justify-content: center;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .container {
-            position: relative;
-            text-align: center;
-            padding: 20px;
-            max-width: 80%;
-            margin: 40px auto;
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 10px;
+        html, body {
+            height: 100%;
+            font-family: Arial, sans-serif;
         }
-        .bg-image {
-            background-image: url('bg.jpg'); 
-            background-size: cover;
-            background-position: center center;
-            min-height: 375px; 
-            filter: blur(2px);
-            position: absolute;
+
+        /* Page Layout */
+        .page-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .content-wrap {
+            flex: 1 0 auto;
+            padding-top: 90px; /* Adjust based on navbar height */
+        }
+
+        /* Navbar Styles */
+        nav {
+            position: fixed;
+
             top: 0;
             left: 0;
-            right: 0;
-            z-index: 1;
+            width: 100%;
+            background-color: #027AA8;
+            color: white;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
 
-        .content {
-            position: relative;
-            z-index: 2;
-            color: white;
-        }
-        .logo {
-            width: 60px;
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            z-index: 3; 
-        }
-        
-        h1 {
-            font-size: 36px;
-            margin: 20px 0;
-            font-weight: bold;
-        }
-        .bio {
-            font-size: 16px;
-            text-align: justify;
-            margin: 10px 20px;
-        }
-        .keywords {
-            font-size: 20px;
-            margin: 15px 0;
-        }
-        .members {
+        /* Event Filters */
+        .event-filters {
+            max-width: 80%;
+            margin: 20px auto;
             display: flex;
             justify-content: center;
-            margin-top: 20px;
+            gap: 15px;
+            flex-wrap: wrap;
         }
-        .member {
-            margin: 0 10px;
-            text-align: center;
+
+        .event-filters input,
+        .event-filters select {
+            padding: 10px;
+            border: 1px solid #027AA8;
+            border-radius: 5px;
+            min-width: 200px;
         }
-        .member img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            border: 2px solid white;
-        }
-        .member-name {
-            font-size: 18px;
-            margin-top: 5px;
-        }
-        .member-designation {
-            font-size: 14px;
-            color: #fff;
-        }
-        
+
+        /* Event Section */
         .event-section {
             max-width: 80%;
-            margin: 40px auto;
-            padding: 20px;
+            margin: 20px auto;
         }
+
         .event-section h2 {
             font-size: 28px;
             margin-bottom: 20px;
             color: #027AA8;
+            text-align: center;
         }
 
-        .event-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 20px; /* Add some spacing between cards */
-    max-width: 80%;
-    margin: 40px auto;
-}
 
-.event-card {
-    flex: 1 1 calc(25% - 20px); /* Adjust width to fit 4 cards per row with gaps */
-    display: flex; 
-    flex-direction: column;
-    background-color: rgba(255, 255, 255, 0.8); 
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
 
-.event-card img {
-    width: 100%;
-    height: 150px; /* Adjust height as needed */
-    object-fit: cover;
-}
-
-.event-details {
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.event-description {
-    font-size: 16px;
-    color: #333;
-    margin-bottom: 10px;
-}
-
-.read-more-btn {
-    align-self: flex-start;
-    background-color: #027AA8;
-    color: white;
-    padding: 5px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-.read-more-btn:hover {
-    background-color: #005f7f;
-}
-
-/* Responsive design for smaller screens */
-@media (max-width: 1024px) {
-    .event-card {
-        flex: 1 1 calc(33.33% - 20px); /* 3 cards per row on medium screens */
-
-        
-        .event-container {
-    display: flex;
-    flex-wrap: wrap; /* Allow wrapping of elements */
-    justify-content: space-between; /* Add space between rows */
-    gap: 20px; /* Space between cards */
-}
-
-.event-card {
-    flex: 1 1 calc(25% - 20px); /* Each card takes up 25% width minus the gap */
-    max-width: calc(25% - 20px); /* Ensure max width matches */
-    min-width: 250px; /* Optional: Minimum width for a card */
-    height: 300px; /* Fixed height for uniformity */
-    position: relative;
-    color: white;
-    border-radius: 10px;
-    transition: transform 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 20px;
-    overflow: hidden;
-    box-sizing: border-box;
-}
-
-.event-card:hover {
-    transform: scale(1.05); /* Slightly increase size on hover */
-}
-
-@media (max-width: 1200px) {
-    .event-card {
-        flex: 1 1 calc(33.33% - 20px); /* Three cards per row */
-    }
-}
-
-@media (max-width: 992px) {
-    .event-card {
-        flex: 1 1 calc(50% - 20px); /* Two cards per row */
-
-    }
-}
-
-@media (max-width: 768px) {
-    .event-card {
-        flex: 1 1 calc(50% - 20px); /* 2 cards per row on small screens */
-    }
-}
-
-@media (max-width: 480px) {
-    .event-card {
-        flex: 1 1 100%; /* 1 card per row on extra-small screens */
-    }
-}
-
-        .event-card:hover {
-            transform: scale(1.05);
-        }
-
-        flex: 1 1 100%; /* Single card per row on small screens */
-    }
-}
-
-        
-
-        .event-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-size: cover;
-            background-position: center;
-            background-image: inherit; 
-            filter: blur(2px); 
-            z-index: 1; 
-        }
-        .event-card > * {
-            position: relative;
-            z-index: 2; 
-        }
-        .event-logo {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: white;
-            margin-bottom: 10px;
-            background-image: url('images/club-logo.png');
-            background-size: cover;
-            background-position: center;
-
-        }
-        .event-logo img {
-            width: 50px;
-            height: 50px;
-            object-fit: cover;
-            border-radius: 50%;
-        }
-        .event-description {
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
-        .read-more-btn {
-            background-color: #027AA8;
-            color: white;
-            padding: 5px 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .read-more-btn:hover {
-            background-color: #005f7f;
-        }
         .event-container {
             display: flex;
-            justify-content: space-between;
             flex-wrap: wrap;
             gap: 20px;
+            justify-content: center;
         }
         
         .event-filters {
@@ -349,121 +137,118 @@
 }
 
 
-        .popup-content {
-            background-color: white;
-            border-radius: 10px;
-            width: 33%; 
-            max-width: 600px; 
-            padding: 20px;
-            position: relative; 
-            max-height: 80%; 
-            overflow-y: scroll; 
-            scrollbar-width: none; 
+
+        .event-card {
+            flex: 1 1 calc(30% - 20px);
+            background-color: #ffffff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
         }
 
-        .popup-content::-webkit-scrollbar {
-            display: none; 
+        .event-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
         }
 
-        .popup {
-            display: none; 
-            position: fixed; 
-            z-index: 1000; 
-            left: 0;
-            top: 0;
-            width: 100%; 
-            height: 100%; 
-            background-color: rgba(0, 0, 0, 0.5); 
-            justify-content: center; 
-            align-items: center; 
-            overflow: hidden; 
+        .event-card-header {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background-color: #f4f4f4;
         }
 
-        .close-btn {
-            position: absolute;
-            top: 3px;
-            right: 15px;
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: #333;
+
+        .event-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+            border: 3px solid #027AA8;
         }
-        .close-btn:hover {
+
+        .event-card img.event-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .event-details {
+            padding: 15px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .event-details h3 {
+            margin: 0 0 10px 0;
+            font-size: 18px;
             color: #027AA8;
         }
-        .popup-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+
+        .event-description {
+            font-size: 14px;
+            color: #555;
             margin-bottom: 15px;
+            flex-grow: 1;
         }
-        .popup-logo img {
-            width: 50px; 
-            height: 50px;
-            border-radius: 50%;
-        }
-        .register-btn {
+
+        .read-more-btn {
+            align-self: flex-start;
             background-color: #027AA8;
             color: white;
-            padding: 10px 15px;
             border: none;
             border-radius: 5px;
+            padding: 10px 15px;
             cursor: pointer;
-        }
-        .register-btn:hover {
-            background-color: #005f7f;
-        }
-        .popup-image img {
-            width: 100%;
-            border-radius: 10px;
-            margin-bottom: 15px;
-        }
-        .popup-info h3 {
-            margin: 10px 0;
-            color: #027AA8;
+            transition: background-color 0.3s;
         }
 
+        .read-more-btn:hover {
+            background-color: #005F7F;
+        }
 
+        /* Footer Styles */
         .footer {
-            background-color: #027AA8; /* Dark background for contrast */
-            color: white; /* White text color */
-            padding: 20px;
+            margin-top: 60px;
+            margin-right: 60px;
+            background-color: #027AA8;
+            color: white;
+            padding: 50px;
             font-family: Arial, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            width: 100%;
+            min-height: 80px;
         }
 
         .footer-content {
-            width: 90%;
-            max-width: 1200px;
+            width: 80%;
             text-align: center;
-        }
-
-        .top-left {
-            text-align: left;
-            width: 100%;
-        }
-
-        .top-left h3 {
-            margin: 0;
-            color: white;
+            margin: 0 auto;
         }
 
         .middle p {
             margin: 5px 0;
             color: white;
             font-size: 16px;
+            line-height: 1.5;
         }
 
         .middle a {
             color: white;
             text-decoration: none;
             font-size: 16px;
-            margin: 10px 0;
+            font-weight: bold;
+            margin-top: 10px;
             display: inline-block;
+            transition: color 0.3s ease, text-decoration 0.3s ease;
         }
 
         .middle a:hover {
@@ -474,38 +259,71 @@
             width: 80%;
             margin: 15px auto;
             border: 0.5px solid white;
+            opacity: 0.7;
         }
 
         .social-icons {
             display: flex;
             justify-content: center;
             gap: 15px;
-            margin-top: 10px;
+            margin-top: 15px;
         }
 
-        .social-icons a{
+        .social-icons a {
             text-decoration: none;
         }
 
         .icon-circle {
-            width: 40px;
-            height: 40px;
-            background-color: white; /* White circles */
+            width: 45px;
+            height: 45px;
+            background-color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, background-color 0.3s ease;
         }
 
         .icon-circle:hover {
-            transform: scale(1.1);
+            transform: scale(1.2);
+            background-color: #FFCF40;
         }
 
         .icon-circle i {
-            color: #027AA8; /* Icon color */
+            color: #027AA8;
             font-size: 20px;
+            transition: color 0.3s ease;
+        }
+
+        .icon-circle:hover i {
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .social-icons {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .icon-circle {
+                width: 40px;
+                height: 40px;
+            }
+
+            .middle p, .middle a {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-content {
+                width: 95%;
+            }
+
+            .footer-line {
+                width: 90%;
+            }
         }
 
         nav {
@@ -641,125 +459,89 @@
 
     </style>
 </head>
-<body>
-    <header>
-      <nav>
+
+<body class="page-container">
+    <nav>
         <div class="wrapper">
-          <div class="logo">
-            <a href="#">
-              <img src="images/UPES University of Petroleum and Energy Studies.png" alt="Logo" />
-            </a>
-          </div>
-          <ul class="nav-links">
-            <label for="close-btn" class="btn close-btn">
-              <i class="fas fa-times"></i>
+            <div class="logo">
+                <a href="#">
+                    <img
+                        src="${pageContext.request.contextPath}/images/UPES University of Petroleum and Energy Studies.png"
+                        alt="Logo"
+                    />
+                </a>
+            </div>
+            <input type="radio" name="slider" id="menu-btn" />
+            <input type="radio" name="slider" id="close-btn" />
+            <ul class="nav-links">
+                <label for="close-btn" class="btn close-btn">
+                    <i class="fas fa-times"></i>
+                </label>
+                <li><a href="/home">Home</a></li>
+                <li><a href="/event">Events</a></li>
+                <li id="club-dropdown">
+                    <a href="#">Clubs</a>
+                    <ul class="dropdown-list" id="club-dropdown-list">
+                    </ul>
+                </li>
+                <li id="login-link"><a href="/login">Login</a></li>
+                <li id="profile-item" style="display: none;">
+                    <a href="#" id="logoutLink">Logout</a>
+                    <img src="${pageContext.request.contextPath}/images/profile.png" alt="Profile" class="profile-icon" />
+                    <span id="username"></span> <!-- Placeholder for user's name -->
+                </li>
+            </ul>
+            <label for="menu-btn" class="btn menu-btn">
+                <i class="fas fa-bars"></i>
             </label>
-            <li><a href="#">Home</a></li>
-            <li><a href="/event">Events</a></li>
-            <li id="club-dropdown">
-              <a href="#">Clubs</a>
-              <ul class="dropdown-list" id="club-dropdown-list">
-                <!-- Club names will be dynamically inserted here -->
-                 <!-- <li>sample</li>
-                 <li>sample</li>
-                 <li>sample</li> -->
-              </ul>
-            </li>
-            <li id="login-link"><a href="/login">Login</a></li>
-            <li id="profile-item" style="display: none;">
-              <a href="#" id="logoutLink">Logout</a>
-              <img src="images/profile.png" alt="Profile" class="profile-icon" />
-              <span id="username"></span> 
-            </li>
-          </ul>
-          <label for="menu-btn" class="btn menu-btn">
-            <i class="fas fa-bars"></i>
-          </label>
         </div>
-      </nav>
-    </header>
-    <div class="event-filters">
-        <input type="text" id="search-bar" placeholder="Search events..." oninput="filterEvents()" />
-        <select id="keyword-filter" onchange="filterEvents()">
-            <option value="">All Keywords</option>
-            <option value="Keyword1">Keyword1</option>
-            <option value="Keyword2">Keyword2</option>
-            <option value="Keyword3">Keyword3</option>
-        </select>
-        <select id="sort-filter" onchange="sortEvents()">
-            <option value="">Sort By</option>
-            <option value="a-z">A-Z</option>
-            <option value="z-a">Z-A</option>
-            <option value="newest">Newest</option>
-            <option value="oldest">Oldest</option>
-        </select>
-    </div>    
-    
-<div class="event-section">
-    <h2>Ongoing Events</h2>
-    <div class="event-container">
+    </nav>
+>>>>>>> 6350d4dbe3c769fc38c0628b663a60bb911a580c
 
-        <!-- Events will be rendered dynamically here -->
-
-        <div class="event-card" style="background-image: url('images/event.jpg');">
-            <div class="event-logo" style="background-image: url('images/club-logo.png')"></div>
-            <div class="event-description">CLUB NAME <br>Ongoing Event 1 - A brief description.</div>
-            <button class="read-more-btn" onclick="openPopup()">Read More</button>
+    <div class="content-wrap">
+        <!-- THIS IS THE TAGS SECTION -->
+        <div class="event-filters">
+            <input type="text" id="search-bar" placeholder="Search events..." oninput="filterEvents()" />
+            <select id="keyword-filter" onchange="filterEvents()">
+                <option value="">Select Tag</option>
+                <option value="Coding">Coding</option>
+                <option value="Dance">Dance</option>
+                <option value="Art">Art</option>
+                <option value="Competition">Competition</option>
+                <option value="Innovation">Innovation</option>
+                <option value="Bootcamp">Bootcamp</option>
+                <option value="Beginner">Beginner</option>
+                <option value="AI">AI</option>
+                <option value="Workshop">Workshop</option>
+                <option value="Cybersecurity">Cybersecurity</option>
+                <option value="Talk">Talk</option>
+                <option value="Meeting">Meeting</option>
+                <option value="Annual">Annual</option>
+                <option value="Hackathon">Hackathon</option>
+                <option value="Networking">Networking</option>
+                <option value="Exhibition">Exhibition</option>
+                <option value="Photography">Photography</option>
+                <option value="Seminar">Seminar</option>
+                <option value="Public Speaking">Public Speaking</option>
+                <option value="Music">Music</option>
+                <option value="Festival">Festival</option>
+                <option value="Food">Food</option>
+                <option value="Fitness">Fitness</option>
+            </select>
+            
+            <select id="sort-filter" onchange="sortEvents()">
+                <option value="">Sort By</option>
+                <option value="a-z">A-Z</option>
+                <option value="z-a">Z-A</option>
+                <option value="newest">Newest</option>
+                <option value="oldest">Oldest</option>
+            </select>
+            
         </div>
-        <div class="event-card" style="background-image: url('images/event.jpg');">
-            <div class="event-logo"style="background-image: url('images/club-logo.png') alt="Event Logo 2"></div>
-            <div class="event-description">CLUB NAME <br>Ongoing Event 2 - A brief description.</div>
-            <button class="read-more-btn" onclick="openPopup()">Read More</button>
-        </div>
-        <div class="event-card" style="background-image: url('images/event.jpg');">
-            <div class="event-logo"><img src="event_logo.png" alt="Event Logo 3"></div>
-            <div class="event-description">CLUB NAME <br>Ongoing Event 3 - A brief description.</div>
-            <button class="read-more-btn" onclick="openPopup()">Read More</button>
-        </div>
-    </div>
-    <h2>Upcoming Events</h2>
-    <div class="event-container">
-        <div class="event-card" style="background-image: url('images/event.jpg');">
-            <div class="event-logo"><img src="event_logo.png" alt="Event Logo 4"></div>
-            <div class="event-description">CLUB NAME <br>Upcoming Event 1 - A brief description.</div>
-            <button class="read-more-btn" onclick="openPopup()">Read More</button> 
-        </div>
-        <div class="event-card" style="background-image: url('images/event.jpg');">
-            <div class="event-logo"><img src="event_logo.png" alt="Event Logo 5"></div>
-            <div class="event-description">CLUB NAME <br>Upcoming Event 2 - A brief description.</div>
-            <button class="read-more-btn" onclick="openPopup()">Read More</button>
-        </div>
-        <div class="event-card" style="background-image: url('images/event.jpg');">
-            <div class="event-logo"><img src="event_logo.png" alt="Event Logo 6"></div>
-            <div class="event-description">CLUB NAME <br>Upcoming Event 3 - A brief description.</div>
-            <button class="read-more-btn" onclick="openPopup()">Read More</button> 
-        </div>
-        <div class="event-card" style="background-image: url('images/event.jpg');">
-            <div class="event-logo"><img src="event_logo.png" alt="Event Logo 6"></div>
-            <div class="event-description">CLUB NAME <br>Upcoming Event 3 - A brief description.</div>
-            <button class="read-more-btn" onclick="openPopup()">Read More</button> 
-        </div>
-
-    </div>
-</div>
-
-    <!-- Popup -->
-    <div id="event-popup" class="hidden popup">
-        <div class="popup-content">
-            <button id="close-popup" class="close-btn">&times;</button>
-            <div class="popup-header">
-                <div class="popup-logo">
-                    <img src="event_logo.png" alt="Event Logo">
-                </div>
-                <button class="register-btn">Register</button>
-            </div>
-            <div class="popup-image">
-                <img src="event.jpg" alt="Event Image">
-            </div>
-            <div class="popup-info">
-                <h3>Event Name</h3>
-                <h4>Club Name</h4>
-                <p>Here is the detailed description of the event. This section will contain all the deep information about the event such as its schedule, speakers, venue, and more. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Blanditiis, ab officia at, aspernatur id optio expedita minus cupiditate fugiat dolorem velit incidunt! Nulla nihil architecto temporibus similique ullam neque non.</p>
+        <div class="event-section">
+            <h2>Welcome, to the Events Page</h2>
+            <div id="event-container" class="event-container">
+                <!-- Event Cards will be dynamically inserted here -->
             </div>
         </div>
     </div>
@@ -770,7 +552,7 @@
                 <p>Made in Response to Minor Project 1</p>
                 <a href="https://github.com/your-repo-link" target="_blank">Click to View GitHub Repository</a>
             </div>
-            <hr class="footer-line" />
+            <hr class="footer-line">
             <div class="social-icons">
                 <a href="https://www.instagram.com/upes_dehradun/" target="_blank" class="icon-circle">
                     <i class="fa-brands fa-instagram"></i>
@@ -783,73 +565,128 @@
                 </a>
                 <a href="https://www.linkedin.com/school/upesdehradun/posts/?feedView=all" target="_blank" class="icon-circle">
                     <i class="fa-brands fa-linkedin-in"></i>
-                </a>                
+                </a>
                 <a href="https://www.upes.ac.in/" target="_blank" class="icon-circle">
                     <i class="fa-solid fa-link"></i>
                 </a>
             </div>
         </div>
     </footer>
-
     <script>
-        function openPopup() {
-            document.getElementById("event-popup").style.display = "flex"; 
+        // Fetch and render events from backend
+        function fetchEvents() {
+            fetch('http://localhost:8080/api/events')  // Ensure this matches your backend endpoint
+            .then(response => response.json())
+            .then(events => {
+                console.log('Fetched events:', events); // Log the events array to the console
+                const container = document.getElementById('event-container');
+                container.innerHTML = ''; // Clear existing events
+    
+                if (Array.isArray(events) && events.length > 0) {
+                    events.forEach(event => {
+                        const eventCard = document.createElement('div');
+                        eventCard.classList.add('event-card');
+                        eventCard.dataset.startDate = event.startDate; // Store the event date for sorting
+    
+                        eventCard.innerHTML = `
+                            <div class="event-card-header">
+                                <img src="${event.clubLogoUrl}" alt="${event.clubName} Logo" class="event-logo">
+                                <h3>${event.eventName}</h3>
+                            </div>
+                            <img src="${event.eventImageUrl}" alt="${event.eventName}" class="event-image">
+                            <div class="event-details">
+                                <p class="event-description">${event.description}</p>
+                                <button class="read-more-btn" onclick="openEventDetails(${event.id})">Read More</button>
+                            </div>
+                        `;
+                        container.appendChild(eventCard);
+                    });
+                } else {
+                    console.log('No events found or incorrect data structure.');
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching events:', error);
+            });
+        }
+    
+        // Call fetchEvents when the page loads
+        document.addEventListener('DOMContentLoaded', fetchEvents);
+    
+        // Function to filter events based on user input
+        function filterEvents() {
+            const searchValue = document.getElementById("search-bar").value.toLowerCase();
+            const keywordValue = document.getElementById("keyword-filter").value.toLowerCase();
+    
+            const events = document.querySelectorAll(".event-card");
+    
+            events.forEach((event) => {
+                const description = event.querySelector(".event-description").textContent.toLowerCase();
+    
+                const matchesSearch = description.includes(searchValue);
+                const matchesKeyword = keywordValue === "" || description.includes(keywordValue);
+    
+                if (matchesSearch && matchesKeyword) {
+                    event.style.display = "flex";
+                } else {
+                    event.style.display = "none";
+                }
+            });
+        }
+    
+        // Function to sort events based on the selected option
+    // Function to sort events based on the selected option
+function sortEvents() {
+    const sortValue = document.getElementById("sort-filter").value;
+    const container = document.querySelector(".event-container");
+    const events = Array.from(container.children);
+
+    events.sort((a, b) => {
+        let comparison = 0;
+
+        if (sortValue === "a-z") {
+            // Sort alphabetically (A-Z)
+            const textA = a.querySelector(".event-details h3").textContent.trim().toLowerCase();
+            const textB = b.querySelector(".event-details h3").textContent.trim().toLowerCase();
+            if (textA < textB) comparison = -1;
+            if (textA > textB) comparison = 1;
+        } else if (sortValue === "z-a") {
+            // Sort alphabetically (Z-A)
+            const textA = a.querySelector(".event-details h3").textContent.trim().toLowerCase();
+            const textB = b.querySelector(".event-details h3").textContent.trim().toLowerCase();
+            if (textA > textB) comparison = -1;
+            if (textA < textB) comparison = 1;
+        } else if (sortValue === "newest") {
+            // Sort by newest (based on the event start date)
+            const dateA = new Date(a.dataset.startDate);
+            const dateB = new Date(b.dataset.startDate);
+            comparison = dateB - dateA; // Newest first
+        } else if (sortValue === "oldest") {
+            // Sort by oldest (based on the event start date)
+            const dateA = new Date(a.dataset.startDate);
+            const dateB = new Date(b.dataset.startDate);
+            comparison = dateA - dateB; // Oldest first
         }
 
-        document.getElementById("close-popup").onclick = function() {
-            document.getElementById("event-popup").style.display = "none"; 
+        return comparison;
+    });
+
+    // Clear the container and re-append the sorted events
+    events.forEach(event => container.appendChild(event));
+}
+
+    
+        // Function to open event details (to be implemented)
+        function openEventDetails(eventId) {
+            // Implement event details popup or redirect
+            console.log('Opening details for event:', eventId);
         }
-
-    // Search and filter function
-    function filterEvents() {
-        const searchValue = document.getElementById("search-bar").value.toLowerCase();
-        const keywordValue = document.getElementById("keyword-filter").value.toLowerCase();
-
-        const events = document.querySelectorAll(".event-card");
-
-        events.forEach((event) => {
-            const description = event.querySelector(".event-description").textContent.toLowerCase();
-
-            // Check if the event matches the search and keyword filters
-            const matchesSearch = description.includes(searchValue);
-            const matchesKeyword = keywordValue === "" || description.includes(keywordValue);
-
-            if (matchesSearch && matchesKeyword) {
-                event.style.display = "flex"; // Show matching events
-            } else {
-                event.style.display = "none"; // Hide non-matching events
-            }
-        });
-    }
-
-    // Sort function
-    function sortEvents() {
-        const sortValue = document.getElementById("sort-filter").value;
-        const container = document.querySelector(".event-container");
-
-        const events = Array.from(container.children);
-
-        events.sort((a, b) => {
-            const textA = a.querySelector(".event-description").textContent.trim();
-            const textB = b.querySelector(".event-description").textContent.trim();
-
-            if (sortValue === "a-z") {
-                return textA.localeCompare(textB);
-            } else if (sortValue === "z-a") {
-                return textB.localeCompare(textA);
-            } else if (sortValue === "newest") {
-                // Assuming newest events are displayed at the end of the list initially
-                return container.children.length - events.indexOf(b);
-            } else if (sortValue === "oldest") {
-                return events.indexOf(a) - events.indexOf(b);
-            }
-            return 0;
-        });
-
-        // Reorganize sorted elements back into the container
-        events.forEach((event) => container.appendChild(event));
-    }
+    
+        // Attach the filter and sort events functions to input and select elements
+        document.getElementById("search-bar").addEventListener("input", filterEvents);
+        document.getElementById("keyword-filter").addEventListener("input", filterEvents);
+        document.getElementById("sort-filter").addEventListener("change", sortEvents);
     </script>
-
+               
 </body>
 </html>
