@@ -4,7 +4,7 @@ $(document).ready(function()
     fetchEvents();
 
 function fetchEvents() {
-    fetch('/api/events/ongoing')
+    fetch('/api/events')
         .then(response => response.json())
         .then(events => {
             // Call a function to render events

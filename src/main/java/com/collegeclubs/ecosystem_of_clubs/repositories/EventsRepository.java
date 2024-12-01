@@ -24,5 +24,7 @@ public interface EventsRepository extends MongoRepository<Events, String> {
     List<Events> findByTagsIn(List<String> tags);
 
     List<Events> findByStartTimeAfter(LocalDateTime currentTime);
+    @Query("SELECT DISTINCT e.tags FROM Events e")
+    List<String> findDistinctTags();
 
 }

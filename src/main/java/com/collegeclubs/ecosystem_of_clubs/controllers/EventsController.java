@@ -112,5 +112,10 @@ public class EventsController {
         model.addAttribute("events", eventsList);
         return "events"; // Maps to /WEB-INF/views/events.jsp
     }
+    @GetMapping("/tags")
+    public ResponseEntity<List<String>> getAllTags() {
+        List<String> tags = eventsService.getDistinctTags();  // You may already have this method
+        return ResponseEntity.ok(tags);
+    }
 
 }
