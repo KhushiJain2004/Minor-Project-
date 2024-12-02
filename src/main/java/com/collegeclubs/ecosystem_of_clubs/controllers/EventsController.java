@@ -1,6 +1,7 @@
 package com.collegeclubs.ecosystem_of_clubs.controllers;
 
 import com.collegeclubs.ecosystem_of_clubs.model.Events;
+import com.collegeclubs.ecosystem_of_clubs.repositories.EventsRepository;
 import com.collegeclubs.ecosystem_of_clubs.service.EventsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,9 @@ public class EventsController {
 
     @Autowired
     private EventsService eventsService;
+    @Autowired
+    private EventsRepository eventsRepository;
+
 
     // Get all events with sorting functionality
     @GetMapping
@@ -128,9 +132,16 @@ public class EventsController {
         return "events"; // Maps to /WEB-INF/views/events.jsp
     }
     // Get all distinct tags
-    @GetMapping("/tags")
-    public ResponseEntity<List<String>> getAllTags() {
-        List<String> tags = eventsService.getDistinctTags();  // You may already have this method
+ @GetMapping("/tags")
+public ResponseEntity<List<String>> getAllTags() {
+    try {
+        List<String> tags = eventsService.getAllTags();
         return ResponseEntity.ok(tags);
+    } catch (Exception e) {
+        e.printStackTrace();
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
     }
+}
+
+
 }
