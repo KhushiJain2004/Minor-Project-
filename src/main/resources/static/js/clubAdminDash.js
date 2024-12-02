@@ -46,12 +46,6 @@ $(document).ready(function()
             
             positionHolders.push({ name, designation });
         }
-        // if (positionHolders.length <3 && positionHolders.length>0) {
-        //     toastr.options.positionClass = 'toast-bottom-right';
-        //     toastr.warning("Please fill in all position holder details or leave them blank.");
-        //     return; 
-        //   }
-        // else if(positionHolders.length ==0) return positionHolders;
           
       
         return positionHolders;
@@ -160,5 +154,10 @@ $(document).ready(function()
         }
       }
       
+
+      function createEvent(eventId)
+      {
+
+      }
       
 })

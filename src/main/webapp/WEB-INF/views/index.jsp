@@ -95,12 +95,14 @@
         position: absolute;
         top: 50%;
         left: 100px;
-        width: 300px;
+        width: 400px;
+        height:400px;
         text-align: left;
         color: #eee;
         transform: translate(0, -50%);
         font-family: system-ui;
         display: none;
+
       }
 
       .content button:hover {
@@ -110,10 +112,32 @@
 
       .slide .item:nth-child(2) .content {
         display: block;
+        position: relative;
+        padding: 30px;
+        box-sizing: border-box;
+        z-index: 1; 
+        
+
+      }
+      .slide .item:nth-child(2) .content::before{
+
+        content: '';
+        position: absolute;
+        top: -40%;
+        left: -80%;
+        width: 200%;
+        height: 200%;
+        background-color:rgba(0,0,0,0.6);
+        /* opacity: 0.5; */
+        padding: 20%;
+        box-sizing: border-box;
+        border-radius: 50%;
+        animation: animate 1s ease-in-out 1 forwards;
+        z-index: -11;
       }
 
       .content .name {
-        font-size: 40px;
+        font-size: 43px;
         text-transform: uppercase;
         font-weight: bold;
         opacity: 0;
@@ -121,8 +145,9 @@
       }
 
       .content .des {
-        margin-top: 10px;
+        margin-top: 20px;
         margin-bottom: 20px;
+        font-size: 20px;
         opacity: 0;
         animation: animate 1s ease-in-out 0.3s 1 forwards;
       }
@@ -226,9 +251,11 @@
             padding: 20px;
             font-family: Arial, sans-serif;
             display: flex;
-            flex-direction: column;
+            flex-direction: column; 
             align-items: center;
             justify-content: center;
+            z-index:200;
+            position: inherit;
         }
 
         .footer-content {
@@ -302,6 +329,40 @@
             color: #027AA8; /* Icon color */
             font-size: 20px;
         }
+        /* .item .content {
+          position: relative;
+          left: 0;
+          width: 40%;
+          height:100%;
+          z-index: 1; 
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          text-align: left;
+          color: black;
+          padding: 20px;
+          overflow: hidden;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+        } */
+
+        /* .item .content::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: rgba(255, 255, 255, 0.6); /* Semi-transparent black */
+           /* border-top-right-radius: 60%; */
+          /* border-bottom-right-radius: 40%;  */
+          /* z-index: -1;  */
+          /* transition: transform 0.5s ease, opacity 0.5s ease;  */
+        /* } */ */
+
     </style>
   </head>
 
@@ -361,6 +422,16 @@
             <button>See More</button>
           </div>
         </div>
+        <div class="item" style="background-image: url('images/upes.jpg')">
+          <div class="content first" >
+            <div class="name">Welcome to,</div>
+            <div class="name">Ecosystem of Clubs!</div>
+            <div class="des">
+              Your gateway to discovering and engaging with campus clubs. Join events, explore profiles, and stay connected with everything happening around you!"
+            </div>
+            <!-- <button>See More</button> -->
+          </div>
+        </div>
         <div class="item" style="background-image: url('images/mtc.jpg')">
           <div class="content">
             <div class="name">Microsoft Technical Community - UPES</div>
@@ -398,16 +469,7 @@
             <button>See More</button>
           </div>
         </div>
-        <div class="item" style="background-image: url('/images/spe.png')">
-          <div class="content">
-            <div class="name">SPE - Society of Petroleum Engineers</div>
-            <div class="des">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab, eum!
-            </div>
-            <button>See More</button>
-          </div>
-        </div>
-      </div>
+        
       <div class="button">
         <button class="next"><i class="fa-solid fa-arrow-left"></i></button>
         <button class="prev"><i class="fa-solid fa-arrow-right"></i></button>
