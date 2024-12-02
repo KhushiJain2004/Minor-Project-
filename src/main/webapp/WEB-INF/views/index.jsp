@@ -374,8 +374,6 @@
             <img src="images/UPES University of Petroleum and Energy Studies.png" alt="Logo" />
           </a>
         </div>
-        <input type="radio" name="slider" id="menu-btn" />
-        <input type="radio" name="slider" id="close-btn" />
         <ul class="nav-links">
           <label for="close-btn" class="btn close-btn">
             <i class="fas fa-times"></i>
@@ -404,18 +402,12 @@
       </div>
     </nav>
     
-
-<!-- 
-    <div class="banner-image">
-      <img src="${pageContext.request.contextPath}/images/banner.jpeg" alt="Banner Image" style="width: 100%; height: auto; display: block; margin: 80px auto; margin-top: 100px;" />
-    </div> -->
-    
     
     <div class="container">
       <div class="slide">
-        <div class="item" style="background-image: url('/images/fipi.jpg')">
+        <div class="item" style="background-image: url('/images/meet.png')">
           <div class="content">
-            <div class="name">UPES FIPI Student Chapter</div>
+            <div class="name">UPES CSA</div>
             <div class="des">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab, eum!
             </div>
@@ -443,8 +435,8 @@
         </div>
         
         <div class="item" style="background-image: url('/images/inf.jpeg')">
-          <div class="content">
-            <div class="name">Infinity Club – Aerospace</div>
+          <div class="content">   
+            <div class="name">Infinity Club - Aerospace</div>
             <div class="des">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ab, eum!
             </div>
@@ -536,7 +528,7 @@
 
       // Function to start automatic sliding
       function startAutoSlide() {
-        autoSlideInterval = setInterval(slideNext, 4000); // Automatically slide every 4 seconds
+        autoSlideInterval = setInterval(slideNext, 3000); // Automatically slide every 4 seconds
       }
 
       // Initialize the slider without immediate movement
