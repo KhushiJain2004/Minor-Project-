@@ -2,6 +2,7 @@ $(document).ready(function()
 {
     const club=JSON.parse(localStorage.getItem("club"));
     console.log(club);
+    fetchEvents(club.clubId);
     const existingLinks=club.socialMediaLinks;
     populateSocialMediaLinks(existingLinks);
     function gatherFieldData(fieldName) {
@@ -46,12 +47,6 @@ $(document).ready(function()
             
             positionHolders.push({ name, designation });
         }
-        // if (positionHolders.length <3 && positionHolders.length>0) {
-        //     toastr.options.positionClass = 'toast-bottom-right';
-        //     toastr.warning("Please fill in all position holder details or leave them blank.");
-        //     return; 
-        //   }
-        // else if(positionHolders.length ==0) return positionHolders;
           
       
         return positionHolders;
@@ -59,7 +54,8 @@ $(document).ready(function()
       function handleEmptyFields(value) {
         return value.trim() === "" ? null : value.trim();
       }
-      
+
+    
       function collectFormData(e) {
         e.preventDefault();
         console.log("Submitted update");
@@ -160,5 +156,126 @@ $(document).ready(function()
         }
       }
       
+
+      document.getElementById("createEvent").addEventListener("click", async (e) => {
+        e.preventDefault();
+        console.log("task ")
+        const currentClub=JSON.parse(localStorage.getItem("club"));
+
+        const eventData = {
+          clubId: currentClub.clubId, 
+          eventName: document.getElementById("taskInput").value.trim(),
+          eventDescription: document.getElementById("eventDescription").value.trim(),
+          startTime: new Date(
+            document.getElementById("dateFrom").value + "T" + document.getElementById("clockStart").value
+          ).toISOString(),
+          endTime: new Date(
+            document.getElementById("dateTo").value + "T" + document.getElementById("clockEnd").value
+          ).toISOString(),
+          contact: {
+            name: document.getElementById("eventManager").value.trim(),
+            email: document.getElementById("contactEmail").value.trim(),
+          },
+          featured: document.getElementById("featuredEvent").checked, 
+          tags: getSelectedTags(), 
+        };
       
-})
+        try {
+          const response = await fetch("../api/events", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(eventData),
+          });
+      
+          if (response.ok) {
+            const savedEvent = await response.json();
+            toastr.success("Event created successfully!");
+            console.log("Saved Event:", savedEvent);
+            document.getElementById("taskModal").style.display="none";
+            fetchEvents(currentClub.clubId);
+          } else {
+            const error = await response.json();
+            toastr.error("Failed to create event: " + error.message);
+            console.error("Error response:", error);
+          }
+        } catch (err) {
+          toastr.error("An error occurred: " + err.message);
+          console.error(err);
+        }
+      });
+
+      function getSelectedTags() {
+        const selectedTags = [];
+        const tagCheckboxes = document.querySelectorAll('#tagsDropdown input[type="checkbox"]:checked');
+        tagCheckboxes.forEach((checkbox) => {
+          selectedTags.push(checkbox.value);
+        });
+        return selectedTags;
+      }
+      
+      function fetchEvents(clubId) {
+        fetch(`/api/events/club/${clubId}`)
+            .then(response => {
+                if (response.ok) {
+                    return response.json(); // Parse the JSON data if successful
+                } else if (response.status === 204) {
+                    // Handle empty events response (No content)
+                    console.log('No events available for this club.');
+                    return [];
+                } else {
+                    throw new Error('Failed to load events');
+                }
+            })
+            .then(events => {
+                // Call a function to render events
+                console.log(events);
+                render(events, clubId);
+            })
+            .catch(error => console.log('Error fetching events:', error));
+    }
+
+    
+
+   
+
+});
+function render(events, clubId) {
+  const ongoing = document.getElementById("ongoing");
+  const upcoming = document.getElementById("upcoming");
+  const featured = document.getElementById("featured");
+  const now = Date.now();
+
+  ongoing.innerHTML = '';
+  upcoming.innerHTML = '';
+  featured.innerHTML = '';
+
+  events.forEach(event => {
+    console.log(event);
+    const eventCard = document.createElement('div');
+    eventCard.classList.add("event-card");
+
+    eventCard.innerHTML = `
+      <div class="eventInfoContainer">
+          <div class="event-description">${event.eventName}</div>          
+          <div class="event-description">${event.eventDescription}</div>          
+      </div>
+    `;
+
+    console.log(eventCard);
+
+    if (new Date(event.startTime) <= now && new Date(event.endTime) >= now) {
+      ongoing.appendChild(eventCard);
+    } else if (new Date(event.startTime) > now) {
+      upcoming.appendChild(eventCard);
+    }
+
+    if (event.featured) {
+      const clonedElement = eventCard.cloneNode(true);
+      featured.appendChild(clonedElement);
+    }
+  });
+}
+
+

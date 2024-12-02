@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/nav.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/common.js"></script>
+    <script src="${pageContext.request.contextPath}/js/nav.js"></script>
     <script src="${pageContext.request.contextPath}/js/events.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -20,7 +21,8 @@
 
         html, body {
             height: 100%;
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f9;
         }
 
         /* Page Layout */
@@ -47,228 +49,214 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
 
+        nav .logo img {
+            height: 140px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: flex-end;
+            gap: 20px;
+            padding: 15px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 5px 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background-color: #005F7F;
+            border-radius: 5px;
+        }
+
         /* Event Filters */
         .event-filters {
-            max-width: 80%;
-            margin: 20px auto;
             display: flex;
-            justify-content: center;
-            gap: 15px;
             flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            padding: 20px 0;
         }
 
         .event-filters input,
         .event-filters select {
             padding: 10px;
-            border: 1px solid #027AA8;
+            border: 2px solid #027AA8;
             border-radius: 5px;
-            min-width: 200px;
+            min-width: 180px;
+            font-size: 14px;
+            background-color: #fff;
+            transition: border-color 0.3s;
+        }
+
+        .event-filters input:focus,
+        .event-filters select:focus {
+            border-color: #005F7F;
         }
 
         /* Event Section */
         .event-section {
-            max-width: 80%;
-            margin: 20px auto;
+            max-width: 90%;
+            margin: 40px auto;
         }
 
         .event-section h2 {
-            font-size: 28px;
-            margin-bottom: 20px;
+            font-size: 32px;
+            margin-bottom: 30px;
             color: #027AA8;
             text-align: center;
         }
 
         .event-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-        }
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 equal-width columns */
+    gap: 30px; /* Increase the gap between cards */
+    margin-bottom: 40px;
+}
 
-        .event-card {
-            flex: 1 1 calc(30% - 20px);
-            background-color: #ffffff;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-            display: flex;
-            flex-direction: column;
-        }
+.event-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    height: 400px; /* Increase the height of the card */
+}
 
-        .event-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-        }
+.event-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
 
-        .event-card-header {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            background-color: #f4f4f4;
-        }
+.event-card-header {
+    display: flex;
+    align-items: center;
+    padding: 20px; /* Increase padding for header */
+    background-color: #f4f4f4;
+}
 
-        .event-logo {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-right: 15px;
-            border: 3px solid #027AA8;
-        }
+.event-logo {
+    width: 60px; /* Increase the size of the logo */
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px; /* Increase spacing between logo and title */
+    border: 2px solid #027AA8;
+}
 
-        .event-card img.event-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
+.event-card img.event-image {
+    width: 100%;
+    height: 250px; /* Increase the height of the event image */
+    object-fit: cover;
+}
 
-        .event-details {
-            padding: 15px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
+.event-details {
+    padding: 20px; /* Increase padding for details section */
+    flex-grow: 1;
+}
 
-        .event-details h3 {
-            margin: 0 0 10px 0;
-            font-size: 18px;
-            color: #027AA8;
-        }
+.event-details h3 {
+    font-size: 24px; /* Increase font size for event title */
+    color: #027AA8;
+    margin-bottom: 15px;
+}
 
-        .event-description {
-            font-size: 14px;
-            color: #555;
-            margin-bottom: 15px;
-            flex-grow: 1;
-        }
+.event-description {
+    font-size: 16px; /* Increase font size for description */
+    color: #555;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
 
-        .read-more-btn {
-            align-self: flex-start;
-            background-color: #027AA8;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 15px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+.read-more-btn {
+    background-color: #027AA8;
+    color: white;
+    border: none;
+    padding: 15px 20px; /* Increase button padding */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
 
-        .read-more-btn:hover {
-            background-color: #005F7F;
-        }
+.read-more-btn:hover {
+    background-color: #005F7F;
+}
+
 
         /* Footer Styles */
         .footer {
-            margin-top: 60px;
-            margin-right: 60px;
             background-color: #027AA8;
             color: white;
-            padding: 50px;
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            min-height: 80px;
+            padding: 50px 0;
+            text-align: center;
         }
 
         .footer-content {
-            width: 80%;
-            text-align: center;
+            width: 90%;
             margin: 0 auto;
         }
 
-        .middle p {
-            margin: 5px 0;
-            color: white;
-            font-size: 16px;
-            line-height: 1.5;
-        }
-
-        .middle a {
-            color: white;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: bold;
-            margin-top: 10px;
-            display: inline-block;
-            transition: color 0.3s ease, text-decoration 0.3s ease;
-        }
-
-        .middle a:hover {
-            text-decoration: underline;
-        }
-
         .footer-line {
-            width: 80%;
-            margin: 15px auto;
-            border: 0.5px solid white;
-            opacity: 0.7;
+            margin: 20px auto;
+            width: 60%;
+            height: 1px;
+            background-color: white;
         }
 
         .social-icons {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 20px;
             margin-top: 15px;
         }
 
         .social-icons a {
             text-decoration: none;
-        }
-
-        .icon-circle {
-            width: 45px;
-            height: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
             background-color: white;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: transform 0.3s ease, background-color 0.3s ease;
+            transition: background-color 0.3s;
         }
 
-        .icon-circle:hover {
-            transform: scale(1.2);
+        .social-icons a:hover {
             background-color: #FFCF40;
         }
 
-        .icon-circle i {
+        .social-icons i {
             color: #027AA8;
             font-size: 20px;
-            transition: color 0.3s ease;
+            transition: color 0.3s;
         }
 
-        .icon-circle:hover i {
+        .social-icons a:hover i {
             color: white;
         }
 
         @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                gap: 10px;
+                padding: 20px;
+            }
+
+            .footer-content {
+                width: 100%;
+            }
+
             .social-icons {
                 flex-wrap: wrap;
                 gap: 10px;
-            }
-
-            .icon-circle {
-                width: 40px;
-                height: 40px;
-            }
-
-            .middle p, .middle a {
-                font-size: 14px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .footer-content {
-                width: 95%;
-            }
-
-            .footer-line {
-                width: 90%;
             }
         }
     </style>
@@ -284,12 +272,7 @@
                     />
                 </a>
             </div>
-            <input type="radio" name="slider" id="menu-btn" />
-            <input type="radio" name="slider" id="close-btn" />
             <ul class="nav-links">
-                <label for="close-btn" class="btn close-btn">
-                    <i class="fas fa-times"></i>
-                </label>
                 <li><a href="/home">Home</a></li>
                 <li><a href="/event">Events</a></li>
                 <li id="club-dropdown">
@@ -301,17 +284,13 @@
                 <li id="profile-item" style="display: none;">
                     <a href="#" id="logoutLink">Logout</a>
                     <img src="${pageContext.request.contextPath}/images/profile.png" alt="Profile" class="profile-icon" />
-                    <span id="username"></span> <!-- Placeholder for user's name -->
+                    <span id="username" style="color: black;"></span>
                 </li>
             </ul>
-            <label for="menu-btn" class="btn menu-btn">
-                <i class="fas fa-bars"></i>
-            </label>
         </div>
     </nav>
 
     <div class="content-wrap">
-        <!-- THIS IS THE TAGS SECTION -->
         <div class="event-filters">
             <input type="text" id="search-bar" placeholder="Search events..." oninput="filterEvents()" />
             <select id="keyword-filter" onchange="filterEvents()">
@@ -324,181 +303,85 @@
                 <option value="Bootcamp">Bootcamp</option>
                 <option value="Beginner">Beginner</option>
                 <option value="AI">AI</option>
-                <option value="Workshop">Workshop</option>
-                <option value="Cybersecurity">Cybersecurity</option>
-                <option value="Talk">Talk</option>
-                <option value="Meeting">Meeting</option>
-                <option value="Annual">Annual</option>
-                <option value="Hackathon">Hackathon</option>
-                <option value="Networking">Networking</option>
-                <option value="Exhibition">Exhibition</option>
-                <option value="Photography">Photography</option>
-                <option value="Seminar">Seminar</option>
-                <option value="Public Speaking">Public Speaking</option>
-                <option value="Music">Music</option>
-                <option value="Festival">Festival</option>
-                <option value="Food">Food</option>
-                <option value="Fitness">Fitness</option>
+                <option value="Management">Management</option>
             </select>
-            
-            <select id="sort-filter" onchange="sortEvents()">
-                <option value="">Sort By</option>
-                <option value="a-z">A-Z</option>
-                <option value="z-a">Z-A</option>
-                <option value="newest">Newest</option>
-                <option value="oldest">Oldest</option>
-            </select>
-            
         </div>
-        <div class="event-section">
-            <h2>Welcome, to the Events Page</h2>
-            <div id="event-container" class="event-container">
-                <!-- Event Cards will be dynamically inserted here -->
+
+        <section class="event-section">
+            <h2>Events</h2>
+            <div class="event-container">
+                <!-- Dynamic event cards will be inserted here -->
             </div>
-        </div>
+        </section>
     </div>
 
     <footer class="footer">
         <div class="footer-content">
-            <div class="middle">
-                <p>Made in Response to Minor Project 1</p>
-                <a href="https://github.com/your-repo-link" target="_blank">Click to View GitHub Repository</a>
-            </div>
-            <hr class="footer-line">
+            <p>© 2024 UPES Clubs Portal</p>
+            <div class="footer-line"></div>
             <div class="social-icons">
-                <a href="https://www.instagram.com/upes_dehradun/" target="_blank" class="icon-circle">
-                    <i class="fa-brands fa-instagram"></i>
-                </a>
-                <a href="https://www.facebook.com/UPESddnuk" target="_blank" class="icon-circle">
-                    <i class="fa-brands fa-facebook-f"></i>
-                </a>
-                <a href="https://www.youtube.com/user/UPESUniversity/featured" target="_blank" class="icon-circle">
-                    <i class="fa-brands fa-youtube"></i>
-                </a>
-                <a href="https://www.linkedin.com/school/upesdehradun/posts/?feedView=all" target="_blank" class="icon-circle">
-                    <i class="fa-brands fa-linkedin-in"></i>
-                </a>
-                <a href="https://www.upes.ac.in/" target="_blank" class="icon-circle">
-                    <i class="fa-solid fa-link"></i>
-                </a>
+                <a href="#" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="#" target="_blank"><i class="fa-brands fa-instagram"></i></a>
             </div>
         </div>
     </footer>
     <script>
-        // Fetch and render events from backend
-        function fetchEvents() {
-            fetch('http://localhost:8080/api/events')  // Ensure this matches your backend endpoint
-            .then(response => response.json())
-            .then(events => {
-                console.log('Fetched events:', events); // Log the events array to the console
-                const container = document.getElementById('event-container');
-                container.innerHTML = ''; // Clear existing events
-    
-                if (Array.isArray(events) && events.length > 0) {
-                    events.forEach(event => {
-                        const eventCard = document.createElement('div');
-                        eventCard.classList.add('event-card');
-                        eventCard.dataset.startDate = event.startDate; // Store the event date for sorting
-    
-                        eventCard.innerHTML = `
-                            <div class="event-card-header">
-                                <img src="${event.clubLogoUrl}" alt="${event.clubName} Logo" class="event-logo">
-                                <h3>${event.eventName}</h3>
-                            </div>
-                            <img src="${event.eventImageUrl}" alt="${event.eventName}" class="event-image">
-                            <div class="event-details">
-                                <p class="event-description">${event.description}</p>
-                                <button class="read-more-btn" onclick="openEventDetails(${event.id})">Read More</button>
-                            </div>
-                        `;
-                        container.appendChild(eventCard);
-                    });
-                } else {
-                    console.log('No events found or incorrect data structure.');
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching events:', error);
-            });
-        }
-    
-        // Call fetchEvents when the page loads
-        document.addEventListener('DOMContentLoaded', fetchEvents);
-    
-        // Function to filter events based on user input
-        function filterEvents() {
-            const searchValue = document.getElementById("search-bar").value.toLowerCase();
-            const keywordValue = document.getElementById("keyword-filter").value.toLowerCase();
-    
-            const events = document.querySelectorAll(".event-card");
-    
-            events.forEach((event) => {
-                const description = event.querySelector(".event-description").textContent.toLowerCase();
-    
-                const matchesSearch = description.includes(searchValue);
-                const matchesKeyword = keywordValue === "" || description.includes(keywordValue);
-    
-                if (matchesSearch && matchesKeyword) {
-                    event.style.display = "flex";
-                } else {
-                    event.style.display = "none";
-                }
-            });
-        }
-    
-        // Function to sort events based on the selected option
-    // Function to sort events based on the selected option
-function sortEvents() {
-    const sortValue = document.getElementById("sort-filter").value;
-    const container = document.querySelector(".event-container");
-    const events = Array.from(container.children);
 
-    events.sort((a, b) => {
-        let comparison = 0;
+// Render events dynamically
+function renderEvents(filteredEvents) {
+    const eventContainer = document.querySelector('.event-container');
+    eventContainer.innerHTML = '';  // Clear existing events
 
-        if (sortValue === "a-z") {
-            // Sort alphabetically (A-Z)
-            const textA = a.querySelector(".event-details h3").textContent.trim().toLowerCase();
-            const textB = b.querySelector(".event-details h3").textContent.trim().toLowerCase();
-            if (textA < textB) comparison = -1;
-            if (textA > textB) comparison = 1;
-        } else if (sortValue === "z-a") {
-            // Sort alphabetically (Z-A)
-            const textA = a.querySelector(".event-details h3").textContent.trim().toLowerCase();
-            const textB = b.querySelector(".event-details h3").textContent.trim().toLowerCase();
-            if (textA > textB) comparison = -1;
-            if (textA < textB) comparison = 1;
-        } else if (sortValue === "newest") {
-            // Sort by newest (based on the event start date)
-            const dateA = new Date(a.dataset.startDate);
-            const dateB = new Date(b.dataset.startDate);
-            comparison = dateB - dateA; // Newest first
-        } else if (sortValue === "oldest") {
-            // Sort by oldest (based on the event start date)
-            const dateA = new Date(a.dataset.startDate);
-            const dateB = new Date(b.dataset.startDate);
-            comparison = dateA - dateB; // Oldest first
-        }
+    filteredEvents.forEach(event => {
+        const eventCard = document.createElement('div');
+        eventCard.classList.add('event-card');
 
-        return comparison;
+        eventCard.innerHTML = `
+            <div class="event-card-header">
+                <img src="${event.logo}" alt="${event.title}" class="event-logo" />
+                <div>
+                    <h3>${event.title}</h3>
+                </div>
+            </div>
+            <img src="${event.image}" alt="${event.title}" class="event-image" />
+            <div class="event-details">
+                <p class="event-description">${event.description}</p>
+                <button class="read-more-btn" onclick="window.location.href='/event/${event.id}'">Read More</button>
+            </div>
+        `;
+        
+        eventContainer.appendChild(eventCard);
     });
-
-    // Clear the container and re-append the sorted events
-    events.forEach(event => container.appendChild(event));
 }
 
-    
-        // Function to open event details (to be implemented)
-        function openEventDetails(eventId) {
-            // Implement event details popup or redirect
-            console.log('Opening details for event:', eventId);
-        }
-    
-        // Attach the filter and sort events functions to input and select elements
-        document.getElementById("search-bar").addEventListener("input", filterEvents);
-        document.getElementById("keyword-filter").addEventListener("input", filterEvents);
-        document.getElementById("sort-filter").addEventListener("change", sortEvents);
+// Filter events based on search input and selected tag
+function filterEvents() {
+    const searchQuery = document.getElementById('search-bar').value.toLowerCase();
+    const tagFilter = document.getElementById('keyword-filter').value;
+
+    const filteredEvents = events.filter(event => {
+        const matchesSearch = event.title.toLowerCase().includes(searchQuery) || event.description.toLowerCase().includes(searchQuery);
+        const matchesTag = tagFilter ? event.tag === tagFilter : true;
+        return matchesSearch && matchesTag;
+    });
+
+    renderEvents(filteredEvents);
+}
+
+// Initial render
+renderEvents(events);
+
+// Add event listeners
+document.getElementById('search-bar').addEventListener('input', filterEvents);
+document.getElementById('keyword-filter').addEventListener('change', filterEvents);
+
+$("#logoutLink").on("click", function (e) {
+        e.preventDefault(); // Prevent the default link behavior
+        logout();
+      });
+
     </script>
-               
 </body>
 </html>

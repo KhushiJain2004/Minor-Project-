@@ -25,9 +25,6 @@ function renderEvents(events) {
         eventCard.style.backgroundImage = `url(${event.image})`; // Set background image for event card
 
         const eventContent = `
-            <div class="event-logo">
-                <img src="${event.logo}" alt="${event.eventName} Logo">
-            </div>
             <h3 class="event-description">${event.eventName}</h3>
             <p>${event.eventDescription}</p>
             <button class="read-more-btn" onclick="openEventPopup(${event.id})">Read More</button>
@@ -39,19 +36,7 @@ function renderEvents(events) {
 }
 
 // Open event popup for details
-function openEventPopup(eventId) {
-    fetch(`/api/events/${eventId}`)
-        .then(response => response.json())
-        .then(event => {
-            // Populate popup with event details
-            document.querySelector('.popup-info h3').textContent = event.name;
-            document.querySelector('.popup-info h4').textContent = event.clubName;
-            document.querySelector('.popup-image img').src = event.image;
-            document.querySelector('.popup-info p').textContent = event.description;
-            document.getElementById('event-popup').classList.remove('hidden');
-        })
-        .catch(error => console.log('Error fetching event details:', error));
-}
+
 
 // Close event popup
 document.getElementById('close-popup').addEventListener('click', () => {
@@ -75,3 +60,16 @@ document.querySelector('.register-btn').addEventListener('click', () => {
     .catch(error => console.log('Error registering for event:', error));
 });
 })  
+function openEventPopup(eventId) {
+    fetch(`/api/events/${eventId}`)
+        .then(response => response.json())
+        .then(event => {
+            // Populate popup with event details
+            document.querySelector('.popup-info h3').textContent = event.name;
+            document.querySelector('.popup-info h4').textContent = event.clubName;
+            document.querySelector('.popup-image img').src = event.image;
+            document.querySelector('.popup-info p').textContent = event.description;
+            document.getElementById('event-popup').classList.remove('hidden');
+        })
+        .catch(error => console.log('Error fetching event details:', error));
+}
