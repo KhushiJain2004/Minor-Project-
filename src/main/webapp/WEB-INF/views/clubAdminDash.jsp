@@ -185,30 +185,39 @@ pageEncoding="UTF-8"%>
       .add-card:hover {
         background-color: #015f85;
       }
-      .modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.6);
-        justify-content: center;
-        align-items: center;
-      }
-      .modal-content {
-        background-color: #fff;
-        padding: 30px;
-        border-radius: 10px;
-        max-width: 500px;
-        width: 90%;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-      }
-      .modal-header {
-        font-size: 22px;
-        margin-bottom: 20px;
-        color: #027aa8;
-      }
+      /* Make the modal scrollable */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #fff;
+  width: 90%;
+  max-width: 500px;
+  max-height: 80%; /* Restrict the modal height */
+  overflow-y: auto; /* Enable vertical scrolling */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+}
+
+.modal-header {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  font-weight: bold;
+  text-align: center;
+}
+
       .modal-footer {
         display: flex;
         justify-content: flex-end;
@@ -451,6 +460,43 @@ pageEncoding="UTF-8"%>
             font-size: 20px;
         }
 
+        .tags-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  z-index: 1000;
+  max-height: 200px; /* Limit height */
+  overflow-y: auto; /* Enable scrolling */
+  width: 200px;
+}
+
+.dropdown-content label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.tags-dropdown.open .dropdown-content {
+  display: block;
+}
+
   </style>
   </head>
   <body>
@@ -610,7 +656,7 @@ pageEncoding="UTF-8"%>
       
       <!-- Regular Task Manager Section -->
       <div class="section">
-        <h2>Upcomming events</h2>
+        <h2>Add events</h2>
         <div class="task-container" id="taskContainer">
           <div class="add-card" onclick="showModal()">
             <i class="fa fa-plus"></i>
@@ -621,66 +667,125 @@ pageEncoding="UTF-8"%>
       
   
       <!-- Modal for Adding/Editing Task -->
-      <div id="taskModal" class="modal">
-        <div class="modal-content">
-          <div class="modal-header">Add Task</div>
-          <div class="input-group">
-            <label for="taskInput">Task:</label>
-            <input type="text" id="taskInput" />
-          </div>
-          <div class="input-group">
-            <label for="eventDescription">Event Description:</label>
-            <textarea id="eventDescription"></textarea>
-          </div>
-          <div class="input-group">
-            <label for="dateFrom">Date From:</label>
-            <input type="date" id="dateFrom" />
-          </div>
-          <div class="input-group">
-            <label for="dateTo">Date To:</label>
-            <input type="date" id="dateTo" />
-          </div>
-          <div class="input-group">
-            <label for="eventManager">Event Manager:</label>
-            <input type="text" id="eventManager" />
-          </div>
-          <div class="modal-footer">
-            <button onclick="saveTask()">Add</button>
-          </div>
-        </div>
-      </div>
+<!-- Modal for Adding/Editing Task -->
+<div id="taskModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">Add Task</div>
+    <div class="input-group">
+      <label for="taskInput">Task:</label>
+      <input type="text" id="taskInput" />
+    </div>
+    <div class="input-group">
+      <label for="eventDescription">Event Description:</label>
+      <textarea id="eventDescription"></textarea>
+    </div>
+    <div class="input-group">
+      <label for="dateFrom">Date From:</label>
+      <input type="date" id="dateFrom" />
+    </div>
+    <div class="input-group">
+      <label for="dateTo">Date To:</label>
+      <input type="date" id="dateTo" />
+    </div>
+    <div class="input-group">
+      <label for="clockStart">Clock Start:</label>
+      <input type="time" id="clockStart" />
+    </div>
+    <div class="input-group">
+      <label for="clockEnd">Clock End:</label>
+      <input type="time" id="clockEnd" />
+    </div>
+    <div class="input-group">
+      <label for="eventManager">Contact Person:</label>
+      <input type="text" id="eventManager" />
+    </div>
+    <div class="input-group">
+      <label for="contactEmail">Contact Email:</label>
+      <input type="email" id="contactEmail" />
+    </div>
 
-      <!-- <footer class="footer">
-        <div class="footer-content">
-            <div class="middle">
-                <p>Made in Response to Minor Project 1</p>
-                <a href="https://github.com/your-repo-link" target="_blank">Click to View GitHub Repository</a>
-            </div>
-            <hr class="footer-line" />
-            <div class="social-icons">
-                <a href="https://www.instagram.com/upes_dehradun/" target="_blank" class="icon-circle">
-                    <i class="fa-brands fa-instagram"></i>
-                </a>
-                <a href="https://www.facebook.com/UPESddnuk" target="_blank" class="icon-circle">
-                    <i class="fa-brands fa-facebook-f"></i>
-                </a>
-                <a href="https://www.youtube.com/user/UPESUniversity/featured" target="_blank" class="icon-circle">
-                    <i class="fa-brands fa-youtube"></i>
-                </a>
-                <a href="https://www.linkedin.com/school/upesdehradun/posts/?feedView=all" target="_blank" class="icon-circle">
-                    <i class="fa-brands fa-linkedin-in"></i>
-                </a>
-                <a href="https://www.upes.ac.in/" target="_blank" class="icon-circle">
-                    <i class="fa-solid fa-link"></i>
-                </a>
-            </div>
-        </div>
-    </footer>
-   -->
+    <div class="input-group">
+      <label for="tags">Tags:</label>
+      <div id="tagsDropdown" class="tags-dropdown">
+          <button id="tagsButton" class="dropdown-button">Select Tags</button>
+          <div id="dropdownContent" class="dropdown-content">
+              <div class="controls">
+                  <button class="select-all-btn" id="selectAllBtn">Select All</button>
+                  <button class="clear-all-btn" id="clearAllBtn">Clear All</button>
+              </div>
+              <label><input type="checkbox" name="tag" value="Coding"> Coding</label>
+              <label><input type="checkbox" name="tag" value="Dance"> Dance</label>
+              <label><input type="checkbox" name="tag" value="Art"> Art</label>
+              <label><input type="checkbox" name="tag" value="Competition"> Competition</label>
+              <label><input type="checkbox" name="tag" value="Innovation"> Innovation</label>
+              <label><input type="checkbox" name="tag" value="Bootcamp"> Bootcamp</label>
+              <label><input type="checkbox" name="tag" value="Beginner"> Beginner</label>
+              <label><input type="checkbox" name="tag" value="AI"> AI</label>
+              <label><input type="checkbox" name="tag" value="Workshop"> Workshop</label>
+              <label><input type="checkbox" name="tag" value="Cybersecurity"> Cybersecurity</label>
+              <label><input type="checkbox" name="tag" value="Talk"> Talk</label>
+              <label><input type="checkbox" name="tag" value="Meeting"> Meeting</label>
+              <label><input type="checkbox" name="tag" value="Annual"> Annual</label>
+              <label><input type="checkbox" name="tag" value="Hackathon"> Hackathon</label>
+              <label><input type="checkbox" name="tag" value="Networking"> Networking</label>
+              <label><input type="checkbox" name="tag" value="Exhibition"> Exhibition</label>
+              <label><input type="checkbox" name="tag" value="Photography"> Photography</label>
+              <label><input type="checkbox" name="tag" value="Seminar"> Seminar</label>
+              <label><input type="checkbox" name="tag" value="Public Speaking"> Public Speaking</label>
+              <label><input type="checkbox" name="tag" value="Music"> Music</label>
+              <label><input type="checkbox" name="tag" value="Festival"> Festival</label>
+              <label><input type="checkbox" name="tag" value="Food"> Food</label>
+              <label><input type="checkbox" name="tag" value="Fitness"> Fitness</label>
+          </div>
+      </div>
+  </div>
+
+    <div class="modal-footer">
+      <button onclick="saveTask()">Add</button>
+    </div>
+  </div>
+</div>
+
       
       <script>
         let tasks = [];
         let importantEvents = [];
+
+        document.addEventListener("DOMContentLoaded", () => {
+  const tagsButton = document.getElementById("tagsButton");
+  const dropdownContent = document.getElementById("dropdownContent");
+  const tagsDropdown = document.getElementById("tagsDropdown");
+
+  // Toggle dropdown visibility when the button is clicked
+  tagsButton.addEventListener("click", (e) => {
+    e.stopPropagation(); // Prevent closing when clicking inside
+    tagsDropdown.classList.toggle("open");
+  });
+
+  // Prevent closing dropdown when clicking inside dropdownContent
+  dropdownContent.addEventListener("click", (e) => {
+    e.stopPropagation(); // Prevent click from closing the dropdown
+  });
+
+  // Close dropdown when clicking outside of the dropdown
+  document.addEventListener("click", () => {
+    tagsDropdown.classList.remove("open");
+  });
+
+  // Update the button text with selected tags
+  dropdownContent.addEventListener("change", () => {
+    const selectedTags = Array.from(
+      dropdownContent.querySelectorAll("input[type='checkbox']:checked")
+    ).map((checkbox) => checkbox.value);
+
+    // Update the button with the selected tags
+    tagsButton.textContent = selectedTags.length
+      ? `Selected: ${selectedTags.join(", ")}`
+      : "Select Tags";
+  });
+});
+
+
       
         // Show update modal
         document.getElementById("updateButton").addEventListener("click", function () {
@@ -754,71 +859,75 @@ pageEncoding="UTF-8"%>
         function hideModal() {
           document.getElementById("taskModal").style.display = "none";
         }
-      
-        // function saveTask() {
-        //   const taskInput = document.getElementById("taskInput").value;
-        //   const eventDescription =
-        //     document.getElementById("eventDescription").value;
-        //   const dateFrom = document.getElementById("dateFrom").value;
-        //   const dateTo = document.getElementById("dateTo").value;
-        //   const eventManager = document.getElementById("eventManager").value;
-        //   const taskModal = document.getElementById("taskModal");
-        //   const editTaskIndex = taskModal.dataset.editing;
-      
-        //   if (taskInput.trim() !== "" && eventManager.trim() !== "") {
-        //     const taskData = {
-        //       name: taskInput,
-        //       description: eventDescription,
-        //       dateFrom: dateFrom,
-        //       dateTo: dateTo,
-        //       eventManager: eventManager,
-        //     };
-      
-        //     if (editTaskIndex) {
-        //       tasks[editTaskIndex] = taskData;
-        //     } else {
-        //       tasks.push(taskData);
-        //     }
-      
-        //     renderTasks();
-        //     hideModal();
-        //   }
-        // }
-      
-        function renderTasks() {
-          const taskContainer = document.getElementById("taskContainer");
-          taskContainer.innerHTML =
-            '<div class="add-card" onclick="showModal()"><i class="fa fa-plus"></i></div>'; // Reset task list
-      
-          tasks.forEach((task, index) => {
-            const taskCard = document.createElement("div");
-            taskCard.classList.add("task-card");
-      
-            taskCard.innerHTML = `
-                  <div class="task-details">
-                      <strong>${task.name}</strong><br>
-                      <span>${task.description}</span><br>
-                      <span>From: ${task.dateFrom}</span><br>
-                      <span>To: ${task.dateTo}</span><br>
-                      <span>Manager: ${task.eventManager}</span>
-                  </div>
-                  <div class="task-actions">
-                      <a href="#" onclick="deleteTask(${index})">Delete</a>
-                      <a href="#" onclick="showModal(${index})">Change</a>
-                  </div>
-              `;
-      
-            taskContainer.appendChild(taskCard);
-          });
-        }
-      
-        function deleteTask(index) {
-          if (confirm("Are you sure you want to delete this task?")) {
-            tasks.splice(index, 1);
-            renderTasks();
-          }
-        }
-      
+
+        function saveTask() {
+  const taskInput = document.getElementById("taskInput").value;
+  const eventDescription = document.getElementById("eventDescription").value;
+  const dateFrom = document.getElementById("dateFrom").value;
+  const dateTo = document.getElementById("dateTo").value;
+  const clockStart = document.getElementById("clockStart").value;
+  const clockEnd = document.getElementById("clockEnd").value;
+  const eventManager = document.getElementById("eventManager").value;
+  const contactEmail = document.getElementById("contactEmail").value;
+  const taskModal = document.getElementById("taskModal");
+  const editTaskIndex = taskModal.dataset.editing;
+
+  // Get selected tags
+  const tags = Array.from(document.querySelectorAll("#tagsDropdown input:checked"))
+    .map(tag => tag.value);
+
+  if (taskInput.trim() !== "" && eventManager.trim() !== "" && contactEmail.trim() !== "") {
+    const taskData = {
+      name: taskInput,
+      description: eventDescription,
+      dateFrom: dateFrom,
+      dateTo: dateTo,
+      clockStart: clockStart,
+      clockEnd: clockEnd,
+      eventManager: eventManager,
+      contactEmail: contactEmail,
+      tags: tags,
+    };
+
+    if (editTaskIndex) {
+      tasks[editTaskIndex] = taskData;
+    } else {
+      tasks.push(taskData);
+    }
+
+    renderTasks();
+    hideModal();
+  }
+}
+
+function renderTasks() {
+  const taskContainer = document.getElementById("taskContainer");
+  taskContainer.innerHTML =
+    '<div class="add-card" onclick="showModal()"><i class="fa fa-plus"></i></div>'; // Reset task list
+
+  tasks.forEach((task, index) => {
+    const taskCard = document.createElement("div");
+    taskCard.classList.add("task-card");
+
+    taskCard.innerHTML = `
+      <div class="task-details">
+          <strong>${task.name}</strong><br>
+          <span>${task.description}</span><br>
+          <span>From: ${task.dateFrom} (${task.clockStart})</span><br>
+          <span>To: ${task.dateTo} (${task.clockEnd})</span><br>
+          <span>Manager: ${task.eventManager} (${task.contactEmail})</span><br>
+          <span>Tags: ${task.tags.join(", ")}</span>
+      </div>
+      <div class="task-actions">
+          <a href="#" onclick="deleteTask(${index})">Delete</a>
+          <a href="#" onclick="showModal(${index})">Change</a>
+      </div>
+    `;
+
+    taskContainer.appendChild(taskCard);
+  });
+}
+
         // Important Event Modal Functions
         function showEventModal(editEventIndex = null) {
           const eventModal = document.getElementById("eventModal");

@@ -86,6 +86,7 @@
         }
 
         .event-card {
+            background-image: url('images/event.jpg');
             flex: 1 1 calc(30% - 20px);
             background-color: #ffffff;
             border-radius: 15px;
@@ -284,8 +285,6 @@
                     />
                 </a>
             </div>
-            <input type="radio" name="slider" id="menu-btn" />
-            <input type="radio" name="slider" id="close-btn" />
             <ul class="nav-links">
                 <label for="close-btn" class="btn close-btn">
                     <i class="fas fa-times"></i>
