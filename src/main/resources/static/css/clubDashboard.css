@@ -20,6 +20,13 @@ header, footer {
     margin-right:30px;   
     width:85%;
 }
+body {
+    overflow: auto; /* Allow scrolling */
+}
+
+.mainContainer {
+    overflow: visible; /* Ensure content within can overflow if necessary */
+}
 
 /* .clubcontainer {
     position: relative;
