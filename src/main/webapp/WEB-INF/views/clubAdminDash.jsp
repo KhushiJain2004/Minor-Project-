@@ -663,46 +663,67 @@ pageEncoding="UTF-8"%>
           </div>
         </div>
       </div>
+      <div class="event-section">
+        <h2>Ongoing Events</h2>
+        <div class="event-container" id="ongoing">
+            
+        </div>
+        <h2>Upcoming Events</h2>
+        <div class="event-container" id="upcoming">
+           
+        </div>
+        <h2>Featured Events</h2>
+        <div class="event-container" id="featured">
+           
+        </div>
+    </div>
+    
   
       
   
       <!-- Modal for Adding/Editing Task -->
 <!-- Modal for Adding/Editing Task -->
-<div id="taskModal" class="modal">
-  <div class="modal-content">
-    <div class="modal-header">Add Task</div>
-    <div class="input-group">
-      <label for="taskInput">Task:</label>
-      <input type="text" id="taskInput" />
-    </div>
-    <div class="input-group">
-      <label for="eventDescription">Event Description:</label>
-      <textarea id="eventDescription"></textarea>
-    </div>
-    <div class="input-group">
-      <label for="dateFrom">Date From:</label>
-      <input type="date" id="dateFrom" />
-    </div>
-    <div class="input-group">
-      <label for="dateTo">Date To:</label>
-      <input type="date" id="dateTo" />
-    </div>
-    <div class="input-group">
-      <label for="clockStart">Clock Start:</label>
-      <input type="time" id="clockStart" />
-    </div>
-    <div class="input-group">
-      <label for="clockEnd">Clock End:</label>
-      <input type="time" id="clockEnd" />
-    </div>
-    <div class="input-group">
-      <label for="eventManager">Contact Person:</label>
-      <input type="text" id="eventManager" />
-    </div>
-    <div class="input-group">
-      <label for="contactEmail">Contact Email:</label>
-      <input type="email" id="contactEmail" />
-    </div>
+  <div id="taskModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">Add Task</div>
+      <div class="input-group">
+        <label for="taskInput">Task:</label>
+        <input type="text" id="taskInput" />
+      </div>
+      <div class="input-group">
+        <label for="eventDescription">Event Description:</label>
+        <textarea id="eventDescription"></textarea>
+      </div>
+
+      <div class="input-group">
+        <label for="featuredEvent">Featured Event:</label>
+        <input type="checkbox" id="featuredEvent" />
+      </div>
+      <div class="input-group">
+        <label for="dateFrom">Date From:</label>
+        <input type="date" id="dateFrom" />
+      </div>
+      <div class="input-group">
+        <label for="dateTo">Date To:</label>
+        <input type="date" id="dateTo" />
+      </div>
+      <div class="input-group">
+        <label for="clockStart">Event Starts at:</label>
+        <input type="time" id="clockStart" />
+      </div>
+      <div class="input-group">
+        <label for="clockEnd">Event Ends at:</label>
+        <input type="time" id="clockEnd" />
+      </div>
+      <div class="input-group">
+        <label for="eventManager">Contact Person:</label>
+        <input type="text" id="eventManager" />
+      </div>
+      <div class="input-group">
+        <label for="contactEmail">Contact Email:</label>
+        <input type="email" id="contactEmail" />
+      </div>
+
 
     <div class="input-group">
       <label for="tags">Tags:</label>
@@ -741,9 +762,10 @@ pageEncoding="UTF-8"%>
   </div>
 
     <div class="modal-footer">
-      <button onclick="saveTask()">Add</button>
+      <button type="button" id="createEvent">Add</button>
     </div>
   </div>
+  
 </div>
 
       
