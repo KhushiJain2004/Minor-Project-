@@ -68,6 +68,15 @@ public class EventsService {
         return eventsRepository.findByStartTimeAfter(currentTime);
     }
 
+    public List<String> getAllTags() {
+    List<Events> events = eventsRepository.findAll(); // Fetch all events
+    return events.stream()
+                 .flatMap(event -> event.getTags().stream())
+                 .distinct()
+                 .collect(Collectors.toList());
+}
+
+
     // Fetch distinct tags from the events
     public List<String> getDistinctTags() {
         Aggregation aggregation = Aggregation.newAggregation(

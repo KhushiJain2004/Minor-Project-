@@ -5,6 +5,8 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.domain.Sort;
 import java.time.LocalDateTime;
+import java.util.stream.Collectors;
+
 import java.util.List;
 
 public interface EventsRepository extends MongoRepository<Events, String> {
@@ -29,6 +31,14 @@ public interface EventsRepository extends MongoRepository<Events, String> {
 
     List<Events> findByStartTimeAfter(LocalDateTime currentTime);
 
-    @Query("SELECT DISTINCT e.tags FROM Events e")
-    List<String> findDistinctTags();
-}
+    @Query(value = "{}", fields = "{tags: 1}")
+    List<Events> findDistinctTagsRaw();
+    
+    default List<String> findDistinctTags() {
+        List<Events> eventsWithTags = findDistinctTagsRaw();
+        return eventsWithTags.stream()
+                             .flatMap(event -> event.getTags().stream())
+                             .distinct()
+                             .collect(Collectors.toList());
+    }
+} 
