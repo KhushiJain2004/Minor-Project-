@@ -25,7 +25,6 @@ function renderEvents(events) {
         eventCard.style.backgroundImage = `url(${event.image})`; // Set background image for event card
 
         const eventContent = `
-            
             <h3 class="event-description">${event.eventName}</h3>
             <p>${event.eventDescription}</p>
             <button class="read-more-btn" onclick="openEventPopup(${event.id})">Read More</button>

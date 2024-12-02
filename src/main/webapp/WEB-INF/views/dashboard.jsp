@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/nav.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         body {
@@ -15,7 +16,7 @@
             margin: 0;
             padding: 0;
             display: flex;
-            background: #4facfe;
+            background: #b1d9fc;
             color: #333;
         }
 
@@ -118,9 +119,133 @@
         .delete-btn:hover {
             background-color: #d32f2f;
         }
+
+
+/* Navbar Styles */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #027AA8;
+    color: white;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+}
+
+.logo img {
+    height: 100px;
+    width: auto;
+}
+
+.nav-links {
+    list-style-type: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li {
+    display: inline-block;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #FFCF40;
+}
+
+.menu-btn, .close-btn {
+    display: none;
+}
+
+#menu-btn:checked ~ .nav-links {
+    display: block;
+}
+
+#close-btn:checked ~ .nav-links {
+    display: none;
+}
+
+/* Dropdown Styles */
+#club-dropdown {
+    position: relative;
+}
+
+#club-dropdown .dropdown-list {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #027AA8;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    list-style-type: none;
+    padding: 10px 0;
+}
+
+#club-dropdown:hover .dropdown-list {
+    display: block;
+}
+
+#club-dropdown .dropdown-list li {
+    padding: 8px 20px;
+}
+
+#club-dropdown .dropdown-list li a {
+    color: white;
+    text-decoration: none;
+}
+
+#club-dropdown .dropdown-list li a:hover {
+    background-color: #005F7F;
+}
+
     </style>
 </head>
 <body>
+
+<nav>
+    <div class="wrapper">
+        <div class="logo">
+            <a href="#">
+                <img src="${pageContext.request.contextPath}/images/UPES University of Petroleum and Energy Studies.png" alt="Logo" />
+            </a>
+        </div>  
+        <ul class="nav-links">
+            <label for="close-btn" class="btn close-btn">
+                <i class="fas fa-times"></i>
+            </label>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/event">Events</a></li>
+            <li id="club-dropdown">
+                <a href="#">Clubs</a>
+                <ul class="dropdown-list" id="club-dropdown-list"></ul>
+            </li>
+            <li id="login-link"><a href="/login">Login</a></li>
+            <li id="profile-item" style="display: none;">
+                <a href="#" id="logoutLink">Logout</a>
+                <img src="${pageContext.request.contextPath}/images/profile.png" alt="Profile" class="profile-icon" />
+                <span id="username"></span> <!-- Placeholder for user's name -->
+            </li>
+        </ul>
+        <label for="menu-btn" class="btn menu-btn">
+            <i class="fas fa-bars"></i>
+        </label>
+    </div>
+</nav>
+
     <div class="sidebar">
         <h2>Admin Details</h2>
         <p>Welcome, <span id="userUsername"></span>!</p>
